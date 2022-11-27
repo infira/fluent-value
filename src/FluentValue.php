@@ -6,7 +6,6 @@ use Closure;
 use Illuminate\Support\Stringable;
 use Stringable as BaseStringable;
 use Wolo\AttributesBag;
-use Wolo\Contracts\HasAttributes;
 
 /**
  * @mixin Stringable
@@ -16,10 +15,10 @@ class FluentValue implements
     \ArrayAccess,
     \Countable,
     BaseStringable,
-    HasAttributes
+    AttributesBag\HasAttributes
 {
-    use Traits\AttributesManager,
-        Traits\PHPBuiltInterfaceImplementations,
+    use AttributesBag\AttributesBagManager;
+    use Traits\PHPBuiltInterfaceImplementations,
         Traits\Miscellaneous,
         Traits\Hashing,
         Traits\Numbers,
@@ -41,7 +40,6 @@ class FluentValue implements
     private $templateProcessor;
     private bool $mutatorEnabled = false;
     private bool $endMutationManually = false;
-    private AttributesBag $attributes;
     public mixed $value;
 
     public function __construct(mixed $value)
