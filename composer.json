@@ -1,6 +1,6 @@
 {
   "name": "infira/fluent-value",
-  "description": "OOP style value handling",
+  "description": "OOP style value handling ",
   "type": "library",
   "authors": [
     {
@@ -19,9 +19,7 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=8.1",
-    "infira/wolo": "dev-main",
-    "illuminate/support": "^9.41",
-    "nesbot/carbon": "^2.63"
+    "infira/wolo": "dev-main"
   },
   "suggest": {
     "nesbot/carbon": "When using FluentValue date formating",
