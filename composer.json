@@ -1,0 +1,30 @@
+{
+  "name": "infira/fluent-value",
+  "description": "OOP style value handling",
+  "type": "library",
+  "authors": [
+    {
+      "name": "gen.taliaru",
+      "email": "gen@infira.ee"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "src/helpers.php"
+    ],
+    "psr-4": {
+      "Infira\\FluentValue\\": "src/"
+    }
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=8.1",
+    "infira/wolo": "dev-main",
+    "illuminate/support": "^9.41",
+    "nesbot/carbon": "^2.63"
+  },
+  "suggest": {
+    "nesbot/carbon": "When using FluentValue date formating",
+    "illuminate/support": "Some FluentValue methods uses laravel Stringable and Collection methods"
+  }
+}
