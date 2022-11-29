@@ -8,6 +8,7 @@ use Stringable as BaseStringable;
 use Wolo\AttributesBag;
 
 /**
+ * @template TValue
  * @mixin Stringable
  * @property-read $this $mutate - enables mutator, every chain call will alter original value, mutator will turn off after first chain call
  */
@@ -17,6 +18,7 @@ class FluentValue implements
     BaseStringable,
     AttributesBag\HasAttributes
 {
+    public const UNDEFINED = '_UNDEFINED_';
     use AttributesBag\AttributesBagManager;
     use Traits\PHPBuiltInterfaceImplementations,
         Traits\Miscellaneous,
@@ -32,7 +34,6 @@ class FluentValue implements
 
     /** @generated */
     use Traits\CastingMutators;
-
 
     /**
      * @var callable
@@ -79,7 +80,11 @@ class FluentValue implements
             $value = $value->value;
         }
         elseif ($value instanceof Closure) {
-            $value = \Wolo\Closure::makeInjectableOrVoid($value)($this);
+            //$value = \Wolo\Closure::makeInjectableOrVoid($value)($this);
+            $value = \Wolo\Closure::makeInjectableOrVoid($value)($this->value);
+        }
+        elseif ($value instanceof Stringable) {
+            $value = (string)$value;
         }
 
         return $this->fluValue($value);
@@ -103,6 +108,19 @@ class FluentValue implements
     public function set(mixed $value): static
     {
         $this->value = $this->pv($value);
+
+        return $this;
+    }
+
+    /**
+     * Edit value with callable
+     * Closure callable is injectable ex ->edit(\MyClass $value) // will call $editor(MyClass(TValue))
+     * @param  (callable(TValue): mixed)  $editor
+     * @return $this
+     */
+    public function edit(callable $editor): static
+    {
+        $this->value = $this->pv($editor);
 
         return $this;
     }
@@ -140,7 +158,7 @@ class FluentValue implements
         }
         $constructValue = $hasArgs ? $this->pv($value) : $this->value;
 
-        return static::make($constructValue)->setAttributes($this->getAttributes());
+        return (new static($constructValue))->setAttributes($this->getAttributes());
     }
 
     public static function make(mixed $value): static

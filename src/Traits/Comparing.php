@@ -45,6 +45,11 @@ trait Comparing
         return is_array($this->value);
     }
 
+    public function isIterable(): bool
+    {
+        return is_iterable($this->value);
+    }
+
     public function isObject(): bool
     {
         return is_object($this->value);

@@ -99,6 +99,25 @@ trait Miscellaneous
         return unserialize($this->value, $options);
     }
 
+    /**
+     * Append values works for array and strings
+     * @param  mixed  ...$values
+     * @return $this
+     */
+    public function append(mixed ...$values): static
+    {
+        if ($this->isIterable()) {
+            $newValue = $this->value;
+            foreach ($values as $value) {
+                $newValue[] = $value;
+            }
+
+            return $this->new($newValue);
+        }
+
+        return $this->new($this->stringable()->append(...$values));
+    }
+
     public function clone(): static
     {
         return clone $this;

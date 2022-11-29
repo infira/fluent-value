@@ -7,6 +7,7 @@ use Wolo\Closure;
 use Infira\FluentValue\FluentValue;
 
 /**
+ * @template TValue
  * @mixin FluentValue
  */
 trait Arrays
@@ -129,8 +130,9 @@ trait Arrays
 
     /**
      * Applies the callback to the elements of the given arrays
-     *
-     * @param  callable  $callback  - "self::method" or "static::method" will be called Using FluentValue
+     * Closure callable is injectable ex ->edit(\MyClass $value) // will call $editor(MyClass(TValue))
+     * "self::method" or "static::method" will be called Using FluentValue
+     * @param  (callable(TValue): mixed)  $callback
      * @param  mixed  ...$arg  extra arguments passed to callback
      * @return $this
      */
@@ -141,7 +143,7 @@ trait Arrays
         }
 
         if (is_string($callback) && str_starts_with($callback, 'static::')) {
-            return $this->map(fn($item) => $this->fluValue((NEW static($item))->{substr($callback, 8)}(...$arg)));
+            return $this->map(fn($item) => $this->fluValue((new static($item))->{substr($callback, 8)}(...$arg)));
         }
 
         if (is_string($callback)) {

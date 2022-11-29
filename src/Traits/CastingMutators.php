@@ -6,57 +6,88 @@ use Infira\FluentValue\FluentValue;
 /**
  * @generated
  * @mixin FluentValue
- * @property-read $this $bool - proxy to method bool()
- * @property-read $this $int - proxy to method int()
- * @property-read $this $float - proxy to method float()
- * @property-read $this $array - proxy to method array()
- * @property-read $this $string - proxy to method string()
- * @property-read $this $type - proxy to method type()
- * @property-read $this $serialize - proxy to method serialize()
+ * @property-read FluentValue $bool - proxy to method bool()
+ * @property-read FluentValue $int - proxy to method int()
+ * @property-read FluentValue $float - proxy to method float()
+ * @property-read FluentValue $array - proxy to method array()
+ * @property-read FluentValue $string - proxy to method string()
+ * @property-read FluentValue $type - proxy to method type()
+ * @property-read FluentValue $serialize - proxy to method serialize()
  * @property-read mixed $toUnSerialize - proxy to method toUnSerialize()
  * @property-read static $clone - proxy to method clone()
- * @property-read $this $md5 - proxy to method md5()
- * @property-read $this $sha1 - proxy to method sha1()
- * @property-read $this $crc32b - proxy to method crc32b()
- * @property-read $this $sha512 - proxy to method sha512()
- * @property-read $this $numeric - proxy to method numeric()
- * @property-read $this $formatNumber - proxy to method formatNumber()
- * @property-read $this $negative - proxy to method negative()
- * @property-read $this $positive - proxy to method positive()
- * @property-read $this $floor - proxy to method floor()
- * @property-read $this $ceil - proxy to method ceil()
- * @property-read $this $round - proxy to method round()
+ * @property-read FluentValue $md5 - proxy to method md5()
+ * @property-read FluentValue $sha1 - proxy to method sha1()
+ * @property-read FluentValue $crc32b - proxy to method crc32b()
+ * @property-read FluentValue $sha512 - proxy to method sha512()
+ * @property-read FluentValue $numeric - proxy to method numeric()
+ * @property-read FluentValue $formatNumber - proxy to method formatNumber()
+ * @property-read FluentValue $negative - proxy to method negative()
+ * @property-read FluentValue $positive - proxy to method positive()
+ * @property-read FluentValue $floor - proxy to method floor()
+ * @property-read FluentValue $ceil - proxy to method ceil()
+ * @property-read FluentValue $round - proxy to method round()
  * @property-read static $increment - proxy to method increment()
  * @property-read static $decrement - proxy to method decrement()
  * @property-read bool $ok - proxy to method ok()
  * @property-read bool $notOk - proxy to method notOk()
- * @property-read $this $eur - proxy to method eur()
- * @property-read $this $discount - proxy to method discount()
- * @property-read $this $markup - proxy to method markup()
- * @property-read $this $removeVat - proxy to method removeVat()
- * @property-read $this $addVat - proxy to method addVat()
- * @property-read $this $formatDate - proxy to method formatDate()
- * @property-read $this $formatStandardDate - proxy to method formatStandardDate()
- * @property-read $this $formatStandardDateTime - proxy to method formatStandardDateTime()
- * @property-read $this $time - proxy to method time()
- * @property-read $this $formatDateTime - proxy to method formatDateTime()
- * @property-read $this $formatDateNice - proxy to method formatDateNice()
- * @property-read $this $formatDateTimeNice - proxy to method formatDateTimeNice()
- * @property-read $this $formatTimeNice - proxy to method formatTimeNice()
- * @property-read $this $basename - proxy to method basename()
- * @property-read $this $urlEncode - proxy to method urlEncode()
- * @property-read $this $lines - proxy to method lines()
- * @property-read $this $json - proxy to method json()
- * @property-read $this $escapeHTML - proxy to method escapeHTML()
- * @property-read $this $addSlashes - proxy to method addSlashes()
- * @property-read $this $parseStr - proxy to method parseStr()
- * @property-read $this $htmlAttributes - proxy to method htmlAttributes()
- * @property-read $this $htmlToText - proxy to method htmlToText()
+ * @property-read FluentValue $eur - proxy to method eur()
+ * @property-read FluentValue $discount - proxy to method discount()
+ * @property-read FluentValue $markup - proxy to method markup()
+ * @property-read FluentValue $removeVat - proxy to method removeVat()
+ * @property-read FluentValue $addVat - proxy to method addVat()
+ * @property-read FluentValue $formatDate - proxy to method formatDate()
+ * @property-read FluentValue $formatStandardDate - proxy to method formatStandardDate()
+ * @property-read FluentValue $formatStandardDateTime - proxy to method formatStandardDateTime()
+ * @property-read FluentValue $time - proxy to method time()
+ * @property-read FluentValue $formatDateTime - proxy to method formatDateTime()
+ * @property-read FluentValue $formatDateNice - proxy to method formatDateNice()
+ * @property-read FluentValue $formatDateTimeNice - proxy to method formatDateTimeNice()
+ * @property-read FluentValue $formatTimeNice - proxy to method formatTimeNice()
+ * @property-read FluentValue $basename - proxy to method basename()
+ * @property-read FluentValue $urlEncode - proxy to method urlEncode()
+ * @property-read FluentValue $lines - proxy to method lines()
+ * @property-read FluentValue $json - proxy to method json()
+ * @property-read FluentValue $escapeHTML - proxy to method escapeHTML()
+ * @property-read FluentValue $addSlashes - proxy to method addSlashes()
+ * @property-read FluentValue $parseStr - proxy to method parseStr()
+ * @property-read FluentValue $htmlAttributes - proxy to method htmlAttributes()
+ * @property-read FluentValue $htmlToText - proxy to method htmlToText()
  * @property-read static $filter - proxy to method filter()
  * @property-read static $reject - proxy to method reject()
- * @property-read $this $first - proxy to method first()
- * @property-read $this $last - proxy to method last()
+ * @property-read FluentValue $first - proxy to method first()
+ * @property-read FluentValue $last - proxy to method last()
  * @property-read bool $fileExists - proxy to method fileExists()
+ * @property-read FluentValue $path - proxy to method path()
+ * @property-read FluentValue $extension - proxy to method extension()
+ * ############# Start of laravel Stringable proxies
+ * @property-read $this $newLine - proxy to method newLine()
+ * @property-read $this $ascii - proxy to method ascii()
+ * @property-read $this $camel - proxy to method camel()
+ * @property-read $this $dirname - proxy to method dirname()
+ * @property-read $this $kebab - proxy to method kebab()
+ * @property-read $this $limit - proxy to method limit()
+ * @property-read $this $lower - proxy to method lower()
+ * @property-read $this $markdown - proxy to method markdown()
+ * @property-read $this $inlineMarkdown - proxy to method inlineMarkdown()
+ * @property-read $this $plural - proxy to method plural()
+ * @property-read $this $pluralStudly - proxy to method pluralStudly()
+ * @property-read $this $reverse - proxy to method reverse()
+ * @property-read $this $squish - proxy to method squish()
+ * @property-read $this $stripTags - proxy to method stripTags()
+ * @property-read $this $upper - proxy to method upper()
+ * @property-read $this $title - proxy to method title()
+ * @property-read $this $headline - proxy to method headline()
+ * @property-read $this $singular - proxy to method singular()
+ * @property-read $this $slug - proxy to method slug()
+ * @property-read $this $snake - proxy to method snake()
+ * @property-read $this $studly - proxy to method studly()
+ * @property-read $this $trim - proxy to method trim()
+ * @property-read $this $ltrim - proxy to method ltrim()
+ * @property-read $this $rtrim - proxy to method rtrim()
+ * @property-read $this $lcfirst - proxy to method lcfirst()
+ * @property-read $this $ucfirst - proxy to method ucfirst()
+ * @property-read $this $words - proxy to method words()
+ * ############# End of laravel Stringable proxies
  */
 trait CastingMutators
 {
@@ -128,7 +159,7 @@ trait CastingMutators
 	/**
 	 * String representation of object.
 	 * @link https://www.php.net/manual/en/function.serialize.php
-	 * @return static
+	 * @return FluentValue
 	 * @see FluentValue::toSerialize()
 	 * @generated
 	 */
@@ -151,7 +182,7 @@ trait CastingMutators
 	/**
 	 * @param  callable  $callback  ($value,...$parameter)
 	 * @param  mixed  ...$parameter
-	 * @return static
+	 * @return FluentValue
 	 * @see FluentValue::callSpread()
 	 * @generated
 	 */
@@ -522,7 +553,7 @@ trait CastingMutators
 	/**
 	 * Returns the JSON representation of a value
 	 * @param  bool  $pretty  JSON_PRETTY_PRINT - https://www.php.net/manual/en/json.constants.php
-	 * @return static
+	 * @return FluentValue
 	 * @link https://php.net/manual/en/function.json-encode.php
 	 * @throws \JsonException
 	 * @see FluentValue::toEncodedJson()
@@ -597,7 +628,7 @@ trait CastingMutators
 	 * Parses the string into variables
 	 * @link https://www.php.net/manual/en/function.parse-str.php
 	 * @see FluentValue::toHTMLAttributes()
-	 * @return static
+	 * @return FluentValue
 	 * @generated
 	 */
 	public function htmlAttributes(): static
@@ -671,8 +702,35 @@ trait CastingMutators
 	 * @see FluentValue::toFilename()
 	 * @generated
 	 */
-	public function filename(?string $extension): static
+	public function filename(string $extension): static
 	{
 		return $this->new($this->toFilename($extension));
+	}
+
+
+	/**
+	 * Convert value to path
+	 * @example flu('filename').toFilePath('.txt','/var/www/html') #=> /var/www/html/filename.txt
+	 * @example flu('filename').toFilePath('txt','/var/www/html') #=> /var/www/html/filename.txt
+	 * @param  string|null  $extension  if null then current value is added
+	 * @param  string|null  $root  directory path - If null then / is used
+	 * @see FluentValue::toPath()
+	 * @generated
+	 */
+	public function path(string $extension = null, string $root = null): static
+	{
+		return $this->new($this->toPath($extension, $root));
+	}
+
+
+	/**
+	 * Return file extension.
+	 * If current value is not file then try to get extension manually using string manipulations
+	 * @see FluentValue::toExtension()
+	 * @generated
+	 */
+	public function extension(bool $lowercase = false): static
+	{
+		return $this->new($this->toExtension($lowercase));
 	}
 }
