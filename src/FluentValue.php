@@ -11,6 +11,8 @@ use Wolo\AttributesBag;
  * @template TValue
  * @mixin Stringable
  * @property-read $this $mutate - enables mutator, every chain call will alter original value, mutator will turn off after first chain call
+ * @property-read FluentChain $chain
+ * @property-read FluentChain $whenOk
  */
 class FluentValue implements
     \ArrayAccess,
@@ -28,6 +30,7 @@ class FluentValue implements
         Traits\Comparing,
         Traits\Dates,
         Traits\Strings,
+        Traits\HtmlManipulation,
         Traits\Arrays,
         Traits\Files,
         Traits\ConditionMutators;
@@ -168,6 +171,11 @@ class FluentValue implements
 
 
     //region mutation
+    public function chain(self $carry = null): FluentChain
+    {
+        return new FluentChain($carry ?: $this);
+    }
+
     public function mutate(bool $endMutationManually = false): static
     {
         $this->endMutationManually = $endMutationManually;
@@ -204,6 +212,13 @@ class FluentValue implements
     {
         if ($name === 'mutate') {
             return $this->mutate(false);
+        }
+
+        if ($name === 'chain') {
+            return $this->chain($this);
+        }
+        if ($name === 'whenOk') {
+            return $this->whenOkChain();
         }
 
         if (!$this->methodExists($name)) {

@@ -3,6 +3,7 @@
 namespace Infira\FluentValue\Traits;
 
 use Illuminate\Support\Stringable;
+use Infira\FluentValue\FluentChain;
 use Infira\FluentValue\FluentValue;
 
 /**
@@ -15,22 +16,66 @@ trait ConditionMutators
         return $this->when(fn() => $this->ok(), $success, $default);
     }
 
+    public function whenOkChain(mixed $failedValue = null): FluentChain
+    {
+        if (func_num_args() == 0) {
+            return $this->chain($this)->dontRunWhen(fn() => $this->notOk());
+        }
+
+        return $this->chain($this)->dontRunWhen(fn() => $this->notOk(), $failedValue);
+    }
+
     public function whenNotOk(mixed $success, mixed $default = null): static
     {
         return $this->when(fn() => $this->notOk(), $success, $default);
     }
 
-    public function when(mixed $check, mixed $success, mixed $default = null): static
+    public function when(mixed $value, mixed $success, mixed $default = null): static
     {
-        if (!is_callable($success)) {
+        if ($success !== null && !is_callable($success)) {
             $success = static fn() => $success;
         }
 
-        if (!is_callable($default)) {
+        if ($default !== null && !is_callable($default)) {
             $default = static fn() => $default;
         }
 
-        return $this->new($this->stringable()->when($check, $success, $default));
+        $value = $value instanceof \Closure ? $value($this) : $value;
+        if ($value) {
+            $output = $success($this, $value) ?? $this;
+        }
+        elseif ($default) {
+            $output = $default($this, $value) ?? $this;
+        }
+        else {
+            return $this;
+        }
+
+        return $this->new($output);
+    }
+
+    public function unless(mixed $value, mixed $success, mixed $default = null): static
+    {
+        if ($success !== null && !is_callable($success)) {
+            $success = static fn() => $success;
+        }
+
+        if ($default !== null && !is_callable($default)) {
+            $default = static fn() => $default;
+        }
+
+        $value = $value instanceof \Closure ? $value($this) : $value;
+        if (!$value) {
+            $output = $success($this, $value) ?? $this;
+        }
+        elseif ($default) {
+            $output = $default($this, $value) ?? $this;
+        }
+        else {
+            return $this;
+        }
+
+        return $this->new($output);
     }
 
     /**

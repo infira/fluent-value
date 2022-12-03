@@ -47,11 +47,11 @@ use Infira\FluentValue\FluentValue;
  * @property-read FluentValue $urlEncode - proxy to method urlEncode()
  * @property-read FluentValue $lines - proxy to method lines()
  * @property-read FluentValue $json - proxy to method json()
- * @property-read FluentValue $escapeHTML - proxy to method escapeHTML()
  * @property-read FluentValue $addSlashes - proxy to method addSlashes()
  * @property-read FluentValue $parseStr - proxy to method parseStr()
  * @property-read FluentValue $htmlAttributes - proxy to method htmlAttributes()
  * @property-read FluentValue $htmlToText - proxy to method htmlToText()
+ * @property-read FluentValue $escapeHTML - proxy to method escapeHTML()
  * @property-read static $filter - proxy to method filter()
  * @property-read static $reject - proxy to method reject()
  * @property-read FluentValue $first - proxy to method first()
@@ -188,7 +188,7 @@ trait CastingMutators
 	 */
 	public function transform(callable $callback, mixed ...$parameter): static
 	{
-		return $this->new($this->callSpread($callback, $parameter));
+		return $this->new($this->callSpread($callback, ...$parameter));
 	}
 
 
@@ -282,7 +282,7 @@ trait CastingMutators
 	 */
 	public function max(mixed ...$max): static
 	{
-		return $this->new($this->toMax($max));
+		return $this->new($this->toMax(...$max));
 	}
 
 
@@ -292,7 +292,7 @@ trait CastingMutators
 	 */
 	public function min(mixed ...$max): static
 	{
-		return $this->new($this->toMin($max));
+		return $this->new($this->toMin(...$max));
 	}
 
 
@@ -546,7 +546,7 @@ trait CastingMutators
 	 */
 	public function format(string $format, mixed ...$values): static
 	{
-		return $this->new($this->toFormatted($format, $values));
+		return $this->new($this->toFormatted($format, ...$values));
 	}
 
 
@@ -573,7 +573,7 @@ trait CastingMutators
 	 */
 	public function sprintf(mixed ...$values): static
 	{
-		return $this->new($this->toSprintf($values));
+		return $this->new($this->toSprintf(...$values));
 	}
 
 
@@ -586,17 +586,6 @@ trait CastingMutators
 	public function vsprintf(mixed $values): static
 	{
 		return $this->new($this->toVSprintf($values));
-	}
-
-
-	/**
-	 * @link https://php.net/manual/en/function.htmlspecialchars.php
-	 * @see FluentValue::toEncodedHTML()
-	 * @generated
-	 */
-	public function escapeHTML(bool $doubleEncode = true): static
-	{
-		return $this->new($this->toEncodedHTML($doubleEncode));
 	}
 
 
@@ -621,6 +610,30 @@ trait CastingMutators
 	public function parseStr(): static
 	{
 		return $this->new($this->toParseStr());
+	}
+
+
+	/**
+	 * Get the string matching the given pattern.
+	 * @see  Regex::matchAll
+	 * @see FluentValue::getAllMatches()
+	 * @generated
+	 */
+	public function matchAll(string $pattern): static
+	{
+		return $this->new($this->getAllMatches($pattern));
+	}
+
+
+	/**
+	 * Wrap current value with html tag
+	 * @see FluentValue::toHTMLTag()
+	 * @example flu('Hello world!')->toHTMLTag('h1') //<h1>Hello world</h1>
+	 * @generated
+	 */
+	public function htmlTag(string $tag): static
+	{
+		return $this->new($this->toHTMLTag($tag));
 	}
 
 
@@ -650,14 +663,13 @@ trait CastingMutators
 
 
 	/**
-	 * Get the string matching the given pattern.
-	 * @see  Regex::matchAll
-	 * @see FluentValue::getAllMatches()
+	 * @link https://php.net/manual/en/function.htmlspecialchars.php
+	 * @see FluentValue::toEncodedHTML()
 	 * @generated
 	 */
-	public function matchAll(string $pattern): static
+	public function escapeHTML(bool $doubleEncode = true): static
 	{
-		return $this->new($this->getAllMatches($pattern));
+		return $this->new($this->toEncodedHTML($doubleEncode));
 	}
 
 
@@ -669,7 +681,7 @@ trait CastingMutators
 	 */
 	public function merge(array ...$array): static
 	{
-		return $this->new($this->getMerged($array));
+		return $this->new($this->getMerged(...$array));
 	}
 
 
