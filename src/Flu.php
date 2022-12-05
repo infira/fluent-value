@@ -2,7 +2,6 @@
 
 namespace Infira\FluentValue;
 
-use Illuminate\Support\Stringable;
 use JsonException;
 use Wolo\Traits\NumberTrait;
 use Wolo\Traits\StringTrait;
@@ -17,7 +16,6 @@ class Flu
      * @var class-string
      */
     public static string $defaultFluentValueClass = FluentValue::class;
-    public static string $stringableProcessor = Stringable::class;
 
     public static function of(mixed $value, array $attributes = []): FluentValue
     {

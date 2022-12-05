@@ -3,114 +3,98 @@
 namespace Infira\FluentValue;
 
 use Closure;
-use Illuminate\Support\Stringable;
-use Stringable as BaseStringable;
+use Infira\FluentValue\Processors\FluentValueProcessor;
+use Infira\FluentValue\Processors\LaravelStringableProcessor;
+use Infira\FluentValue\Processors\Processor;
 use Wolo\AttributesBag;
 
 /**
  * @template TValue
- * @mixin Stringable
+ * @mixin LaravelStringableProcessor
  * @property-read $this $mutate - enables mutator, every chain call will alter original value, mutator will turn off after first chain call
  * @property-read FluentChain $chain
  * @property-read FluentChain $whenOk
+ * @property-read mixed $value - Get the underlying value
  */
 class FluentValue implements
     \ArrayAccess,
     \Countable,
-    BaseStringable,
+    \Stringable,
     AttributesBag\HasAttributes
 {
     public const UNDEFINED = '_UNDEFINED_';
     use AttributesBag\AttributesBagManager;
-    use Traits\PHPBuiltInterfaceImplementations,
-        Traits\Miscellaneous,
-        Traits\Hashing,
-        Traits\Numbers,
-        Traits\MoneyAndTaxes,
-        Traits\Comparing,
-        Traits\Dates,
-        Traits\Strings,
-        Traits\HtmlManipulation,
-        Traits\Arrays,
-        Traits\Files,
-        Traits\ConditionMutators;
+    use Processors\Traits\Comparing;
+    use Traits\Helpers,
+        Traits\FluentImmutableValue;
 
-    /** @generated */
-    use Traits\CastingMutators;
 
-    /**
-     * @var callable
-     */
-    private $templateProcessor;
     private bool $mutatorEnabled = false;
     private bool $endMutationManually = false;
-    public mixed $value;
+    private FluentValueProcessor $proc;
 
     public function __construct(mixed $value)
     {
-        $this->value = $this->pv($value);
+        $this->proc = new FluentValueProcessor($value);
         $this->init();
     }
 
     /**
      * Will be called right after __construct
+     *
      * @return void
      */
     public function init(): void {}
 
-    public function stringable(): Stringable
+    /**
+     * @return Processor[]
+     */
+    public function getProcessors(): array
     {
-        return new (Flu::$stringableProcessor)($this->value);
-    }
-
-    private function methodExists(string $method): bool
-    {
-        if (method_exists($this, $method)) {
-            return true;
-        }
-
-        return method_exists(Stringable::class, $method);
+        return [
+            LaravelStringableProcessor::class
+        ];
     }
 
     /**
      * Convert to real value
+     *
      * @param  mixed  $value
      * @return mixed
      */
     protected function pv(mixed $value): mixed
     {
         if ($value instanceof self) {
-            $value = $value->value;
+            $value = $value->get();
         }
         elseif ($value instanceof Closure) {
             //$value = \Wolo\Closure::makeInjectableOrVoid($value)($this);
-            $value = \Wolo\Closure::makeInjectableOrVoid($value)($this->value);
-        }
-        elseif ($value instanceof Stringable) {
-            $value = (string)$value;
+            $value = \Wolo\Closure::makeInjectableOrVoid($value)($this->get());
         }
 
-        return $this->fluValue($value);
-    }
+        if ($value instanceof self) {
+            $value = $value->get();
+        }
 
-    protected function fluValue(mixed $value): mixed
-    {
-        return $value instanceof self ? $value->value : $value;
-    }
-
-    protected function numericValue(mixed $value): float|int
-    {
-        return Flu::numeric($this->pv($value));
+        return $value;
     }
 
     /**
      * Set value for this instance
+     *
      * @param  mixed  $value
      * @return $this
      */
     public function set(mixed $value): static
     {
-        $this->value = $this->pv($value);
+        $this->proc->setValue($this->pv($value));
+
+        return $this;
+    }
+
+    public function setAt(string|int $key, mixed $value): static
+    {
+        $this->offsetSet($key, $value);
 
         return $this;
     }
@@ -118,32 +102,39 @@ class FluentValue implements
     /**
      * Edit value with callable
      * Closure callable is injectable ex ->edit(\MyClass $value) // will call $editor(MyClass(TValue))
+     *
      * @param  (callable(TValue): mixed)  $editor
      * @return $this
      */
     public function edit(callable $editor): static
     {
-        $this->value = $this->pv($editor);
+        $this->proc->setValue($editor);
 
         return $this;
     }
 
     /**
      * Get the underlying value
+     *
      * @return mixed
+     * @alias
+     * @see self::getValue()
      */
     public function get(): mixed
     {
-        return $this->value;
+        return $this->proc->getValue();
     }
 
     /**
      * Get the underlying value
+     *
      * @return mixed
+     * @alias
+     * @see self::getValue()
      */
     public function value(): mixed
     {
-        return $this->value;
+        return $this->get();
     }
 
     public function new(mixed $value = null): static
@@ -159,7 +150,7 @@ class FluentValue implements
 
             return $this;
         }
-        $constructValue = $hasArgs ? $this->pv($value) : $this->value;
+        $constructValue = $hasArgs ? $this->pv($value) : $this->get();
 
         return (new static($constructValue))->setAttributes($this->getAttributes());
     }
@@ -169,12 +160,7 @@ class FluentValue implements
         return new static($value);
     }
 
-
     //region mutation
-    public function chain(self $carry = null): FluentChain
-    {
-        return new FluentChain($carry ?: $this);
-    }
 
     public function mutate(bool $endMutationManually = false): static
     {
@@ -194,13 +180,13 @@ class FluentValue implements
     //endregion
 
     //region magic
-    public function __invoke(mixed $value = null)
+    public function __invoke(callable $parser = null)
     {
-        if ($value === null) {
-            return $this->value;
+        if ($parser === null) {
+            return $this->get();
         }
 
-        return $this->new($value)->value;
+        return $this->new($parser)->get();
     }
 
     public function __toString()
@@ -210,6 +196,10 @@ class FluentValue implements
 
     public function __get(string $name)
     {
+        if ($name === 'value') {
+            return $this->proc->getValue();
+        }
+
         if ($name === 'mutate') {
             return $this->mutate(false);
         }
@@ -221,36 +211,140 @@ class FluentValue implements
             return $this->whenOkChain();
         }
 
-        if (!$this->methodExists($name)) {
-            throw new \InvalidArgumentException("method('$name') does not exist");
+        if ($this->proc->propertyExists($name)) {
+            $value = $this->proc->getPropertyValue($name);
+
+            return $this->getProcessorOutput($this->proc, $value);
         }
 
-        return $this->$name();
+        //FluentValueProcessor doesn't have necessary properties, lets fund out that other processors has
+        foreach ($this->getProcessors() as $processor) {
+            $processor = new $processor($this->get());
+            if ($processor->propertyExists($name)) {
+                $value = $processor->getPropertyValue($name);
+
+                return $this->getProcessorOutput($processor, $value);
+            }
+        }
+        throw new \InvalidArgumentException("property|method('$name') does not exist");
     }
 
-    public function __call(string $name, array $arguments): static|bool|null
+    public function __set(string $name, $value): void
     {
-        if (!$this->methodExists($name)) {
-            throw new \InvalidArgumentException("method('$name') does not exist");
-        }
-        $result = $this->stringable()->$name(
-            ...array_map(static function ($v) {
-                if ($v instanceof self) {
-                    return $v->get();
-                }
-
-                return $v;
-            }, $arguments)
-        );
-        if (is_bool($result)) {
-            return $result;
-        }
-        if ($result instanceof Stringable) {
-            $result = (string)$result;
+        if ($name === 'value') {
+            $this->set($value);
         }
 
-        return $this->new($result);
+        if ($this->canOffset()) {
+            $this->proc->offsetSet($name, $value);
+
+            return;
+        }
+        throw new \RuntimeException('cant set value');
+    }
+
+    public function __isset(string $name): bool
+    {
+        if ($this->canOffset()) {
+            return $this->offsetExists($name);
+        }
+        throw new \RuntimeException('cant use __isset');
+    }
+
+    public function __call(string $method, array $arguments = []): static|bool|null
+    {
+        if ($arguments) {
+            $arguments = array_map(
+                static function ($v) {
+                    if ($v instanceof self) {
+                        return $v->get();
+                    }
+
+                    return $v;
+                },
+                $arguments
+            );
+        }
+
+        if ($this->proc->canExecute($method)) {
+            $value = $this->proc->execute($method, ...$arguments);
+
+            return $this->getProcessorOutput($this->proc, $value);
+        }
+
+        //FluentValueProcessor doesn't have necessary methods, lets fund out that other processors has
+        foreach ($this->getProcessors() as $processor) {
+            $processor = $processor instanceof Processor ? $processor : new $processor($this->get());
+            if ($processor->canExecute($method)) {
+                $value = $processor->execute($method, ...$arguments);
+
+                return $this->getProcessorOutput($processor, $value);
+            }
+        }
+        throw new \InvalidArgumentException("method('$method') does not exist");
     }
 
     //endregion
+
+    private function getProcessorOutput(Processor $processor, $value): mixed
+    {
+        if ($processor->canConvertToFluent($value)) {
+            return $this->new($processor->getFluentValue($value));
+        }
+
+        return $value;
+    }
+
+    /**
+     * Get default value added tax
+     *
+     * @return float|int
+     */
+    public static function getDefaultVATPercent(): float|int
+    {
+        return 20;
+    }
+
+
+    /**
+     * Get default date format for flu()->formatDate()
+     */
+    public static function getDefaultDateFormat(): string
+    {
+        return 'd.m.Y';
+    }
+
+    /**
+     * Get default date format for flu()->formatDate()
+     */
+    public static function getDefaultDateTimeFormat(): string
+    {
+        return 'd.m.Y H:i:s';
+    }
+
+    //region PHP built interface implementations
+    public function offsetExists(mixed $offset): bool
+    {
+        return $this->proc->offsetExists($offset);
+    }
+
+    public function offsetGet(mixed $offset): mixed
+    {
+        return $this->proc->offsetGet($offset);
+    }
+
+    public function offsetSet(mixed $offset, mixed $value): void
+    {
+        $this->proc->offsetSet($offset, $value);
+    }
+
+    public function offsetUnset(mixed $offset): void
+    {
+        $this->proc->offsetUnset($offset);
+    }
+
+    public function count(): int
+    {
+        return $this->proc->count();
+    }
 }
