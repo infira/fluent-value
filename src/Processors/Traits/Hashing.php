@@ -15,7 +15,6 @@ trait Hashing
      *
      * @return string
      * @see  Hash::make()
-     * @aliasof FluentImmutableValue::toMd5()
      * @uses FluentImmutableValue::$md5
      */
     public function md5(): string
@@ -28,7 +27,6 @@ trait Hashing
      *
      * @return string
      * @see  Hash::make()
-     * @aliasof FluentImmutableValue::toSha1()
      * @uses FluentImmutableValue::$sha1
      */
     public function sha1(): string
@@ -41,7 +39,6 @@ trait Hashing
      *
      * @return string
      * @see  Hash::make()
-     * @aliasof FluentImmutableValue::toCrc32b()
      * @uses FluentImmutableValue::$crc32b
      */
     public function crc32b(): string
@@ -54,7 +51,6 @@ trait Hashing
      *
      * @return string
      * @see  Hash::make()
-     * @aliasof FluentImmutableValue::toSha512()
      * @uses FluentImmutableValue::$sha512
      */
     public function sha512(): string

@@ -18,12 +18,7 @@ trait Miscellaneous
     public function append(mixed ...$values): mixed
     {
         if ($this->isIterable()) {
-            $newValue = $this->value;
-            foreach ($values as $value) {
-                $newValue[] = $value;
-            }
-
-            return $newValue;
+            return $this->push(...$values);
         }
 
         return $this->value.implode('', $values);
@@ -37,10 +32,10 @@ trait Miscellaneous
     public function transform(callable $callback, mixed ...$parameter): static
     {
         if ($this->isArray()) {
-            $this->value = $this->map(fn($value) => $callback($value, ...$parameter));
+            $this->setValue($this->map(fn($value) => $callback($value, ...$parameter)));
         }
         else {
-            $this->value = $callback($this->value, ...$parameter);
+            $this->setValue($callback($this->value, ...$parameter));
         }
 
         return $this;
@@ -93,7 +88,7 @@ trait Miscellaneous
             return count($this->value);
         }
 
-        return strlen($this->value);
+        return $this->strlen();
     }
 
 

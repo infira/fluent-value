@@ -26,6 +26,7 @@ class Flu
 
     /**
      * Returns the JSON representation of a value
+     *
      * @param  mixed  $input
      * @param  bool  $pretty  JSON_PRETTY_PRINT - https://www.php.net/manual/en/json.constants.php
      * @return string
@@ -73,6 +74,7 @@ class Flu
 
     /**
      * Parses the string into variables
+     *
      * @link https://www.php.net/manual/en/function.parse-str.php
      */
     public static function parseStr(mixed $string): array
@@ -89,6 +91,7 @@ class Flu
 
     /**
      * Converts html to text
+     *
      * @param  string  $str
      * @return string
      */
@@ -100,11 +103,11 @@ class Flu
     /**
      * Simple string templating
      *
-     * @param  mixed  $template
+     * @example render('my name is {name}',['name' => 'gen']) // 'my name is gen'
      * @param  array  $vars
      * @param  string|array  $syntax
+     * @param  mixed  $template
      * @return string
-     * @example render('my name is {name}',['name' => 'gen']) // 'my name is gen'
      */
     public static function render(mixed $template, array $vars, string|array $syntax = '{}'): string
     {
@@ -121,6 +124,7 @@ class Flu
 
     /**
      * Encode HTML special characters in a string.
+     *
      * @link https://www.php.net/manual/en/function.htmlspecialchars.php
      */
     public static function escapeHTML(mixed $value, bool $doubleEncode = true): string
@@ -128,35 +132,65 @@ class Flu
         return htmlspecialchars($value ?? '', ENT_QUOTES, 'UTF-8', $doubleEncode);
     }
 
+    //endregion
+
     /**
+     * Get offset value
+     *
+     * @param  mixed  $key
      * @param  mixed  $value
-     * @param  string|array  $wrap
-     * @param  string|null  $right
-     * @return string
-     * @example flu('value')->surround('{}') // {value}
-     * @example flu('value')->surround('left_','_right') // left_value_right
-     * @example flu('value')->surround(['left_','_right']) // left_value_right
+     * @param  mixed  $default
+     * @return mixed
      */
-    public static function surround(mixed $value, string|array $wrap, string $right = null): string
+    public static function at(mixed $key, mixed $value, mixed $default = null): mixed
     {
-        if (is_array($wrap) && $right === null) {
-            [$left, $right] = $wrap;
-        }
-        elseif ($right === null && is_string($wrap) && strlen($wrap) === 1) {
-            $left = $right = $wrap;
-        }
-        elseif (is_string($wrap) && $right === null) {
-            [$left, $right] = mb_str_split($wrap, 1);
-        }
-        else {
-            $left = (string)$wrap;
-            $right = (string)$right;
+        if (is_array($value)) {
+            return array_key_exists($key, $value) ? $value[$key] : $default;
         }
 
-        return $left.$value.$right;
+        return isset($value[$key]) ? $key[$value] : $default;
     }
 
 
-    //endregion
+    /**
+     * Set value to offset
+     *
+     * @param  mixed  $key
+     * @param  mixed  $value
+     * @param  mixed  $setValue
+     * @return mixed
+     */
+    public static function setAt(mixed $key, mixed $value, mixed $setValue): mixed
+    {
+        if (is_string($value)) {
+            $of = (array)mb_str_split($value, 1);
+            $of[$key] = $setValue;
 
+            return implode('', $of);
+        }
+
+        $value[$key] = $setValue;
+
+        return $value;
+    }
+
+    /**
+     * Remove offset value
+     *
+     * @param  mixed  $key
+     * @param  mixed  $value
+     * @return mixed
+     */
+    public static function removeAt(mixed $key, mixed $value): mixed
+    {
+        if (is_string($value)) {
+            $value = (array)mb_str_split($value, 1);
+            unset($value[$key]);
+
+            return implode('', $value);
+        }
+        unset($value[$key]);
+
+        return $value;
+    }
 }

@@ -12,9 +12,9 @@ use Wolo\Calculator\Calc;
 trait Numbers
 {
     /**
-     * @aliasof FluentImmutableValue::toNumeric()
      * @return float|int
      * @uses FluentImmutableValue::$numeric
+     * @aliasof FluentImmutableValue::toNumeric()
      */
     public function numeric(): float|int
     {
@@ -25,7 +25,6 @@ trait Numbers
      * @param  string  $decimalSeparator
      * @param  string  $thousand
      * @return string
-     * @aliasof FluentImmutableValue::toFormattedNumber()
      * @uses FluentImmutableValue::$formattedNumber
      */
     public function formatNumber(string $decimalSeparator = ',', string $thousand = ''): string
@@ -34,7 +33,6 @@ trait Numbers
     }
 
     /**
-     * @aliasof FluentImmutableValue::toNegative()
      * @return float|int
      * @uses FluentImmutableValue::$negative
      */
@@ -49,7 +47,6 @@ trait Numbers
     }
 
     /**
-     * @aliasof FluentImmutableValue::toPositive()
      * @return float|int
      * @uses FluentImmutableValue::$positive
      */
@@ -59,7 +56,6 @@ trait Numbers
     }
 
     /**
-     * @aliasof FluentImmutableValue::toMax()
      * @param  mixed  ...$max
      * @return mixed
      */
@@ -71,7 +67,6 @@ trait Numbers
     /**
      * @param  mixed  ...$max
      * @return mixed
-     * @aliasof FluentImmutableValue::toMin()
      */
     public function min(mixed ...$max): mixed
     {
@@ -79,7 +74,6 @@ trait Numbers
     }
 
     /**
-     * @aliasof FluentImmutableValue::toFloor()
      * @return float
      * @uses FluentImmutableValue::$floor
      */
@@ -89,7 +83,6 @@ trait Numbers
     }
 
     /**
-     * @aliasof FluentImmutableValue::toCeil()
      * @return float
      * @uses FluentImmutableValue::$ceil
      */
@@ -99,7 +92,6 @@ trait Numbers
     }
 
     /**
-     * @aliasof FluentImmutableValue::toRounded()
      * @param  int  $decimals
      * @return float|int
      * @uses FluentImmutableValue::$round
@@ -110,10 +102,10 @@ trait Numbers
     }
 
     /**
-     * @aliasof FluentImmutableValue::getIncremented()
      * @param  int  $by
      * @return float|int
      * @uses FluentImmutableValue::$increment
+     * @template Immutable
      */
     public function increment(int $by = 1): float|int
     {
@@ -121,10 +113,10 @@ trait Numbers
     }
 
     /**
-     * @aliasof FluentImmutableValue::getDecremented()
      * @param  int  $by
      * @return float|int
      * @uses FluentImmutableValue::$decrement
+     * @template Immutable
      */
     public function decrement(int $by = 1): float|int
     {
@@ -132,7 +124,6 @@ trait Numbers
     }
 
     /**
-     * @aliasof FluentImmutableValue::getAdded()
      * @param  float|int  $value
      * @return float|int
      */
@@ -142,7 +133,6 @@ trait Numbers
     }
 
     /**
-     * @aliasof FluentImmutableValue::getSubtracted()
      * @param  float|int  $value
      * @return float|int
      */
@@ -152,7 +142,6 @@ trait Numbers
     }
 
     /**
-     * @aliasof FluentImmutableValue::getMultiplied()
      * @param  float|int  $value
      * @return float|int
      */
@@ -162,7 +151,6 @@ trait Numbers
     }
 
     /**
-     * @aliasof FluentImmutableValue::getDivided()
      * @param  float|int  $value
      * @return float|int
      */
@@ -172,7 +160,6 @@ trait Numbers
     }
 
     /**
-     * @aliasof FluentImmutableValue::getIncreasedByPercent()
      * @param  float|int  $percent
      * @return float|int
      */
@@ -182,7 +169,6 @@ trait Numbers
     }
 
     /**
-     * @aliasof FluentImmutableValue::getDecreasedByPercent()
      * @param  float|int  $percent
      * @return float|int
      */

@@ -17,11 +17,21 @@ trait Strings
     private $templateProcessor;
 
     /**
+     * Get string length
+     *
+     * @return string
+     * @uses FluentImmutableValue::$strlen
+     */
+    public function strlen(): string
+    {
+        return mb_strlen($this->value);
+    }
+
+    /**
      * Returns trailing name component of path/class-string
      *
      * @return string
      * @see  Flu::basename
-     * @aliasof FluentImmutableValue::toBaseName()
      * @uses FluentImmutableValue::$basename
      */
     public function basename(): string
@@ -32,7 +42,6 @@ trait Strings
     /**
      * URL-encodes string
      *
-     * @aliasof FluentImmutableValue::toEncodedURL()
      * @return string
      * @uses FluentImmutableValue::$encodedURL
      */
@@ -44,7 +53,6 @@ trait Strings
     /**
      * Join array elements with a string
      *
-     * @aliasof FluentImmutableValue::toImploded()
      * @param  string  $glue
      * @return string
      */
@@ -68,7 +76,6 @@ trait Strings
     /**
      * Split a string by a string
      *
-     * @aliasof FluentImmutableValue::toExploded()
      * @param  string  $separator
      * @return array
      */
@@ -80,7 +87,6 @@ trait Strings
     /**
      * Split lines into array
      *
-     * @aliasof FluentImmutableValue::toLines()
      * @return array
      * @uses FluentImmutableValue::$lines
      */
@@ -92,23 +98,21 @@ trait Strings
     /**
      * Surround value with
      *
-     * @aliasof FluentImmutableValue::toSurrounded()
-     * @example flu('value')->surround('{}') // {value}
-     * @example flu('value')->surround('left_','_right') // left_value_right
-     * @example flu('value')->surround(['left_','_right']) // left_value_right
-     * @param  string|array  $wrap
-     * @param  string|null  $right
+     * @example flu('value')->wrap('value','{','}') // "{value}"
+     * @example flu('value')->wrap('value',['{','}']) //"{value}"
+     * @example flu('value')->wrap('value',['{','['],['}',']']) // "[{value}]"
+     * @param  string|array  $before
+     * @param  string|array|null  $after
      * @return string
      */
-    public function surround(string|array $wrap, string $right = null): string
+    public function wrap(string|array $before, string|array $after = null): string
     {
-        return Flu::surround($this->value, $wrap, $right);
+        return Flu::wrap($this->value, $before, $after);
     }
 
     /**
      * Return a formatted string
      *
-     * @aliasof FluentImmutableValue::toFormatted()
      * @example flu('gen')->getFormattedText('my name is {%value%}, and im %s age of old',39) //my name is gen, and im 39 age of old
      * @param  string  $format
      * @param  mixed  ...$values
@@ -130,7 +134,6 @@ trait Strings
      * @param  bool  $pretty  JSON_PRETTY_PRINT - https://www.php.net/manual/en/json.constants.php
      * @return string
      * @throws \JsonException
-     * @aliasof FluentImmutableValue::toEncodedJson()
      * @uses FluentImmutableValue::$json
      */
     public function json(bool $pretty = false): string
@@ -141,7 +144,6 @@ trait Strings
     /**
      * Return a formatted string
      *
-     * @aliasof FluentImmutableValue::toSprintf()
      * @param  mixed  ...$values
      * @return string
      */
@@ -153,7 +155,6 @@ trait Strings
     /**
      * Return a formatted string
      *
-     * @aliasof FluentImmutableValue::toVSprintf()
      * @param  mixed  $values
      * @return string
      */
@@ -167,9 +168,21 @@ trait Strings
     }
 
     /**
+     * Wrap quotes
+     *
+     * @example flu('hello world')->wrapQuotes('"') // '"hello world"'
+     * @param  string  $quotes
+     * @return string
+     * @uses FluentImmutableValue::$wrapQuotes
+     */
+    public function wrapQuotes(string $quotes = '"'): string
+    {
+        return $this->flu->wrap($quotes)->toString();
+    }
+
+    /**
      * Quote string with slashes
      *
-     * @aliasof FluentImmutableValue::toSlashedString()
      * @return string
      * @uses FluentImmutableValue::$slashedString
      */
@@ -181,7 +194,6 @@ trait Strings
     /**
      * Parses the string into variables
      *
-     * @aliasof FluentImmutableValue::toParseStr()
      * @return array
      * @uses FluentImmutableValue::$parsedStr
      */
@@ -224,7 +236,6 @@ trait Strings
      * String representation of object.
      *
      * @return string|null The string representation of the object or null
-     * @aliasof FluentImmutableValue::toSerialized()
      * @uses FluentImmutableValue::$serialized
      */
     public function serialize(): ?string
@@ -237,7 +248,6 @@ trait Strings
      *
      * @param  array  $options
      * @return mixed
-     * @aliasof FluentImmutableValue::toUnserialized()
      * @uses FluentImmutableValue::$unserialized
      */
     public function unserialize(array $options = []): mixed
@@ -248,7 +258,6 @@ trait Strings
     /**
      * Get array of its characters
      *
-     * @aliasof FluentImmutableValue::getCharacters()
      * @param  int  $length
      * @return array
      * @uses FluentImmutableValue::$characters - transform underlying value characters array
@@ -258,7 +267,7 @@ trait Strings
         return (array)mb_str_split($this->value, $length);
     }
 
-    public function withRenderProcessor(callable $processor): static
+    protected function withRenderProcessor(callable $processor): static
     {
         $this->templateProcessor = $processor;
 
@@ -273,8 +282,11 @@ trait Strings
      * @param  array  $data
      * @return string
      */
-    public function render(array $data = []): string
+    public function render(array $data = [], callable $renderer = null): string
     {
+        if ($renderer) {
+            return $renderer($this->value, $data);
+        }
         if ($this->templateProcessor) {
             return ($this->templateProcessor)($this->value, $data);
         }

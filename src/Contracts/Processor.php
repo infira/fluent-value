@@ -1,8 +1,8 @@
 <?php
 
-namespace Infira\FluentValue\Processors;
+namespace Infira\FluentValue\Contracts;
 
-interface Processor
+interface Processor extends UnderlyingValue
 {
     public function canExecute(string $method);
 
@@ -15,8 +15,6 @@ interface Processor
     public function canConvertToFluent(mixed $value): bool;
 
     public function getFluentValue(mixed $value): mixed;
-
-    public function getValue(): mixed;
 
     public function setValue(mixed $value): static;
 }

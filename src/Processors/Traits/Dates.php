@@ -14,7 +14,6 @@ trait Dates
      * Convert value to date formatted string using $format
      * If $format is not provided getDefaultDateFormat() is used
      *
-     * @aliasof FluentImmutableValue::toFormattedDate()
      * @param  string|null  $format
      * @return string
      * @uses FluentImmutableValue::$formatDate
@@ -29,7 +28,6 @@ trait Dates
     /**
      * Convert value to date formatted using getDefaultDateTimeFormat()
      *
-     * @aliasof FluentImmutableValue::toFormattedDateTime()
      * @return string
      * @uses FluentImmutableValue::$formatDateTime
      */
@@ -41,7 +39,6 @@ trait Dates
     /**
      * Converts value to date format Y-m-d
      *
-     * @aliasof FluentImmutableValue::toStandardDate()
      * @return string
      * @uses FluentImmutableValue::$formatStandardDate
      */
@@ -53,7 +50,6 @@ trait Dates
     /**
      * Converts value to date format Y-m-d H:i:s
      *
-     * @aliasof FluentImmutableValue::toStandardDateTime()
      * @return string
      * @uses FluentImmutableValue::$formatStandardDateTime
      */
@@ -63,11 +59,10 @@ trait Dates
     }
 
     /**
-     * @aliasof FluentImmutableValue::toTimestamp()
-     * @return string
+     * @return int
      * @uses FluentImmutableValue::$timestamp
      */
-    public function time(): string
+    public function timestamp(): int
     {
         return $this->toDate()->getTimestamp();
     }

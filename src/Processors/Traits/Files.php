@@ -15,7 +15,6 @@ trait Files
     /**
      * Add .$extension to current value
      *
-     * @aliasof FluentImmutableValue::toFilename()
      * @param  string  $extension
      * @return string
      */
@@ -27,11 +26,6 @@ trait Files
         );
     }
 
-    protected static function getPathRoot(string $root = null): string
-    {
-        return is_null($root) ? '/' : $root;
-    }
-
     /**
      * Convert value to path
      *
@@ -39,13 +33,12 @@ trait Files
      * @example flu('filename').toFilePath('txt','/var/www/html') #=> /var/www/html/filename.txt
      * @param  string|null  $extension  if null then current value is added
      * @param  string|null  $root  directory path - If null then / is used
-     * @aliasof FluentImmutableValue::toPath()
      * @uses FluentImmutableValue::$path
      * @return string
      */
     public function path(string $extension = null, string $root = null): string
     {
-        $root = static::getPathRoot($root);
+        $root = $root ?: '/';
 
         if (is_null($extension)) {
             return Path::join($root, $this->value());
@@ -58,7 +51,6 @@ trait Files
      * Return file extension.
      * If current value is not file then try to get extension manually using string manipulations
      *
-     * @aliasof FluentImmutableValue::toExtension()
      * @param  bool  $lowercase
      * @return string
      * @uses FluentImmutableValue::$extension
@@ -79,6 +71,7 @@ trait Files
     /**
      * @param  string|null  $extension
      * @return bool
+     * @aliasof FluentImmutableValue::fileExists()
      * @final
      */
     public function fileExists(string $extension = null): bool
@@ -93,6 +86,7 @@ trait Files
     /**
      * @param  string|null  $extension
      * @return bool
+     * @aliasof FluentImmutableValue::isFile()
      * @final
      */
     public function isFile(string $extension = null): bool
@@ -107,6 +101,7 @@ trait Files
     /**
      * Is current value file extension
      *
+     * @aliasof FluentImmutableValue::isExtension()
      * @final
      */
     public function isExtension(string $extension): bool

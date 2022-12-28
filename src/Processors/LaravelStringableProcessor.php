@@ -4,6 +4,7 @@ namespace Infira\FluentValue\Processors;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Stringable;
+use Infira\FluentValue\Contracts\Processor;
 
 class LaravelStringableProcessor extends Stringable implements Processor
 {
@@ -30,8 +31,7 @@ class LaravelStringableProcessor extends Stringable implements Processor
     public function canConvertToFluent(mixed $value): bool
     {
         return $value instanceof self
-            || $value instanceof Collection
-            ;
+            || $value instanceof Collection;
     }
 
     public function getFluentValue(mixed $value): mixed
@@ -44,11 +44,6 @@ class LaravelStringableProcessor extends Stringable implements Processor
         }
 
         return $value;
-    }
-
-    public function getValue(): mixed
-    {
-        return $this->value();
     }
 
     public function setValue(mixed $value): static

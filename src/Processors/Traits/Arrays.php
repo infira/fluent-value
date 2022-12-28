@@ -9,14 +9,21 @@ use Wolo\Closure;
 /**
  * @template TValue
  * @template TKey
+ * @template Immutable
  * @mixin FluentValueProcessor
  */
 trait Arrays
 {
+    private function validateArray(string $method): void
+    {
+        if (!$this->isArray()) {
+            throw new \RuntimeException("cant initiate $method on non array ");
+        }
+    }
+
     /**
      * Merge array
      *
-     * @aliasof FluentImmutableValue::getMerged()
      * @param  array  ...$array
      * @return array
      */
@@ -30,7 +37,6 @@ trait Arrays
      *
      * @param  (callable(TKey,TValue): mixed)|null  $callback  - "self::method" or "static::method" will be called Using FluentValue
      * @return array
-     * @aliasof FluentImmutableValue::getFiltered()
      * @uses FluentImmutableValue::$filter - reject empty
      */
     public function filter(callable $callback = null): array
@@ -39,8 +45,8 @@ trait Arrays
             return array_filter($this->value);
         }
 
-        if ($this->canCallMe($callback)) {
-            return $this->filter(fn($item) => $this->executeMe($item, $callback)->bool());
+        if ($fluMethod = $this->extractFluMethod($callback)) {
+            return $this->filter(fn($item) => flu($item)->{$fluMethod}()->bool());
         }
 
         return array_filter(
@@ -51,11 +57,49 @@ trait Arrays
     }
 
     /**
+     * Add items to, if not exists new array will be created
+     * It is same as flu([])['key'] = $value
+     *
+     * @param  string|int  $key
+     * @param  mixed  ...$values
+     * @return array
+     * @template Immutable
+     */
+    public function pushTo(string|int $key, mixed ...$values): array
+    {
+        $arr = $this->value;
+        if (!isset($this->value[$key])) {
+            $arr[$key] = [];
+        }
+        foreach ($values as $value) {
+            $arr[$key][] = $value;
+        }
+
+        return $arr;
+    }
+
+    /**
+     * Push values to array
+     *
+     * @param  mixed  ...$values
+     * @return array
+     * @template Immutable
+     */
+    public function push(mixed ...$values): array
+    {
+        $arr = $this->value;
+        foreach ($values as $value) {
+            $arr[] = $value;
+        }
+
+        return $arr;
+    }
+
+    /**
      * Rejects items using truth test
      *
      * @param  (callable(TKey,TValue): mixed)|null  $callback  - "self::method" or "static::method" will be called Using FluentValue
      * @return array
-     * @aliasof FluentImmutableValue::getRejected()
      * @uses FluentImmutableValue::$reject - reject not empty
      */
     public function reject(callable $callback = null): array
@@ -64,8 +108,8 @@ trait Arrays
             return array_filter($this->value, static fn($item) => !empty($item));
         }
 
-        if ($this->canCallMe($callback)) {
-            return $this->reject(fn($item) => $this->executeMe($item, $callback)->bool());
+        if ($fluMethod = $this->extractFluMethod($callback)) {
+            return $this->reject(fn($item) => flu($item)->{$fluMethod}()->bool());
         }
 
         return array_filter(
@@ -78,7 +122,6 @@ trait Arrays
     /**
      * Explodes, then value and then filters out empty values
      *
-     * @aliasof FluentImmutableValue::getExplodedEmptyRejected()
      * @param  string  $separator
      * @return array
      */
@@ -93,7 +136,6 @@ trait Arrays
     /**
      * Explodes, then trims each value
      *
-     * @aliasof FluentImmutableValue::toExplodeTrim()
      * @param  string  $separator
      * @return array
      */
@@ -109,7 +151,6 @@ trait Arrays
      * @param  null  $default
      * @return mixed
      * @see  Arr::first()
-     * @aliasof FluentImmutableValue::getFirst()
      * @uses FluentImmutableValue::$first
      */
     public function first(callable $callback = null, $default = null): mixed
@@ -124,7 +165,6 @@ trait Arrays
      * @param  null  $default
      * @return mixed
      * @see  Arr::last()
-     * @aliasof FluentImmutableValue::getLast()
      * @uses FluentImmutableValue::$last
      */
     public function last(callable $callback = null, $default = null): mixed
@@ -134,29 +174,62 @@ trait Arrays
 
     /**
      * Applies the callback to the elements of the given arrays
-     * Closure callable is injectable ex ->edit(\MyClass $value) // will call $editor(MyClass(TValue))
-     * "self::method" or "static::method" will be called Using FluentValue
+     * Closure callable is injectable ex ->edit(\MyClass $value) // will call $editor(new \MyClass(TValue))
+     * "flu::method" will be mapped with flu($arrayItem)->method(...$arg)
      *
-     * @param  (callable(TKey,TValue): mixed)  $callback
+     * @example flu([' 1',' 2',' hello'])->map('flu::trim->eur') //['1,00€','2,00€','0,00€]
+     * @example flu([' 1',' 2',' hello'])->map('trim->intval') //[1,2,0]
+     * @example flu([' 1',' 2',' hello'])->map(['trim','intval']) //[1,2,0]
+     * @param  (callable(TKey,TValue): mixed)|(callable(TKey,TValue): mixed)[]|string  $callback
      * @param  mixed  ...$arg  extra arguments passed to callback
      * @return array
-     * @aliasof FluentImmutableValue::getMapped()
      */
-    public function map(callable $callback, mixed...$arg): array
+    public function map(callable|string|array $callback, mixed...$arg): array
     {
-        if ($this->canCallMe($callback)) {
-            return $this->map(fn($item) => $this->executeMe($item, $callback, $arg)->getValue());
+        if ($fluMethod = $this->extractFluMethod($callback)) {
+            return $this->map(fn($item) => flu($item)->execute($fluMethod, ...$arg)->value());
         }
 
-        if (is_string($callback)) {
-            return array_map($callback, $this->value);
+        if (is_string($callback) && str_contains($callback, '->')) {
+            return $this->map(array_map('trim', explode('->', $callback)));
+        }
+
+        if (is_array($callback) && !is_callable($callback)) {
+            return $this->map(function ($carry) use ($callback) {
+                foreach ($callback as $callable) {
+                    $carry = $callable($carry);
+                }
+
+                return $carry;
+            });
         }
 
         $keys = array_keys($this->value);
-        $items = array_map(Closure::makeInjectableOrVoid($callback), $this->value, [...$keys, ...$arg]);
+        $callback = Closure::makeInjectableOrVoid($callback);
+        try {
+            $items = array_map($callback, $this->value, $keys);
+        }
+        catch (\ArgumentCountError) {
+            $items = array_map($callback, $this->value);
+        }
 
         return array_combine($keys, $items);
     }
+
+    /**
+     * Applies the $fluentMethod to the elements of the given arrays
+     *
+     * @param  string  $fluentMethod
+     * @param  mixed  ...$arg  extra arguments passed to callback
+     * @return array
+     * @TODO to get better autosuggestion use phpstorm meta
+     */
+    public function mapMe(string $fluentMethod, mixed...$arg): array
+    {
+        return $this->map("flu::$fluentMethod", ...$arg);
+        //return $this->map(fn($item) => flu($item)->{$fluentMethod}(...$arg));
+    }
+
 
     /**
      * Run an associative map over each of the items.
@@ -164,7 +237,6 @@ trait Arrays
      *
      * @param  (callable(TKey,TValue): mixed)  $callback
      * @return array
-     * @aliasof FluentImmutableValue::getMappedWithKeys()
      */
     public function mapWithKeys(callable $callback): array
     {

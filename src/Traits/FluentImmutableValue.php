@@ -9,17 +9,19 @@ use Infira\FluentValue\FluentValue;
  * @template TKey
  * @template TValue
  * @property-read FluentValue $size - transform underlying value using count()/strlen()
+ * @property-read FluentValue $strlen - Get string length
  * @property-read FluentValue $basename - Returns trailing name component of path/class-string
  * @property-read FluentValue $encodedURL - URL-encodes string
  * @property-read FluentValue $lines - Split lines into array
  * @property-read FluentValue $json - Returns the JSON representation of a value
+ * @property-read FluentValue $wrapQuotes - Wrap quotes
  * @property-read FluentValue $slashedString - Quote string with slashes
  * @property-read FluentValue $parsedStr - Parses the string into variables
  * @property-read FluentValue $serialized - String representation of object.
  * @property-read FluentValue $unserialized - Constructs the object.
  * @property-read FluentValue $characters - transform underlying value characters array
  * @property-read FluentValue $rendered - Simple string templating
- * @property-read FluentValue $md - Get md5 hash
+ * @property-read FluentValue $md5 - Get md5 hash
  * @property-read FluentValue $sha1 - Get sha1 hash
  * @property-read FluentValue $crc32b - Get crc32b hash
  * @property-read FluentValue $sha512 - Get sha512 hash
@@ -47,23 +49,8 @@ use Infira\FluentValue\FluentValue;
  * @property-read FluentValue $formatStandardDate - Converts value to date format Y-m-d
  * @property-read FluentValue $formatStandardDateTime - Converts value to date format Y-m-d H:i:s
  * @property-read FluentValue $timestamp
- * @property-read FluentValue $isBool
- * @property-read FluentValue $isInt
- * @property-read FluentValue $isString
- * @property-read FluentValue $isFloat
- * @property-read FluentValue $isNumeric
- * @property-read FluentValue $isNull
- * @property-read FluentValue $isArray
- * @property-read FluentValue $isIterable
- * @property-read FluentValue $isCountable
- * @property-read FluentValue $isObject
- * @property-read FluentValue $canOffset
- * @property-read FluentValue $isEmpty
- * @property-read FluentValue $isNotEmpty
- * @property-read FluentValue $ok - Has conditional value When value is string and "1", "true", "on", and "yes" then returns true Otherwise it validates using empty()
- * @property-read FluentValue $notOk
  * @property-read FluentValue $htmlAttributes - Parses the string into variables
- * @property-read FluentValue $textFromHTML - Parses the string into variables
+ * @property-read FluentValue $htmlToText - Parses the string into variables
  * @property-read FluentValue $escapedHTML
  * @property-read FluentValue $filter - reject empty
  * @property-read FluentValue $reject - reject not empty
@@ -72,33 +59,60 @@ use Infira\FluentValue\FluentValue;
  * @property-read FluentValue $path - Convert value to path
  * @property-read FluentValue $extension - Return file extension. If current value is not file then try to get extension manually using string manipulations
  * ############# Start of laravel Stringable proxies
- * @property-read $this $newLine - Append a new line to the string.
- * @property-read $this $ascii - Transliterate a UTF-8 value to ASCII.
- * @property-read $this $camel - Convert a value to camel case.
- * @property-read $this $dirname - Get the parent directory's path.
- * @property-read $this $kebab - Convert a string to kebab case.
- * @property-read $this $limit - Limit the number of characters in a string.
- * @property-read $this $lower - Convert the given string to lower-case.
- * @property-read $this $markdown - Convert GitHub flavored Markdown into HTML.
- * @property-read $this $inlineMarkdown - Convert inline Markdown into HTML.
- * @property-read $this $plural - Get the plural form of an English word.
- * @property-read $this $pluralStudly - Pluralize the last word of an English, studly caps case string.
- * @property-read $this $reverse - Reverse the string.
- * @property-read $this $squish - Remove all "extra" blank space from the given string.
- * @property-read $this $stripTags - Strip HTML and PHP tags from the given string.
- * @property-read $this $upper - Convert the given string to upper-case.
- * @property-read $this $title - Convert the given string to title case.
- * @property-read $this $headline - Convert the given string to title case for each word.
- * @property-read $this $singular - Get the singular form of an English word.
- * @property-read $this $slug - Generate a URL friendly "slug" from a given string.
- * @property-read $this $snake - Convert a string to snake case.
- * @property-read $this $studly - Convert a value to studly caps case.
- * @property-read $this $trim - Trim the string of the given characters.
- * @property-read $this $ltrim - Left trim the string of the given characters.
- * @property-read $this $rtrim - Right trim the string of the given characters.
- * @property-read $this $lcfirst - Make a string's first character lowercase.
- * @property-read $this $ucfirst - Make a string's first character uppercase.
- * @property-read $this $words - Limit the number of words in a string.
+ * @property-read FluentValue newLine - Append a new line to the string.
+ * @method FluentValue newLine($count = 1) - Append a new line to the string.
+ * @property-read FluentValue ascii - Transliterate a UTF-8 value to ASCII.
+ * @method FluentValue ascii($language = 'en') - Transliterate a UTF-8 value to ASCII.
+ * @property-read FluentValue camel - Convert a value to camel case.
+ * @method FluentValue camel() - Convert a value to camel case.
+ * @property-read FluentValue dirname - Get the parent directory's path.
+ * @method FluentValue dirname($levels = 1) - Get the parent directory's path.
+ * @property-read FluentValue kebab - Convert a string to kebab case.
+ * @method FluentValue kebab() - Convert a string to kebab case.
+ * @property-read FluentValue limit - Limit the number of characters in a string.
+ * @method FluentValue limit($limit = 100, $end = '...') - Limit the number of characters in a string.
+ * @property-read FluentValue lower - Convert the given string to lower-case.
+ * @method FluentValue lower() - Convert the given string to lower-case.
+ * @property-read FluentValue markdown - Convert GitHub flavored Markdown into HTML.
+ * @method FluentValue markdown(array $options = []) - Convert GitHub flavored Markdown into HTML.
+ * @property-read FluentValue inlineMarkdown - Convert inline Markdown into HTML.
+ * @method FluentValue inlineMarkdown(array $options = []) - Convert inline Markdown into HTML.
+ * @property-read FluentValue plural - Get the plural form of an English word.
+ * @method FluentValue plural($count = 2) - Get the plural form of an English word.
+ * @property-read FluentValue pluralStudly - Pluralize the last word of an English, studly caps case string.
+ * @method FluentValue pluralStudly($count = 2) - Pluralize the last word of an English, studly caps case string.
+ * @property-read FluentValue reverse - Reverse the string.
+ * @method FluentValue reverse() - Reverse the string.
+ * @property-read FluentValue squish - Remove all "extra" blank space from the given string.
+ * @method FluentValue squish() - Remove all "extra" blank space from the given string.
+ * @property-read FluentValue stripTags - Strip HTML and PHP tags from the given string.
+ * @method FluentValue stripTags($allowedTags = null) - Strip HTML and PHP tags from the given string.
+ * @property-read FluentValue upper - Convert the given string to upper-case.
+ * @method FluentValue upper() - Convert the given string to upper-case.
+ * @property-read FluentValue title - Convert the given string to title case.
+ * @method FluentValue title() - Convert the given string to title case.
+ * @property-read FluentValue headline - Convert the given string to title case for each word.
+ * @method FluentValue headline() - Convert the given string to title case for each word.
+ * @property-read FluentValue singular - Get the singular form of an English word.
+ * @method FluentValue singular() - Get the singular form of an English word.
+ * @property-read FluentValue slug - Generate a URL friendly "slug" from a given string.
+ * @method FluentValue slug($separator = '-', $language = 'en') - Generate a URL friendly "slug" from a given string.
+ * @property-read FluentValue snake - Convert a string to snake case.
+ * @method FluentValue snake($delimiter = '_') - Convert a string to snake case.
+ * @property-read FluentValue studly - Convert a value to studly caps case.
+ * @method FluentValue studly() - Convert a value to studly caps case.
+ * @property-read FluentValue trim - Trim the string of the given characters.
+ * @method FluentValue trim($characters = null) - Trim the string of the given characters.
+ * @property-read FluentValue ltrim - Left trim the string of the given characters.
+ * @method FluentValue ltrim($characters = null) - Left trim the string of the given characters.
+ * @property-read FluentValue rtrim - Right trim the string of the given characters.
+ * @method FluentValue rtrim($characters = null) - Right trim the string of the given characters.
+ * @property-read FluentValue lcfirst - Make a string's first character lowercase.
+ * @method FluentValue lcfirst() - Make a string's first character lowercase.
+ * @property-read FluentValue ucfirst - Make a string's first character uppercase.
+ * @method FluentValue ucfirst() - Make a string's first character uppercase.
+ * @property-read FluentValue words - Limit the number of words in a string.
+ * @method FluentValue words($words = 100, $end = '...') - Limit the number of words in a string.
  * ############# End of laravel Stringable proxies
  */
 trait FluentImmutableValue
@@ -154,6 +168,18 @@ trait FluentImmutableValue
 
 
 	/**
+	 * Get string length
+	 *
+	 * @return static
+	 * @generated
+	 */
+	public function strlen(): static
+	{
+		return $this->new($this->proc->strlen());
+	}
+
+
+	/**
 	 * Returns trailing name component of path/class-string
 	 *
 	 * @return static
@@ -163,16 +189,6 @@ trait FluentImmutableValue
 	public function basename(): static
 	{
 		return $this->new($this->proc->basename());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::basename()
-	 * @generated
-	 */
-	public function toBaseName(): string
-	{
-		return $this->proc->basename();
 	}
 
 
@@ -189,16 +205,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::urlEncode()
-	 * @generated
-	 */
-	public function toEncodedURL(): string
-	{
-		return $this->proc->urlEncode();
-	}
-
-
-	/**
 	 * Join array elements with a string
 	 *
 	 * @param  string  $glue
@@ -208,16 +214,6 @@ trait FluentImmutableValue
 	public function implode(string $glue): static
 	{
 		return $this->new($this->proc->implode($glue));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::implode()
-	 * @generated
-	 */
-	public function toImploded(string $glue): string
-	{
-		return $this->proc->implode($glue);
 	}
 
 
@@ -249,16 +245,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::explode()
-	 * @generated
-	 */
-	public function toExploded(string $separator): array
-	{
-		return $this->proc->explode($separator);
-	}
-
-
-	/**
 	 * Split lines into array
 	 *
 	 * @return static
@@ -271,39 +257,19 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::lines()
-	 * @generated
-	 */
-	public function toLines(): array
-	{
-		return $this->proc->lines();
-	}
-
-
-	/**
 	 * Surround value with
 	 *
-	 * @example flu('value')->surround('{}') // {value}
-	 * @example flu('value')->surround('left_','_right') // left_value_right
-	 * @example flu('value')->surround(['left_','_right']) // left_value_right
-	 * @param  string|array  $wrap
-	 * @param  string|null  $right
+	 * @example flu('value')->wrap('value','{','}') // "{value}"
+	 * @example flu('value')->wrap('value',['{','}']) //"{value}"
+	 * @example flu('value')->wrap('value',['{','['],['}',']']) // "[{value}]"
+	 * @param  string|array  $before
+	 * @param  string|array|null  $after
 	 * @return static
 	 * @generated
 	 */
-	public function surround(string|array $wrap, string $right = null): static
+	public function wrap(string|array $before, string|array $after = null): static
 	{
-		return $this->new($this->proc->surround($wrap, $right));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::surround()
-	 * @generated
-	 */
-	public function toSurrounded(string|array $wrap, string $right = null): string
-	{
-		return $this->proc->surround($wrap, $right);
+		return $this->new($this->proc->wrap($before, $after));
 	}
 
 
@@ -323,16 +289,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::format()
-	 * @generated
-	 */
-	public function toFormatted(string $format, mixed ...$values): string
-	{
-		return $this->proc->format($format, ...$values);
-	}
-
-
-	/**
 	 * Returns the JSON representation of a value
 	 *
 	 * @param  bool  $pretty  JSON_PRETTY_PRINT - https://www.php.net/manual/en/json.constants.php
@@ -343,16 +299,6 @@ trait FluentImmutableValue
 	public function json(bool $pretty = false): static
 	{
 		return $this->new($this->proc->json($pretty));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::json()
-	 * @generated
-	 */
-	public function toEncodedJson(bool $pretty = false): string
-	{
-		return $this->proc->json($pretty);
 	}
 
 
@@ -370,16 +316,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::sprintf()
-	 * @generated
-	 */
-	public function toSprintf(mixed ...$values): string
-	{
-		return $this->proc->sprintf(...$values);
-	}
-
-
-	/**
 	 * Return a formatted string
 	 *
 	 * @param  mixed  $values
@@ -393,12 +329,16 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::vsprintf()
+	 * Wrap quotes
+	 *
+	 * @example flu('hello world')->wrapQuotes('"') // '"hello world"'
+	 * @param  string  $quotes
+	 * @return static
 	 * @generated
 	 */
-	public function toVSprintf(mixed $values): string
+	public function wrapQuotes(string $quotes = '"'): static
 	{
-		return $this->proc->vsprintf($values);
+		return $this->new($this->proc->wrapQuotes($quotes));
 	}
 
 
@@ -415,16 +355,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::addSlashes()
-	 * @generated
-	 */
-	public function toSlashedString(): string
-	{
-		return $this->proc->addSlashes();
-	}
-
-
-	/**
 	 * Parses the string into variables
 	 *
 	 * @return static
@@ -433,30 +363,6 @@ trait FluentImmutableValue
 	public function parseStr(): static
 	{
 		return $this->new($this->proc->parseStr());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::parseStr()
-	 * @generated
-	 */
-	public function toParseStr(): array
-	{
-		return $this->proc->parseStr();
-	}
-
-
-	/**
-	 * Get the string matching the given pattern.
-	 *
-	 * @param  string  $pattern
-	 * @return static
-	 * @see  Regex::match()
-	 * @generated
-	 */
-	public function match(string $pattern): static
-	{
-		return $this->new($this->proc->match($pattern));
 	}
 
 
@@ -475,12 +381,12 @@ trait FluentImmutableValue
 	 *
 	 * @param  string  $pattern
 	 * @return static
-	 * @see  Regex::matchAll
+	 * @see  Regex::match()
 	 * @generated
 	 */
-	public function matchAll(string $pattern): static
+	public function match(string $pattern): static
 	{
-		return $this->new($this->proc->matchAll($pattern));
+		return $this->new($this->getMatch($pattern));
 	}
 
 
@@ -495,6 +401,20 @@ trait FluentImmutableValue
 
 
 	/**
+	 * Get the string matching the given pattern.
+	 *
+	 * @param  string  $pattern
+	 * @return static
+	 * @see  Regex::matchAll
+	 * @generated
+	 */
+	public function matchAll(string $pattern): static
+	{
+		return $this->new($this->getAllMatches($pattern));
+	}
+
+
+	/**
 	 * String representation of object.
 	 *
 	 * @return static
@@ -503,16 +423,6 @@ trait FluentImmutableValue
 	public function serialize(): static
 	{
 		return $this->new($this->proc->serialize());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::serialize()
-	 * @generated
-	 */
-	public function toSerialized(): string
-	{
-		return $this->proc->serialize();
 	}
 
 
@@ -530,16 +440,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::unserialize()
-	 * @generated
-	 */
-	public function toUnserialized(array $options = []): mixed
-	{
-		return $this->proc->unserialize($options);
-	}
-
-
-	/**
 	 * Get array of its characters
 	 *
 	 * @param  int  $length
@@ -553,25 +453,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::characters()
-	 * @generated
-	 */
-	public function getCharacters(int $length = 1): array
-	{
-		return $this->proc->characters($length);
-	}
-
-
-	/**
-	 * @generated
-	 */
-	public function withRenderProcessor(callable $processor): static
-	{
-		return $this->new($this->proc->withRenderProcessor($processor));
-	}
-
-
-	/**
 	 * Simple string templating
 	 *
 	 * @example flu('my name is {name}')->render(['name' => 'gen']) // 'my name is gen'
@@ -579,9 +460,9 @@ trait FluentImmutableValue
 	 * @return static
 	 * @generated
 	 */
-	public function render(array $data = []): static
+	public function render(array $data = [], callable $renderer = null): static
 	{
-		return $this->new($this->proc->render($data));
+		return $this->new($this->proc->render($data, $renderer));
 	}
 
 
@@ -599,16 +480,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::md5()
-	 * @generated
-	 */
-	public function toMd5(): string
-	{
-		return $this->proc->md5();
-	}
-
-
-	/**
 	 * Get sha1 hash
 	 *
 	 * @return static
@@ -618,16 +489,6 @@ trait FluentImmutableValue
 	public function sha1(): static
 	{
 		return $this->new($this->proc->sha1());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::sha1()
-	 * @generated
-	 */
-	public function toSha1(): string
-	{
-		return $this->proc->sha1();
 	}
 
 
@@ -645,16 +506,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::crc32b()
-	 * @generated
-	 */
-	public function toCrc32b(): string
-	{
-		return $this->proc->crc32b();
-	}
-
-
-	/**
 	 * Get sha512 hash
 	 *
 	 * @return static
@@ -668,12 +519,12 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::sha512()
+	 * @alias FluentValueProcessor::numeric()
 	 * @generated
 	 */
-	public function toSha512(): string
+	public function toNumeric(): float|int
 	{
-		return $this->proc->sha512();
+		return $this->proc->numeric();
 	}
 
 
@@ -683,17 +534,7 @@ trait FluentImmutableValue
 	 */
 	public function numeric(): static
 	{
-		return $this->new($this->proc->numeric());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::numeric()
-	 * @generated
-	 */
-	public function toNumeric(): float|int
-	{
-		return $this->proc->numeric();
+		return $this->new($this->toNumeric());
 	}
 
 
@@ -710,16 +551,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::formatNumber()
-	 * @generated
-	 */
-	public function toFormattedNumber(string $decimalSeparator = ',', string $thousand = ''): string
-	{
-		return $this->proc->formatNumber($decimalSeparator, $thousand);
-	}
-
-
-	/**
 	 * @return static
 	 * @generated
 	 */
@@ -730,32 +561,12 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::negative()
-	 * @generated
-	 */
-	public function toNegative(): float|int
-	{
-		return $this->proc->negative();
-	}
-
-
-	/**
 	 * @return static
 	 * @generated
 	 */
 	public function positive(): static
 	{
 		return $this->new($this->proc->positive());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::positive()
-	 * @generated
-	 */
-	public function toPositive(): float|int
-	{
-		return $this->proc->positive();
 	}
 
 
@@ -771,16 +582,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::max()
-	 * @generated
-	 */
-	public function toMax(mixed ...$max): mixed
-	{
-		return $this->proc->max(...$max);
-	}
-
-
-	/**
 	 * @param  mixed  ...$max
 	 * @return static
 	 * @generated
@@ -788,16 +589,6 @@ trait FluentImmutableValue
 	public function min(mixed ...$max): static
 	{
 		return $this->new($this->proc->min(...$max));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::min()
-	 * @generated
-	 */
-	public function toMin(mixed ...$max): mixed
-	{
-		return $this->proc->min(...$max);
 	}
 
 
@@ -812,32 +603,12 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::floor()
-	 * @generated
-	 */
-	public function toFloor(): float
-	{
-		return $this->proc->floor();
-	}
-
-
-	/**
 	 * @return static
 	 * @generated
 	 */
 	public function ceil(): static
 	{
 		return $this->new($this->proc->ceil());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::ceil()
-	 * @generated
-	 */
-	public function toCeil(): float
-	{
-		return $this->proc->ceil();
 	}
 
 
@@ -853,54 +624,24 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::round()
-	 * @generated
-	 */
-	public function toRounded(int $decimals = 2): float|int
-	{
-		return $this->proc->round($decimals);
-	}
-
-
-	/**
-	 * @param  int  $by
-	 * @return static
+	 * @alias $this->increment()
 	 * @generated
 	 */
 	public function increment(int $by = 1): static
 	{
-		return $this->new($this->proc->increment($by));
+		$this->set($this->proc->increment($by));
+		return $this;
 	}
 
 
 	/**
-	 * @alias FluentValueProcessor::increment()
-	 * @generated
-	 */
-	public function getIncremented(int $by = 1): float|int
-	{
-		return $this->proc->increment($by);
-	}
-
-
-	/**
-	 * @param  int  $by
-	 * @return static
+	 * @alias $this->decrement()
 	 * @generated
 	 */
 	public function decrement(int $by = 1): static
 	{
-		return $this->new($this->proc->decrement($by));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::decrement()
-	 * @generated
-	 */
-	public function getDecremented(int $by = 1): float|int
-	{
-		return $this->proc->decrement($by);
+		$this->set($this->proc->decrement($by));
+		return $this;
 	}
 
 
@@ -916,16 +657,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::add()
-	 * @generated
-	 */
-	public function getAdded(float|int $value): float|int
-	{
-		return $this->proc->add($value);
-	}
-
-
-	/**
 	 * @param  float|int  $value
 	 * @return static
 	 * @generated
@@ -933,16 +664,6 @@ trait FluentImmutableValue
 	public function subtract(float|int $value): static
 	{
 		return $this->new($this->proc->subtract($value));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::subtract()
-	 * @generated
-	 */
-	public function getSubtracted(float|int $value): float|int
-	{
-		return $this->proc->subtract($value);
 	}
 
 
@@ -958,16 +679,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::multiply()
-	 * @generated
-	 */
-	public function getMultiplied(float|int $value): float|int
-	{
-		return $this->proc->multiply($value);
-	}
-
-
-	/**
 	 * @param  float|int  $value
 	 * @return static
 	 * @generated
@@ -975,16 +686,6 @@ trait FluentImmutableValue
 	public function divide(float|int $value): static
 	{
 		return $this->new($this->proc->divide($value));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::divide()
-	 * @generated
-	 */
-	public function getDivided(float|int $value): float|int
-	{
-		return $this->proc->divide($value);
 	}
 
 
@@ -1000,16 +701,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::increaseByPercent()
-	 * @generated
-	 */
-	public function getIncreasedByPercent(float|int $percent): float|int
-	{
-		return $this->proc->increaseByPercent($percent);
-	}
-
-
-	/**
 	 * @param  float|int  $percent
 	 * @return static
 	 * @generated
@@ -1017,16 +708,6 @@ trait FluentImmutableValue
 	public function decreaseByPercent(float|int $percent): static
 	{
 		return $this->new($this->proc->decreaseByPercent($percent));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::decreaseByPercent()
-	 * @generated
-	 */
-	public function getDecreasedByPercent(float|int $percent): float|int
-	{
-		return $this->proc->decreaseByPercent($percent);
 	}
 
 
@@ -1039,17 +720,7 @@ trait FluentImmutableValue
 	 */
 	public function bool(): static
 	{
-		return $this->new($this->proc->bool());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::bool()
-	 * @generated
-	 */
-	public function toBool(): bool
-	{
-		return $this->proc->bool();
+		return $this->new($this->proc->toBool());
 	}
 
 
@@ -1061,17 +732,7 @@ trait FluentImmutableValue
 	 */
 	public function int(): static
 	{
-		return $this->new($this->proc->int());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::int()
-	 * @generated
-	 */
-	public function toInt(): int
-	{
-		return $this->proc->int();
+		return $this->new($this->proc->toInt());
 	}
 
 
@@ -1083,17 +744,7 @@ trait FluentImmutableValue
 	 */
 	public function float(): static
 	{
-		return $this->new($this->proc->float());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::float()
-	 * @generated
-	 */
-	public function toFloat(): float
-	{
-		return $this->proc->float();
+		return $this->new($this->proc->toFloat());
 	}
 
 
@@ -1103,17 +754,7 @@ trait FluentImmutableValue
 	 */
 	public function array(): static
 	{
-		return $this->new($this->proc->array());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::array()
-	 * @generated
-	 */
-	public function toArray(): array
-	{
-		return $this->proc->array();
+		return $this->new($this->proc->toArray());
 	}
 
 
@@ -1125,17 +766,7 @@ trait FluentImmutableValue
 	 */
 	public function string(): static
 	{
-		return $this->new($this->proc->string());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::string()
-	 * @generated
-	 */
-	public function toString(): string
-	{
-		return $this->proc->string();
+		return $this->new($this->proc->toString());
 	}
 
 
@@ -1147,17 +778,7 @@ trait FluentImmutableValue
 	 */
 	public function type(): static
 	{
-		return $this->new($this->proc->type());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::type()
-	 * @generated
-	 */
-	public function toType(): string
-	{
-		return $this->proc->type();
+		return $this->new($this->proc->toType());
 	}
 
 
@@ -1178,16 +799,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::eur()
-	 * @generated
-	 */
-	public function toEur(string $decimalSeparator = ',', string $thousand = ''): string
-	{
-		return $this->proc->eur($decimalSeparator, $thousand);
-	}
-
-
-	/**
 	 * Format value as number and append $ currency sign
 	 *
 	 * @example flu(10000.50)->dollar('.',' ') // "10 000.50$"
@@ -1200,16 +811,6 @@ trait FluentImmutableValue
 	public function dollar(string $decimalSeparator = ',', string $thousand = ''): static
 	{
 		return $this->new($this->proc->dollar($decimalSeparator, $thousand));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::dollar()
-	 * @generated
-	 */
-	public function toDollar(string $decimalSeparator = ',', string $thousand = ''): string
-	{
-		return $this->proc->dollar($decimalSeparator, $thousand);
 	}
 
 
@@ -1231,16 +832,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::money()
-	 * @generated
-	 */
-	public function toMoney(string $currency, string $decimalSeparator = ',', string $thousand = ''): string
-	{
-		return $this->proc->money($currency, $decimalSeparator, $thousand);
-	}
-
-
-	/**
 	 * @param  float|int  $percent
 	 * @return static
 	 * @generated
@@ -1248,16 +839,6 @@ trait FluentImmutableValue
 	public function discount(float|int $percent): static
 	{
 		return $this->new($this->proc->discount($percent));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::discount()
-	 * @generated
-	 */
-	public function getWithDiscount(float|int $percent): float|int
-	{
-		return $this->proc->discount($percent);
 	}
 
 
@@ -1275,16 +856,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::markup()
-	 * @generated
-	 */
-	public function getWithMarkup(float|int $percent): float|int
-	{
-		return $this->proc->markup($percent);
-	}
-
-
-	/**
 	 * Remove VAT(value added tax) from value
 	 *
 	 * @param  float|int|null  $vatPercent
@@ -1298,16 +869,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::removeVat()
-	 * @generated
-	 */
-	public function getVatExcluded(float|int $vatPercent = null): float|int
-	{
-		return $this->proc->removeVat($vatPercent);
-	}
-
-
-	/**
 	 * Add VAT(value added tax) to value
 	 *
 	 * @param  float|int|null  $vatPercent
@@ -1317,16 +878,6 @@ trait FluentImmutableValue
 	public function addVat(float|int $vatPercent = null): static
 	{
 		return $this->new($this->proc->addVat($vatPercent));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::addVat()
-	 * @generated
-	 */
-	public function getVatIncluded(float|int $vatPercent = null): float|int
-	{
-		return $this->proc->addVat($vatPercent);
 	}
 
 
@@ -1345,16 +896,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::vat()
-	 * @generated
-	 */
-	public function getVat(bool $priceContainsVat, float|int $vatPercent = null): float|int
-	{
-		return $this->proc->vat($priceContainsVat, $vatPercent);
-	}
-
-
-	/**
 	 * Convert value to date formatted string using $format
 	 * If $format is not provided getDefaultDateFormat() is used
 	 *
@@ -1365,16 +906,6 @@ trait FluentImmutableValue
 	public function formatDate(string $format = null): static
 	{
 		return $this->new($this->proc->formatDate($format));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::formatDate()
-	 * @generated
-	 */
-	public function toFormattedDate(string $format = null): string
-	{
-		return $this->proc->formatDate($format);
 	}
 
 
@@ -1391,16 +922,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::formatDateTime()
-	 * @generated
-	 */
-	public function toFormattedDateTime(): string
-	{
-		return $this->proc->formatDateTime();
-	}
-
-
-	/**
 	 * Converts value to date format Y-m-d
 	 *
 	 * @return static
@@ -1409,16 +930,6 @@ trait FluentImmutableValue
 	public function formatStandardDate(): static
 	{
 		return $this->new($this->proc->formatStandardDate());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::formatStandardDate()
-	 * @generated
-	 */
-	public function toStandardDate(): string
-	{
-		return $this->proc->formatStandardDate();
 	}
 
 
@@ -1435,32 +946,12 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::formatStandardDateTime()
-	 * @generated
-	 */
-	public function toStandardDateTime(): string
-	{
-		return $this->proc->formatStandardDateTime();
-	}
-
-
-	/**
 	 * @return static
 	 * @generated
 	 */
-	public function time(): static
+	public function timestamp(): static
 	{
-		return $this->new($this->proc->time());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::time()
-	 * @generated
-	 */
-	public function toTimestamp(): string
-	{
-		return $this->proc->time();
+		return $this->new($this->proc->timestamp());
 	}
 
 
@@ -1479,16 +970,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::htmlTag()
-	 * @generated
-	 */
-	public function toHTMLTag(string $tag): string
-	{
-		return $this->proc->htmlTag($tag);
-	}
-
-
-	/**
 	 * Parses the string into variables
 	 *
 	 * @return static
@@ -1501,16 +982,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::htmlAttributes()
-	 * @generated
-	 */
-	public function toHTMLAttributes(): string
-	{
-		return $this->proc->htmlAttributes();
-	}
-
-
-	/**
 	 * Parses the string into variables
 	 *
 	 * @return static
@@ -1519,16 +990,6 @@ trait FluentImmutableValue
 	public function htmlToText(): static
 	{
 		return $this->new($this->proc->htmlToText());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::htmlToText()
-	 * @generated
-	 */
-	public function toTextFromHTML(): string
-	{
-		return $this->proc->htmlToText();
 	}
 
 
@@ -1557,16 +1018,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::merge()
-	 * @generated
-	 */
-	public function getMerged(array ...$array): array
-	{
-		return $this->proc->merge(...$array);
-	}
-
-
-	/**
 	 * Run a filter over each of the items.
 	 *
 	 * @param  (callable(TKey,TValue): mixed)|null  $callback  - "self::method" or "static::method" will be called Using FluentValue
@@ -1580,12 +1031,24 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::filter()
+	 * @alias $this->pushTo()
 	 * @generated
 	 */
-	public function getFiltered(callable $callback = null): array
+	public function pushTo(string|int $key, mixed ...$values): static
 	{
-		return $this->proc->filter($callback);
+		$this->set($this->proc->pushTo($key, ...$values));
+		return $this;
+	}
+
+
+	/**
+	 * @alias $this->push()
+	 * @generated
+	 */
+	public function push(mixed ...$values): static
+	{
+		$this->set($this->proc->push(...$values));
+		return $this;
 	}
 
 
@@ -1603,16 +1066,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::reject()
-	 * @generated
-	 */
-	public function getRejected(callable $callback = null): array
-	{
-		return $this->proc->reject($callback);
-	}
-
-
-	/**
 	 * Explodes, then value and then filters out empty values
 	 *
 	 * @param  string  $separator
@@ -1626,16 +1079,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::explodeRejectEmpty()
-	 * @generated
-	 */
-	public function getExplodedEmptyRejected(string $separator): array
-	{
-		return $this->proc->explodeRejectEmpty($separator);
-	}
-
-
-	/**
 	 * Explodes, then trims each value
 	 *
 	 * @param  string  $separator
@@ -1645,16 +1088,6 @@ trait FluentImmutableValue
 	public function explodeTrim(string $separator): static
 	{
 		return $this->new($this->proc->explodeTrim($separator));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::explodeTrim()
-	 * @generated
-	 */
-	public function toExplodeTrim(string $separator): array
-	{
-		return $this->proc->explodeTrim($separator);
 	}
 
 
@@ -1674,16 +1107,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::first()
-	 * @generated
-	 */
-	public function getFirst(callable $callback = null, $default = null): mixed
-	{
-		return $this->proc->first($callback, $default);
-	}
-
-
-	/**
 	 * Return the last element in an array passing a given truth test.
 	 *
 	 * @param  (callable(TKey,TValue): mixed)|null  $callback
@@ -1699,38 +1122,36 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::last()
-	 * @generated
-	 */
-	public function getLast(callable $callback = null, $default = null): mixed
-	{
-		return $this->proc->last($callback, $default);
-	}
-
-
-	/**
 	 * Applies the callback to the elements of the given arrays
-	 * Closure callable is injectable ex ->edit(\MyClass $value) // will call $editor(MyClass(TValue))
-	 * "self::method" or "static::method" will be called Using FluentValue
+	 * Closure callable is injectable ex ->edit(\MyClass $value) // will call $editor(new \MyClass(TValue))
+	 * "flu::method" will be mapped with flu($arrayItem)->method(...$arg)
 	 *
-	 * @param  (callable(TKey,TValue): mixed)  $callback
+	 * @example flu([' 1',' 2',' hello'])->map('flu::trim->eur') //['1,00€','2,00€','0,00€]
+	 * @example flu([' 1',' 2',' hello'])->map('trim->intval') //[1,2,0]
+	 * @example flu([' 1',' 2',' hello'])->map(['trim','intval']) //[1,2,0]
+	 * @param  (callable(TKey,TValue): mixed)|(callable(TKey,TValue): mixed)[]|string  $callback
 	 * @param  mixed  ...$arg  extra arguments passed to callback
 	 * @return static
 	 * @generated
 	 */
-	public function map(callable $callback, mixed ...$arg): static
+	public function map(callable|string|array $callback, mixed ...$arg): static
 	{
 		return $this->new($this->proc->map($callback, ...$arg));
 	}
 
 
 	/**
-	 * @alias FluentValueProcessor::map()
+	 * Applies the $fluentMethod to the elements of the given arrays
+	 *
+	 * @param  string  $fluentMethod
+	 * @param  mixed  ...$arg  extra arguments passed to callback
+	 * @return static
+	 * @TODO to get better autosuggestion use phpstorm meta
 	 * @generated
 	 */
-	public function getMapped(callable $callback, mixed ...$arg): array
+	public function mapMe(string $fluentMethod, mixed ...$arg): static
 	{
-		return $this->proc->map($callback, ...$arg);
+		return $this->new($this->proc->mapMe($fluentMethod, ...$arg));
 	}
 
 
@@ -1745,16 +1166,6 @@ trait FluentImmutableValue
 	public function mapWithKeys(callable $callback): static
 	{
 		return $this->new($this->proc->mapWithKeys($callback));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::mapWithKeys()
-	 * @generated
-	 */
-	public function getMappedWithKeys(callable $callback): array
-	{
-		return $this->proc->mapWithKeys($callback);
 	}
 
 
@@ -1986,16 +1397,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::filename()
-	 * @generated
-	 */
-	public function toFilename(string $extension): string
-	{
-		return $this->proc->filename($extension);
-	}
-
-
-	/**
 	 * Convert value to path
 	 *
 	 * @example flu('filename').toFilePath('.txt','/var/www/html') #=> /var/www/html/filename.txt
@@ -2008,16 +1409,6 @@ trait FluentImmutableValue
 	public function path(string $extension = null, string $root = null): static
 	{
 		return $this->new($this->proc->path($extension, $root));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::path()
-	 * @generated
-	 */
-	public function toPath(string $extension = null, string $root = null): string
-	{
-		return $this->proc->path($extension, $root);
 	}
 
 
@@ -2036,11 +1427,31 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::extension()
+	 * @alias FluentValueProcessor::fileExists()
 	 * @generated
 	 */
-	public function toExtension(bool $lowercase = false): string
+	public function fileExists(string $extension = null): bool
 	{
-		return $this->proc->extension($lowercase);
+		return $this->proc->fileExists($extension);
+	}
+
+
+	/**
+	 * @alias FluentValueProcessor::isFile()
+	 * @generated
+	 */
+	public function isFile(string $extension = null): bool
+	{
+		return $this->proc->isFile($extension);
+	}
+
+
+	/**
+	 * @alias FluentValueProcessor::isExtension()
+	 * @generated
+	 */
+	public function isExtension(string $extension): bool
+	{
+		return $this->proc->isExtension($extension);
 	}
 }

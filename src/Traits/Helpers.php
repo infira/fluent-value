@@ -3,7 +3,8 @@
 namespace Infira\FluentValue\Traits;
 
 use Carbon\Carbon;
-use Infira\FluentValue\FluentChain;
+use Infira\FluentValue\Chain\ArrayMapChain;
+use Infira\FluentValue\Chain\FluentChain;
 use Wolo\Closure;
 use Wolo\VarDumper;
 
@@ -30,10 +31,15 @@ trait Helpers
         return $this;
     }
 
+    public function debugTap(): static
+    {
+        return $this->tap('debug');
+    }
+
     public function debug(): void
     {
         VarDumper::debug([
-            'value' => $this->get(),
+            'value' => $this->value(),
             'attributes' => $this->getAttributes()
         ]);
     }
@@ -41,7 +47,7 @@ trait Helpers
     public function dump(): string
     {
         return VarDumper::dump([
-            'value' => $this->get(),
+            'value' => $this->value(),
             'attributes' => $this->getAttributes()
         ]);
     }
@@ -57,7 +63,7 @@ trait Helpers
     public function each(callable $callback): static
     {
         $callback = Closure::makeInjectableOrVoid($callback);
-        foreach ($this->get() as $key => $item) {
+        foreach ($this->value() as $key => $item) {
             if ($callback($item, $key) === false) {
                 break;
             }
@@ -73,7 +79,7 @@ trait Helpers
      */
     public function to(callable $callback, mixed ...$parameter): mixed
     {
-        return $callback($this->value, ...$parameter);
+        return $callback($this->value(), ...$parameter);
     }
 
     /**
@@ -86,16 +92,16 @@ trait Helpers
             return new $class($this);
         }
 
-        return (object)$this->value;
+        return (object)$this->value();
     }
 
     public function toDate($format = null, $tz = null): Carbon
     {
         if (is_null($format)) {
-            return Carbon::parse($this->value, $tz);
+            return Carbon::parse($this->value(), $tz);
         }
 
-        return Carbon::createFromFormat($format, $this->value, $tz);
+        return Carbon::createFromFormat($format, $this->value(), $tz);
     }
 
     //region chaining
@@ -107,10 +113,15 @@ trait Helpers
     public function whenOkChain(mixed $failedValue = null): FluentChain
     {
         if (func_num_args() === 0) {
-            return $this->chain($this)->dontRunWhen(fn() => $this->notOk());
+            return $this->chain->dontRunWhen(fn() => $this->notOk());
         }
 
-        return $this->chain($this)->dontRunWhen(fn() => $this->notOk(), $failedValue);
+        return $this->chain->dontRunWhen(fn() => $this->notOk(), $failedValue);
+    }
+
+    protected function mapChain(): FluentChain
+    {
+        return (new ArrayMapChain($this))->dontRunWhen(fn() => !$this->isArray());
     }
     //endregion
 }

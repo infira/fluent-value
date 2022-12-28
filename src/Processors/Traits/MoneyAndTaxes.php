@@ -20,7 +20,6 @@ trait MoneyAndTaxes
      * @param  string  $decimalSeparator
      * @param  string  $thousand
      * @return string
-     * @aliasof FluentImmutableValue::toEur()
      * @uses FluentImmutableValue::$eur
      */
     public function eur(string $decimalSeparator = ',', string $thousand = ''): string
@@ -36,7 +35,6 @@ trait MoneyAndTaxes
      * @param  string  $decimalSeparator
      * @param  string  $thousand
      * @return string
-     * @aliasof FluentImmutableValue::toDollar()
      * @uses FluentImmutableValue::$dollar
      */
     public function dollar(string $decimalSeparator = ',', string $thousand = ''): string
@@ -47,7 +45,6 @@ trait MoneyAndTaxes
     /**
      * Format money
      *
-     * @aliasof FluentImmutableValue::toMoney()
      * @example flu(10000.50)->money('$') // "10000,50$"
      * @example flu(10000.50)->money('$','.',' ') // "10 000.50$"
      * @param  string  $thousand
@@ -61,7 +58,6 @@ trait MoneyAndTaxes
     }
 
     /**
-     * @aliasof FluentImmutableValue::getWithDiscount()
      * @param  float|int  $percent
      * @return float|int
      */
@@ -75,7 +71,6 @@ trait MoneyAndTaxes
      *
      * @param  float|int  $percent
      * @return float|int
-     * @aliasof FluentImmutableValue::getWithMarkup()
      */
     public function markup(float|int $percent): float|int
     {
@@ -87,7 +82,6 @@ trait MoneyAndTaxes
      *
      * @param  float|int|null  $vatPercent
      * @return float|int
-     * @aliasof FluentImmutableValue::getVatExcluded()
      * @uses FluentImmutableValue::$vatExcluded - FluentValue where VAT(value added tax) is excluded
      */
     public function removeVat(float|int $vatPercent = null): float|int
@@ -101,7 +95,6 @@ trait MoneyAndTaxes
     /**
      * Add VAT(value added tax) to value
      *
-     * @aliasof FluentImmutableValue::getVatIncluded()
      * @param  float|int|null  $vatPercent
      * @return float|int
      * @uses FluentImmutableValue::$vatIncluded - FluentValue where VAT(value added tax) is included
@@ -117,7 +110,6 @@ trait MoneyAndTaxes
     /**
      * Get VAT(value added tax) of current value
      *
-     * @aliasof FluentImmutableValue::getVat()
      * @param  bool  $priceContainsVat
      * @param  float|int|null  $vatPercent
      * @return float|int

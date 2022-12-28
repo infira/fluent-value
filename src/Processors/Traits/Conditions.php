@@ -3,8 +3,6 @@
 namespace Infira\FluentValue\Processors\Traits;
 
 use Illuminate\Support\Stringable;
-use Infira\FluentValue\FluentChain;
-use Infira\FluentValue\FluentValue;
 use Infira\FluentValue\Processors\FluentValueProcessor;
 
 /**

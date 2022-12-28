@@ -13,21 +13,18 @@ trait HtmlManipulation
     /**
      * Wrap current value with html tag
      *
-     * @aliasof FluentImmutableValue::toHTMLTag()
      * @example flu('Hello world!')->htmlTag('h1') //<h1>Hello world</h1>
      * @param  string  $tag
      * @return string
      */
     public function htmlTag(string $tag): string
     {
-        return Flu::surround($this->value, "<$tag>", "</$tag>");
+        return Flu::wrap($this->value, "<$tag>", "</$tag>");
     }
-
 
     /**
      * Parses the string into variables
      *
-     * @aliasof FluentImmutableValue::toHTMLAttributes()
      * @return string
      * @uses FluentImmutableValue::$htmlAttributes
      */
@@ -44,9 +41,8 @@ trait HtmlManipulation
     /**
      * Parses the string into variables
      *
-     * @aliasof FluentImmutableValue::toTextFromHTML()
      * @return string
-     * @uses FluentImmutableValue::$textFromHTML
+     * @uses FluentImmutableValue::$htmlToText
      */
     public function htmlToText(): string
     {
