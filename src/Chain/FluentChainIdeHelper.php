@@ -87,8 +87,6 @@ namespace Infira\FluentValue\Chain;
  * @property-read FluentChain $array - transform underlying value to array
  * @method FluentChain string()
  * @property-read FluentChain $string - transform underlying value to string
- * @method FluentChain jsonSerialize()
- * @property-read FluentChain $jsonSerialize - transform underlying value to string
  * @method FluentChain type()
  * @property-read FluentChain $type - transform underlying value to variable type
  * @method FluentChain eur(string $decimalSeparator = ',', string $thousand = '')

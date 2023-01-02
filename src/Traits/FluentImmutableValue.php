@@ -39,7 +39,6 @@ use Infira\FluentValue\FluentValue;
  * @property-read FluentValue $float - transform underlying value to float
  * @property-read FluentValue $array - transform underlying value to array
  * @property-read FluentValue $string - transform underlying value to string
- * @property-read FluentValue $jsonSerialize - transform underlying value to string
  * @property-read FluentValue $type - transform underlying value to variable type
  * @property-read FluentValue $eur - Format value as number and append € currency sign
  * @property-read FluentValue $dollar - Format value as number and append $ currency sign
@@ -768,18 +767,6 @@ trait FluentImmutableValue
 	public function string(): static
 	{
 		return $this->new($this->proc->toString());
-	}
-
-
-	/**
-	 * Get string
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function jsonSerialize(): static
-	{
-		return $this->new($this->proc->jsonSerialize());
 	}
 
 
