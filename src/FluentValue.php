@@ -308,35 +308,6 @@ class FluentValue implements
     public function __call(string $method, array $arguments = []): static|bool|null
     {
         return $this->getProcessorOutput(...$this->callProcessors($method, $arguments));
-        if ($arguments) {
-            $arguments = array_map(
-                static function ($v) {
-                    if ($v instanceof self) {
-                        return $v->get();
-                    }
-
-                    return $v;
-                },
-                $arguments
-            );
-        }
-
-        if ($this->proc->canExecute($method)) {
-            $value = $this->proc->execute($method, ...$arguments);
-
-            return $this->getProcessorOutput($this->proc, $value);
-        }
-
-        //FluentValueProcessor doesn't have necessary methods, lets fund out that other processors has
-        foreach ($this->getProcessors() as $processor) {
-            $processor = $processor instanceof Processor ? $processor : new $processor($this->value());
-            if ($processor->canExecute($method)) {
-                $value = $processor->execute($method, ...$arguments);
-
-                return $this->getProcessorOutput($processor, $value);
-            }
-        }
-        throw new \InvalidArgumentException("method('$method') does not exist");
     }
 
     public function callProcessors(string $method, array $arguments = []): array
