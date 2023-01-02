@@ -2,10 +2,10 @@
 
 namespace Infira\FluentValue\Processors\Traits;
 
-use Wolo\Calculator\Pricing;
-use Wolo\Calculator\Vat;
 use Infira\FluentValue\FluentValue;
 use Infira\FluentValue\Processors\FluentValueProcessor;
+use Wolo\Calculator\Pricing;
+use Wolo\Calculator\Vat;
 
 /**
  * @mixin FluentValueProcessor

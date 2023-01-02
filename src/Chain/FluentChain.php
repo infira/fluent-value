@@ -2,8 +2,8 @@
 
 namespace Infira\FluentValue\Chain;
 
-use Infira\FluentValue\Contracts\UnderlyingValue;
 use Infira\FluentValue\FluentValue;
+use Wolo\Contracts\UnderlyingValue;
 
 /**
  * @property-read FluentValue $end - ends chain

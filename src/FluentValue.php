@@ -6,11 +6,12 @@ use Closure;
 use Infira\FluentValue\Chain\Editor;
 use Infira\FluentValue\Chain\FluentChain;
 use Infira\FluentValue\Contracts\Processor;
-use Infira\FluentValue\Contracts\UnderlyingValue;
 use Infira\FluentValue\Processors\FluentValueProcessor;
 use Infira\FluentValue\Processors\LaravelStringableProcessor;
 use Infira\FluentValue\Traits\FluentImmutableValue;
 use Wolo\AttributesBag;
+use Wolo\Contracts\UnderlyingValue;
+use Wolo\Contracts\UnderlyingValueStatus;
 
 /**
  * @template TValue
@@ -26,7 +27,9 @@ class FluentValue implements
     \ArrayAccess,
     \Countable,
     \Stringable,
+    \JsonSerializable,
     UnderlyingValue,
+    UnderlyingValueStatus,
     AttributesBag\HasAttributes
 {
     public const UNDEFINED = '_UNDEFINED_';
@@ -380,6 +383,7 @@ class FluentValue implements
     private function createProcessor(mixed $value): FluentValueProcessor
     {
         $value = $value instanceof self ? $value->value() : $value;
+        $value = $value instanceof \Stringable ? (string)$value : $value;
         $proc = new static::$valueProcessor($value);
         if (!($proc instanceof FluentValueProcessor)) {
             throw new \RuntimeException('Processor must be instance of \Infira\FluentValue\Processors\FluentValueProcessor');

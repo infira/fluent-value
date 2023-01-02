@@ -2,6 +2,8 @@
 
 namespace Infira\FluentValue\Contracts;
 
+use Wolo\Contracts\UnderlyingValue;
+
 interface Processor extends UnderlyingValue
 {
     public function canExecute(string $method);

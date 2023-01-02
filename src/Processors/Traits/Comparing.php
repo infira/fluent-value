@@ -2,7 +2,6 @@
 
 namespace Infira\FluentValue\Processors\Traits;
 
-use Infira\Error\Error;
 use Infira\FluentValue\Flu;
 use Wolo\Is;
 

@@ -2,7 +2,7 @@
 
 namespace Infira\FluentValue\Processors\Traits;
 
-use Infira\FluentValue\Contracts\UnderlyingValue;
+use Wolo\Contracts\UnderlyingValue;
 
 /**
  * @template TValue
@@ -124,6 +124,23 @@ trait Types
      */
     public function toString(): string
     {
+        return (string)$this->value();
+    }
+
+    /**
+     * Get string
+     *
+     * @return string
+     * @uses FluentImmutableValue::string() - transform underlying value to string
+     * @uses FluentImmutableValue::$string - transform underlying value to string
+     * @final
+     */
+    public function jsonSerialize(): string|array
+    {
+        if ($this->isArray()) {
+            return $this->value();
+        }
+
         return (string)$this->value();
     }
 

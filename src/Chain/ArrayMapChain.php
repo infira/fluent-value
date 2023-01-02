@@ -2,9 +2,7 @@
 
 namespace Infira\FluentValue\Chain;
 
-use Infira\FluentValue\Contracts\UnderlyingValue;
 use Infira\FluentValue\FluentValue;
-use Infira\FluentValue\Processors\Traits\Types;
 
 /**
  * @mixin FluentValue
