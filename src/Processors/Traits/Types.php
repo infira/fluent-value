@@ -131,8 +131,8 @@ trait Types
      * Get string
      *
      * @return string
-     * @uses FluentImmutableValue::string() - transform underlying value to string
-     * @uses FluentImmutableValue::$string - transform underlying value to string
+     * @uses FluentImmutableValue::jsonSerialize() - transform underlying value to string
+     * @uses FluentImmutableValue::$jsonSerialize - transform underlying value to string
      * @final
      */
     public function jsonSerialize(): string|array
