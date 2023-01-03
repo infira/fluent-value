@@ -3,8 +3,9 @@
 namespace Infira\FluentValue\Processors\Traits;
 
 use Illuminate\Support\Arr;
+use Infira\FluentValue\Facade\Callables;
+use Infira\FluentValue\FluentValue;
 use Infira\FluentValue\Processors\FluentValueProcessor;
-use Wolo\Closure;
 
 /**
  * @template TValue
@@ -46,12 +47,12 @@ trait Arrays
         }
 
         if ($fluMethod = $this->extractFluMethod($callback)) {
-            return $this->filter(fn($item) => flu($item)->{$fluMethod}()->bool());
+            return $this->filter(fn(FluentValue $item) => $item->{$fluMethod}()->bool());
         }
 
         return array_filter(
             $this->value,
-            Closure::makeInjectableOrVoid($callback),
+            Callables::makeInjectable($callback),
             ARRAY_FILTER_USE_BOTH
         );
     }
@@ -109,12 +110,12 @@ trait Arrays
         }
 
         if ($fluMethod = $this->extractFluMethod($callback)) {
-            return $this->reject(fn($item) => flu($item)->{$fluMethod}()->bool());
+            return $this->reject(fn(FluentValue $item) => $item->{$fluMethod}()->bool());
         }
 
         return array_filter(
             $this->value,
-            static fn($item, $key) => !Closure::makeInjectableOrVoid($callback)($item, $key),
+            static fn($item, $key) => !Callables::makeInjectable($callback)($item, $key),
             ARRAY_FILTER_USE_BOTH
         );
     }
@@ -155,7 +156,7 @@ trait Arrays
      */
     public function first(callable $callback = null, $default = null): mixed
     {
-        return Arr::first($this->value, Closure::makeInjectableOrVoid($callback), $default);
+        return Arr::first($this->value, Callables::makeInjectable($callback), $default);
     }
 
     /**
@@ -169,7 +170,7 @@ trait Arrays
      */
     public function last(callable $callback = null, $default = null): mixed
     {
-        return Arr::last($this->value, Closure::makeInjectableOrVoid($callback), $default);
+        return Arr::last($this->value, Callables::makeInjectable($callback), $default);
     }
 
     /**
@@ -187,7 +188,7 @@ trait Arrays
     public function map(callable|string|array $callback, mixed...$arg): array
     {
         if ($fluMethod = $this->extractFluMethod($callback)) {
-            return $this->map(fn($item) => flu($item)->execute($fluMethod, ...$arg)->value());
+            return $this->map(fn(FluentValue $item) => $item->execute($fluMethod, ...$arg)->value());
         }
 
         if (is_string($callback) && str_contains($callback, '->')) {
@@ -205,7 +206,7 @@ trait Arrays
         }
 
         $keys = array_keys($this->value);
-        $callback = Closure::makeInjectableOrVoid($callback);
+        $callback = Callables::makeInjectable($callback);
         try {
             $items = array_map($callback, $this->value, $keys);
         }
@@ -227,7 +228,6 @@ trait Arrays
     public function mapMe(string $fluentMethod, mixed...$arg): array
     {
         return $this->map("flu::$fluentMethod", ...$arg);
-        //return $this->map(fn($item) => flu($item)->{$fluentMethod}(...$arg));
     }
 
 
@@ -240,7 +240,7 @@ trait Arrays
      */
     public function mapWithKeys(callable $callback): array
     {
-        $callback = Closure::makeInjectableOrVoid($callback);
+        $callback = Callables::makeInjectable($callback);
         $newArray = [];
         foreach ($this->value as $key => $value) {
             $assoc = $callback($value, $key);

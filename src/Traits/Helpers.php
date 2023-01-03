@@ -5,7 +5,7 @@ namespace Infira\FluentValue\Traits;
 use Carbon\Carbon;
 use Infira\FluentValue\Chain\ArrayMapChain;
 use Infira\FluentValue\Chain\FluentChain;
-use Wolo\Closure;
+use Infira\FluentValue\Facade\Callables;
 use Wolo\VarDumper;
 
 /**
@@ -62,7 +62,7 @@ trait Helpers
      */
     public function each(callable $callback): static
     {
-        $callback = Closure::makeInjectableOrVoid($callback);
+        $callback = Callables::makeInjectable($callback);
         foreach ($this->value() as $key => $item) {
             if ($callback($item, $key) === false) {
                 break;

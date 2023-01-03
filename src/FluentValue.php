@@ -6,6 +6,7 @@ use Closure;
 use Infira\FluentValue\Chain\Editor;
 use Infira\FluentValue\Chain\FluentChain;
 use Infira\FluentValue\Contracts\Processor;
+use Infira\FluentValue\Facade\Callables;
 use Infira\FluentValue\Processors\FluentValueProcessor;
 use Infira\FluentValue\Processors\LaravelStringableProcessor;
 use Infira\FluentValue\Traits\FluentImmutableValue;
@@ -85,8 +86,7 @@ class FluentValue implements
             $value = $value->get();
         }
         elseif ($value instanceof Closure) {
-            //$value = \Wolo\Closure::makeInjectableOrVoid($value)($this);
-            $value = \Wolo\Closure::makeInjectableOrVoid($value)($this->value());
+            $value = Callables::makeInjectable($value)($this->value());
         }
 
         if ($value instanceof self) {
