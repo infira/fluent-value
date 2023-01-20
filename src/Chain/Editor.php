@@ -4,11 +4,12 @@ namespace Infira\FluentValue\Chain;
 
 use Infira\FluentValue\Contracts\Processor;
 use Infira\FluentValue\FluentValue;
+use Wolo\Contracts\UnderlyingValue;
 
 /**
  * @mixin FluentValue
  */
-class Editor
+class Editor implements UnderlyingValue
 {
     public function __construct(private FluentValue $flu, private bool $endMutationManually = false) {}
 
@@ -35,4 +36,8 @@ class Editor
         return $this->flu;
     }
 
+    public function value(): mixed
+    {
+        return $this->endMutation()->value();
+    }
 }
