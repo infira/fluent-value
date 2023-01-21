@@ -34,6 +34,17 @@ trait Arrays
     }
 
     /**
+     * Get array keys
+     *
+     * @return array
+     * @uses FluentImmutableValue::$keys
+     */
+    public function keys(): array
+    {
+        return array_keys($this->value);
+    }
+
+    /**
      * Run a filter over each of the items.
      *
      * @param  (callable(TKey,TValue): mixed)|null  $callback  - "self::method" or "static::method" will be called Using FluentValue

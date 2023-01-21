@@ -52,6 +52,7 @@ use Infira\FluentValue\FluentValue;
  * @property-read FluentValue $htmlAttributes - Parses the string into variables
  * @property-read FluentValue $htmlToText - Parses the string into variables
  * @property-read FluentValue $escapedHTML
+ * @property-read FluentValue $keys - Get array keys
  * @property-read FluentValue $filter - reject empty
  * @property-read FluentValue $reject - reject not empty
  * @property-read FluentValue $first - Return the first element in an array passing a given truth test.
@@ -1014,6 +1015,18 @@ trait FluentImmutableValue
 	public function merge(array ...$array): static
 	{
 		return $this->new($this->proc->merge(...$array));
+	}
+
+
+	/**
+	 * Get array keys
+	 *
+	 * @return static
+	 * @generated
+	 */
+	public function keys(): static
+	{
+		return $this->new($this->proc->keys());
 	}
 
 

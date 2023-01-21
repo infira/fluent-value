@@ -119,6 +119,8 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain escapeHTML(bool $doubleEncode = true)
  * @property-read FluentChain $escapedHTML
  * @method FluentChain merge(array ...$array)
+ * @method FluentChain keys()
+ * @property-read FluentChain $keys - Get array keys
  * @method FluentChain filter(callable $callback = null)
  * @property-read FluentChain $filter - reject empty
  * @method FluentChain pushTo(string|int $key, mixed ...$values)
