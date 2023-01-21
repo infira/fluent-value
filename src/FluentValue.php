@@ -10,6 +10,7 @@ use Infira\FluentValue\Facade\Callables;
 use Infira\FluentValue\Processors\FluentValueProcessor;
 use Infira\FluentValue\Processors\LaravelStringableProcessor;
 use Infira\FluentValue\Traits\FluentImmutableValue;
+use Traversable;
 use Wolo\AttributesBag;
 use Wolo\Contracts\UnderlyingValue;
 use Wolo\Contracts\UnderlyingValueStatus;
@@ -29,6 +30,7 @@ class FluentValue implements
     \Countable,
     \Stringable,
     \JsonSerializable,
+    \IteratorAggregate,
     UnderlyingValue,
     UnderlyingValueStatus,
     AttributesBag\HasAttributes
