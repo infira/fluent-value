@@ -8,112 +8,112 @@ use Infira\FluentValue\FluentValue;
  * @generated
  * @template TKey
  * @template TValue
- * @property-read FluentValue $size - transform underlying value using count()/strlen()
- * @property-read FluentValue $strlen - Get string length
- * @property-read FluentValue $basename - Returns trailing name component of path/class-string
- * @property-read FluentValue $encodedURL - URL-encodes string
- * @property-read FluentValue $lines - Split lines into array
- * @property-read FluentValue $json - Returns the JSON representation of a value
- * @property-read FluentValue $wrapQuotes - Wrap quotes
- * @property-read FluentValue $slashedString - Quote string with slashes
- * @property-read FluentValue $parsedStr - Parses the string into variables
- * @property-read FluentValue $serialized - String representation of object.
- * @property-read FluentValue $unserialized - Constructs the object.
- * @property-read FluentValue $characters - transform underlying value characters array
- * @property-read FluentValue $rendered - Simple string templating
- * @property-read FluentValue $md5 - Get md5 hash
- * @property-read FluentValue $sha1 - Get sha1 hash
- * @property-read FluentValue $crc32b - Get crc32b hash
- * @property-read FluentValue $sha512 - Get sha512 hash
- * @property-read FluentValue $numeric
- * @property-read FluentValue $formattedNumber
- * @property-read FluentValue $negative
- * @property-read FluentValue $positive
- * @property-read FluentValue $floor
- * @property-read FluentValue $ceil
- * @property-read FluentValue $round
- * @property-read FluentValue $increment
- * @property-read FluentValue $decrement
- * @property-read FluentValue $bool - transform underlying value to bool
- * @property-read FluentValue $int - transform underlying value to integer
- * @property-read FluentValue $float - transform underlying value to float
- * @property-read FluentValue $array - transform underlying value to array
- * @property-read FluentValue $string - transform underlying value to string
- * @property-read FluentValue $type - transform underlying value to variable type
- * @property-read FluentValue $eur - Format value as number and append € currency sign
- * @property-read FluentValue $dollar - Format value as number and append $ currency sign
- * @property-read FluentValue $vatExcluded - FluentValue where VAT(value added tax) is excluded
- * @property-read FluentValue $vatIncluded - FluentValue where VAT(value added tax) is included
- * @property-read FluentValue $formatDate - Convert value to date formatted string using $format If $format is not provided getDefaultDateFormat() is used
- * @property-read FluentValue $formatDateTime - Convert value to date formatted using getDefaultDateTimeFormat()
- * @property-read FluentValue $formatStandardDate - Converts value to date format Y-m-d
- * @property-read FluentValue $formatStandardDateTime - Converts value to date format Y-m-d H:i:s
- * @property-read FluentValue $timestamp
- * @property-read FluentValue $htmlAttributes - Parses the string into variables
- * @property-read FluentValue $htmlToText - Parses the string into variables
- * @property-read FluentValue $escapedHTML
- * @property-read FluentValue $keys - Get array keys
- * @property-read FluentValue $filter - reject empty
- * @property-read FluentValue $reject - reject not empty
- * @property-read FluentValue $first - Return the first element in an array passing a given truth test.
- * @property-read FluentValue $last - Return the last element in an array passing a given truth test.
- * @property-read FluentValue $path - Convert value to path
- * @property-read FluentValue $extension - Return file extension. If current value is not file then try to get extension manually using string manipulations
+ * @property-read $this $size - transform underlying value using count()/strlen()
+ * @property-read $this $strlen - Get string length
+ * @property-read $this $basename - Returns trailing name component of path/class-string
+ * @property-read $this $encodedURL - URL-encodes string
+ * @property-read $this $lines - Split lines into array
+ * @property-read $this $json - Returns the JSON representation of a value
+ * @property-read $this $wrapQuotes - Wrap quotes
+ * @property-read $this $slashedString - Quote string with slashes
+ * @property-read $this $parsedStr - Parses the string into variables
+ * @property-read $this $serialized - String representation of object.
+ * @property-read $this $unserialized - Constructs the object.
+ * @property-read $this $characters - transform underlying value characters array
+ * @property-read $this $rendered - Simple string templating
+ * @property-read $this $md5 - Get md5 hash
+ * @property-read $this $sha1 - Get sha1 hash
+ * @property-read $this $crc32b - Get crc32b hash
+ * @property-read $this $sha512 - Get sha512 hash
+ * @property-read $this $numeric
+ * @property-read $this $formattedNumber
+ * @property-read $this $negative
+ * @property-read $this $positive
+ * @property-read $this $floor
+ * @property-read $this $ceil
+ * @property-read $this $round
+ * @property-read $this $increment
+ * @property-read $this $decrement
+ * @property-read $this $bool - transform underlying value to bool
+ * @property-read $this $int - transform underlying value to integer
+ * @property-read $this $float - transform underlying value to float
+ * @property-read $this $array - transform underlying value to array
+ * @property-read $this $string - transform underlying value to string
+ * @property-read $this $type - transform underlying value to variable type
+ * @property-read $this $eur - Format value as number and append € currency sign
+ * @property-read $this $dollar - Format value as number and append $ currency sign
+ * @property-read $this $vatExcluded - FluentValue where VAT(value added tax) is excluded
+ * @property-read $this $vatIncluded - FluentValue where VAT(value added tax) is included
+ * @property-read $this $formatDate - Convert value to date formatted string using $format If $format is not provided getDefaultDateFormat() is used
+ * @property-read $this $formatDateTime - Convert value to date formatted using getDefaultDateTimeFormat()
+ * @property-read $this $formatStandardDate - Converts value to date format Y-m-d
+ * @property-read $this $formatStandardDateTime - Converts value to date format Y-m-d H:i:s
+ * @property-read $this $timestamp
+ * @property-read $this $htmlAttributes - Parses the string into variables
+ * @property-read $this $htmlToText - Parses the string into variables
+ * @property-read $this $escapedHTML
+ * @property-read $this $keys - Get array keys
+ * @property-read $this $filter - reject empty
+ * @property-read $this $reject - reject not empty
+ * @property-read $this $first - Return the first element in an array passing a given truth test.
+ * @property-read $this $last - Return the last element in an array passing a given truth test.
+ * @property-read $this $path - Convert value to path
+ * @property-read $this $extension - Return file extension. If current value is not file then try to get extension manually using string manipulations
  * ############# Start of laravel Stringable proxies
- * @property-read FluentValue newLine - Append a new line to the string.
- * @method FluentValue newLine($count = 1) - Append a new line to the string.
- * @property-read FluentValue ascii - Transliterate a UTF-8 value to ASCII.
- * @method FluentValue ascii($language = 'en') - Transliterate a UTF-8 value to ASCII.
- * @property-read FluentValue camel - Convert a value to camel case.
- * @method FluentValue camel() - Convert a value to camel case.
- * @property-read FluentValue dirname - Get the parent directory's path.
- * @method FluentValue dirname($levels = 1) - Get the parent directory's path.
- * @property-read FluentValue kebab - Convert a string to kebab case.
- * @method FluentValue kebab() - Convert a string to kebab case.
- * @property-read FluentValue limit - Limit the number of characters in a string.
- * @method FluentValue limit($limit = 100, $end = '...') - Limit the number of characters in a string.
- * @property-read FluentValue lower - Convert the given string to lower-case.
- * @method FluentValue lower() - Convert the given string to lower-case.
- * @property-read FluentValue markdown - Convert GitHub flavored Markdown into HTML.
- * @method FluentValue markdown(array $options = []) - Convert GitHub flavored Markdown into HTML.
- * @property-read FluentValue inlineMarkdown - Convert inline Markdown into HTML.
- * @method FluentValue inlineMarkdown(array $options = []) - Convert inline Markdown into HTML.
- * @property-read FluentValue plural - Get the plural form of an English word.
- * @method FluentValue plural($count = 2) - Get the plural form of an English word.
- * @property-read FluentValue pluralStudly - Pluralize the last word of an English, studly caps case string.
- * @method FluentValue pluralStudly($count = 2) - Pluralize the last word of an English, studly caps case string.
- * @property-read FluentValue reverse - Reverse the string.
- * @method FluentValue reverse() - Reverse the string.
- * @property-read FluentValue squish - Remove all "extra" blank space from the given string.
- * @method FluentValue squish() - Remove all "extra" blank space from the given string.
- * @property-read FluentValue stripTags - Strip HTML and PHP tags from the given string.
- * @method FluentValue stripTags($allowedTags = null) - Strip HTML and PHP tags from the given string.
- * @property-read FluentValue upper - Convert the given string to upper-case.
- * @method FluentValue upper() - Convert the given string to upper-case.
- * @property-read FluentValue title - Convert the given string to title case.
- * @method FluentValue title() - Convert the given string to title case.
- * @property-read FluentValue headline - Convert the given string to title case for each word.
- * @method FluentValue headline() - Convert the given string to title case for each word.
- * @property-read FluentValue singular - Get the singular form of an English word.
- * @method FluentValue singular() - Get the singular form of an English word.
- * @property-read FluentValue slug - Generate a URL friendly "slug" from a given string.
- * @method FluentValue slug($separator = '-', $language = 'en') - Generate a URL friendly "slug" from a given string.
- * @property-read FluentValue snake - Convert a string to snake case.
- * @method FluentValue snake($delimiter = '_') - Convert a string to snake case.
- * @property-read FluentValue studly - Convert a value to studly caps case.
- * @method FluentValue studly() - Convert a value to studly caps case.
- * @property-read FluentValue trim - Trim the string of the given characters.
- * @method FluentValue trim($characters = null) - Trim the string of the given characters.
- * @property-read FluentValue ltrim - Left trim the string of the given characters.
- * @method FluentValue ltrim($characters = null) - Left trim the string of the given characters.
- * @property-read FluentValue rtrim - Right trim the string of the given characters.
- * @method FluentValue rtrim($characters = null) - Right trim the string of the given characters.
- * @property-read FluentValue lcfirst - Make a string's first character lowercase.
- * @method FluentValue lcfirst() - Make a string's first character lowercase.
- * @property-read FluentValue ucfirst - Make a string's first character uppercase.
- * @method FluentValue ucfirst() - Make a string's first character uppercase.
- * @property-read FluentValue words - Limit the number of words in a string.
- * @method FluentValue words($words = 100, $end = '...') - Limit the number of words in a string.
+ * @property-read $this newLine - Append a new line to the string.
+ * @method $this newLine($count = 1) - Append a new line to the string.
+ * @property-read $this ascii - Transliterate a UTF-8 value to ASCII.
+ * @method $this ascii($language = 'en') - Transliterate a UTF-8 value to ASCII.
+ * @property-read $this camel - Convert a value to camel case.
+ * @method $this camel() - Convert a value to camel case.
+ * @property-read $this dirname - Get the parent directory's path.
+ * @method $this dirname($levels = 1) - Get the parent directory's path.
+ * @property-read $this kebab - Convert a string to kebab case.
+ * @method $this kebab() - Convert a string to kebab case.
+ * @property-read $this limit - Limit the number of characters in a string.
+ * @method $this limit($limit = 100, $end = '...') - Limit the number of characters in a string.
+ * @property-read $this lower - Convert the given string to lower-case.
+ * @method $this lower() - Convert the given string to lower-case.
+ * @property-read $this markdown - Convert GitHub flavored Markdown into HTML.
+ * @method $this markdown(array $options = []) - Convert GitHub flavored Markdown into HTML.
+ * @property-read $this inlineMarkdown - Convert inline Markdown into HTML.
+ * @method $this inlineMarkdown(array $options = []) - Convert inline Markdown into HTML.
+ * @property-read $this plural - Get the plural form of an English word.
+ * @method $this plural($count = 2) - Get the plural form of an English word.
+ * @property-read $this pluralStudly - Pluralize the last word of an English, studly caps case string.
+ * @method $this pluralStudly($count = 2) - Pluralize the last word of an English, studly caps case string.
+ * @property-read $this reverse - Reverse the string.
+ * @method $this reverse() - Reverse the string.
+ * @property-read $this squish - Remove all "extra" blank space from the given string.
+ * @method $this squish() - Remove all "extra" blank space from the given string.
+ * @property-read $this stripTags - Strip HTML and PHP tags from the given string.
+ * @method $this stripTags($allowedTags = null) - Strip HTML and PHP tags from the given string.
+ * @property-read $this upper - Convert the given string to upper-case.
+ * @method $this upper() - Convert the given string to upper-case.
+ * @property-read $this title - Convert the given string to title case.
+ * @method $this title() - Convert the given string to title case.
+ * @property-read $this headline - Convert the given string to title case for each word.
+ * @method $this headline() - Convert the given string to title case for each word.
+ * @property-read $this singular - Get the singular form of an English word.
+ * @method $this singular() - Get the singular form of an English word.
+ * @property-read $this slug - Generate a URL friendly "slug" from a given string.
+ * @method $this slug($separator = '-', $language = 'en') - Generate a URL friendly "slug" from a given string.
+ * @property-read $this snake - Convert a string to snake case.
+ * @method $this snake($delimiter = '_') - Convert a string to snake case.
+ * @property-read $this studly - Convert a value to studly caps case.
+ * @method $this studly() - Convert a value to studly caps case.
+ * @property-read $this trim - Trim the string of the given characters.
+ * @method $this trim($characters = null) - Trim the string of the given characters.
+ * @property-read $this ltrim - Left trim the string of the given characters.
+ * @method $this ltrim($characters = null) - Left trim the string of the given characters.
+ * @property-read $this rtrim - Right trim the string of the given characters.
+ * @method $this rtrim($characters = null) - Right trim the string of the given characters.
+ * @property-read $this lcfirst - Make a string's first character lowercase.
+ * @method $this lcfirst() - Make a string's first character lowercase.
+ * @property-read $this ucfirst - Make a string's first character uppercase.
+ * @method $this ucfirst() - Make a string's first character uppercase.
+ * @property-read $this words - Limit the number of words in a string.
+ * @method $this words($words = 100, $end = '...') - Limit the number of words in a string.
  * ############# End of laravel Stringable proxies
  */
 trait FluentImmutableValue
