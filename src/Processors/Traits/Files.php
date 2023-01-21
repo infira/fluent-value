@@ -17,8 +17,10 @@ trait Files
      *
      * @param  string  $extension
      * @return string
+     * @uses FluentImmutableValue::filename()
+     * @final
      */
-    public function filename(string $extension): string
+    public function toFileName(string $extension): string
     {
         return Str::finish(
             $this->value,
@@ -34,9 +36,11 @@ trait Files
      * @param  string|null  $extension  if null then current value is added
      * @param  string|null  $root  directory path - If null then / is used
      * @uses FluentImmutableValue::$path
+     * @uses FluentImmutableValue::path()
+     * @final
      * @return string
      */
-    public function path(string $extension = null, string $root = null): string
+    public function toPath(string $extension = null, string $root = null): string
     {
         $root = $root ?: '/';
 
@@ -44,7 +48,7 @@ trait Files
             return Path::join($root, $this->value());
         }
 
-        return Path::join($root, $this->filename($extension));
+        return Path::join($root, $this->toFileName($extension));
     }
 
     /**
@@ -54,11 +58,13 @@ trait Files
      * @param  bool  $lowercase
      * @return string
      * @uses FluentImmutableValue::$extension
+     * @uses FluentImmutableValue::extension()
+     * @final
      */
-    public function extension(bool $lowercase = false): string
+    public function toExtension(bool $lowercase = false): string
     {
         if ($this->isFile()) {
-            return File::extension($this->path(), $lowercase);
+            return File::extension($this->toPath(), $lowercase);
         }
         $extension = $this->flu->explodeRejectEmpty('.')->last();
         if ($lowercase) {
@@ -71,7 +77,6 @@ trait Files
     /**
      * @param  string|null  $extension
      * @return bool
-     * @aliasof FluentImmutableValue::fileExists()
      * @final
      */
     public function fileExists(string $extension = null): bool
@@ -80,13 +85,12 @@ trait Files
             return false;
         }
 
-        return file_exists($this->path($extension));
+        return file_exists($this->toPath($extension));
     }
 
     /**
      * @param  string|null  $extension
      * @return bool
-     * @aliasof FluentImmutableValue::isFile()
      * @final
      */
     public function isFile(string $extension = null): bool
@@ -95,13 +99,12 @@ trait Files
             return false;
         }
 
-        return is_file($this->path($extension));
+        return is_file($this->toPath($extension));
     }
 
     /**
      * Is current value file extension
      *
-     * @aliasof FluentImmutableValue::isExtension()
      * @final
      */
     public function isExtension(string $extension): bool

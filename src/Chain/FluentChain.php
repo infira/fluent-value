@@ -15,7 +15,7 @@ class FluentChain implements \Stringable, UnderlyingValue
     private bool $dontStartRunning = false;
     private mixed $carry;
     use FluentChainIdeHelper;
-    use \Infira\FluentValue\Processors\Traits\Types;
+    use \Infira\FluentValue\Processors\Traits\Finals;
 
     public function __construct(protected FluentValue $flu)
     {

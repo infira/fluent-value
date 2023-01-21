@@ -40,8 +40,7 @@ class FluentValue implements
     public static $valueProcessor = FluentValueProcessor::class;
 
     use AttributesBag\AttributesBagManager;
-    use Processors\Traits\Comparing;
-    use Processors\Traits\Types;
+    use Processors\Traits\Finals;
     use Traits\Helpers,
         Traits\FluentImmutableValue;
 

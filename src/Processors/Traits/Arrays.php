@@ -38,6 +38,7 @@ trait Arrays
      *
      * @return array
      * @uses FluentImmutableValue::$keys
+     * @aliasof FluentImmutableValue::toArrayKeys()
      */
     public function keys(): array
     {

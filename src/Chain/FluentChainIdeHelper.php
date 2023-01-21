@@ -119,6 +119,7 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain escapeHTML(bool $doubleEncode = true)
  * @property-read FluentChain $escapedHTML
  * @method FluentChain merge(array ...$array)
+ * @method array toArrayKeys()
  * @method FluentChain keys()
  * @property-read FluentChain $keys - Get array keys
  * @method FluentChain filter(callable $callback = null)
@@ -157,9 +158,6 @@ namespace Infira\FluentValue\Chain;
  * @property-read FluentChain $path - Convert value to path
  * @method FluentChain extension(bool $lowercase = false)
  * @property-read FluentChain $extension - Return file extension. If current value is not file then try to get extension manually using string manipulations
- * @method bool fileExists(string $extension = null)
- * @method bool isFile(string $extension = null)
- * @method bool isExtension(string $extension)
  * @property-read FluentChain newLine - Append a new line to the string.
  * @method FluentChain newLine($count = 1) - Append a new line to the string.
  * @property-read FluentChain ascii - Transliterate a UTF-8 value to ASCII.

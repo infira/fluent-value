@@ -25,8 +25,7 @@ class FluentValueProcessor implements
     public const UNDEFINED = '_UNDEFINED_';
     use \Infira\FluentValue\Traits\Helpers;
     use Traits\CallableProperties,
-        Traits\Comparing,
-        Traits\Types;
+        Traits\Finals;
 
     //processors
     use Traits\Miscellaneous,
