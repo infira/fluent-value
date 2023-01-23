@@ -1407,12 +1407,12 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::toFileName()
+	 * @alias FluentValueProcessor::filename()
 	 * @generated
 	 */
 	public function toFileName(string $extension): string
 	{
-		return $this->proc->toFileName($extension);
+		return $this->proc->filename($extension);
 	}
 
 
@@ -1430,12 +1430,12 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::toPath()
+	 * @alias FluentValueProcessor::path()
 	 * @generated
 	 */
 	public function toPath(string $extension = null, string $root = null): string
 	{
-		return $this->proc->toPath($extension, $root);
+		return $this->proc->path($extension, $root);
 	}
 
 
@@ -1456,12 +1456,12 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @alias FluentValueProcessor::toExtension()
+	 * @alias FluentValueProcessor::extension()
 	 * @generated
 	 */
 	public function toExtension(bool $lowercase = false): string
 	{
-		return $this->proc->toExtension($lowercase);
+		return $this->proc->extension($lowercase);
 	}
 
 
