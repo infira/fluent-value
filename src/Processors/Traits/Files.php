@@ -12,6 +12,11 @@ use Wolo\File\Path;
  */
 trait Files
 {
+    protected function normalizePath(string $fileName, string $root = '/'): string
+    {
+        return Path::join($root, $fileName);
+    }
+
     /**
      * Add .$extension to current value
      *
@@ -33,20 +38,18 @@ trait Files
      * @example flu('filename').toFilePath('.txt','/var/www/html') #=> /var/www/html/filename.txt
      * @example flu('filename').toFilePath('txt','/var/www/html') #=> /var/www/html/filename.txt
      * @param  string|null  $extension  if null then current value is added
-     * @param  string|null  $root  directory path - If null then / is used
+     * @param  string  $root  directory path - If null then / is used
      * @uses FluentImmutableValue::$path
      * @aliasof FluentImmutableValue::toPath()
      * @return string
      */
-    public function path(string $extension = null, string $root = null): string
+    public function path(string $extension = null, string $root = '/'): string
     {
-        $root = $root ?: '/';
-
         if (is_null($extension)) {
-            return Path::join($root, $this->value());
+            return $this->normalizePath($this->value, $root);
         }
 
-        return Path::join($root, $this->filename($extension));
+        return $this->normalizePath($this->filename($extension), $root);
     }
 
     /**
@@ -97,6 +100,8 @@ trait Files
         if (!$this->ok()) {
             return false;
         }
+
+        debug($this->path($extension));
 
         return is_file($this->path($extension));
     }

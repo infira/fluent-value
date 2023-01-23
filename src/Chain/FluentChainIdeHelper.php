@@ -155,8 +155,8 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain whenTest($pattern, mixed $success, mixed $default = null)
  * @method string toFileName(string $extension)
  * @method FluentChain filename(string $extension)
- * @method string toPath(string $extension = null, string $root = null)
- * @method FluentChain path(string $extension = null, string $root = null)
+ * @method string toPath(string $extension = null, string $root = '/')
+ * @method FluentChain path(string $extension = null, string $root = '/')
  * @property-read FluentChain $path - Convert value to path
  * @method string toExtension(bool $lowercase = false)
  * @method FluentChain extension(bool $lowercase = false)

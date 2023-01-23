@@ -1433,7 +1433,7 @@ trait FluentImmutableValue
 	 * @alias FluentValueProcessor::path()
 	 * @generated
 	 */
-	public function toPath(string $extension = null, string $root = null): string
+	public function toPath(string $extension = null, string $root = '/'): string
 	{
 		return $this->proc->path($extension, $root);
 	}
@@ -1445,11 +1445,11 @@ trait FluentImmutableValue
 	 * @example flu('filename').toFilePath('.txt','/var/www/html') #=> /var/www/html/filename.txt
 	 * @example flu('filename').toFilePath('txt','/var/www/html') #=> /var/www/html/filename.txt
 	 * @param  string|null  $extension  if null then current value is added
-	 * @param  string|null  $root  directory path - If null then / is used
+	 * @param  string  $root  directory path - If null then / is used
 	 * @return static
 	 * @generated
 	 */
-	public function path(string $extension = null, string $root = null): static
+	public function path(string $extension = null, string $root = '/'): static
 	{
 		return $this->new($this->toPath($extension, $root));
 	}
