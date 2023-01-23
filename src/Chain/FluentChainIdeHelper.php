@@ -153,11 +153,17 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain whenIsUuid(mixed $success, mixed $default = null)
  * @method FluentChain whenStartsWith($needles, mixed $success, mixed $default = null)
  * @method FluentChain whenTest($pattern, mixed $success, mixed $default = null)
+ * @method string toFileName(string $extension)
  * @method FluentChain filename(string $extension)
+ * @method string toPath(string $extension = null, string $root = null)
  * @method FluentChain path(string $extension = null, string $root = null)
  * @property-read FluentChain $path - Convert value to path
+ * @method string toExtension(bool $lowercase = false)
  * @method FluentChain extension(bool $lowercase = false)
  * @property-read FluentChain $extension - Return file extension. If current value is not file then try to get extension manually using string manipulations
+ * @method bool fileExists(string $extension = null)
+ * @method bool isFile(string $extension = null)
+ * @method bool isExtension(string $extension)
  * @property-read FluentChain newLine - Append a new line to the string.
  * @method FluentChain newLine($count = 1) - Append a new line to the string.
  * @property-read FluentChain ascii - Transliterate a UTF-8 value to ASCII.

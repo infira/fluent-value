@@ -10,7 +10,6 @@ trait Finals
 {
     use Comparing;
     use Types;
-    use Files;
 
     /**
      * @final

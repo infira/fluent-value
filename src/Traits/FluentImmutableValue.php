@@ -1407,6 +1407,16 @@ trait FluentImmutableValue
 
 
 	/**
+	 * @alias FluentValueProcessor::toFileName()
+	 * @generated
+	 */
+	public function toFileName(string $extension): string
+	{
+		return $this->proc->toFileName($extension);
+	}
+
+
+	/**
 	 * Add .$extension to current value
 	 *
 	 * @param  string  $extension
@@ -1415,7 +1425,17 @@ trait FluentImmutableValue
 	 */
 	public function filename(string $extension): static
 	{
-		return $this->new($this->proc->toFileName($extension));
+		return $this->new($this->toFileName($extension));
+	}
+
+
+	/**
+	 * @alias FluentValueProcessor::toPath()
+	 * @generated
+	 */
+	public function toPath(string $extension = null, string $root = null): string
+	{
+		return $this->proc->toPath($extension, $root);
 	}
 
 
@@ -1431,7 +1451,17 @@ trait FluentImmutableValue
 	 */
 	public function path(string $extension = null, string $root = null): static
 	{
-		return $this->new($this->proc->toPath($extension, $root));
+		return $this->new($this->toPath($extension, $root));
+	}
+
+
+	/**
+	 * @alias FluentValueProcessor::toExtension()
+	 * @generated
+	 */
+	public function toExtension(bool $lowercase = false): string
+	{
+		return $this->proc->toExtension($lowercase);
 	}
 
 
@@ -1445,6 +1475,36 @@ trait FluentImmutableValue
 	 */
 	public function extension(bool $lowercase = false): static
 	{
-		return $this->new($this->proc->toExtension($lowercase));
+		return $this->new($this->toExtension($lowercase));
+	}
+
+
+	/**
+	 * @alias FluentValueProcessor::fileExists()
+	 * @generated
+	 */
+	public function fileExists(string $extension = null): bool
+	{
+		return $this->proc->fileExists($extension);
+	}
+
+
+	/**
+	 * @alias FluentValueProcessor::isFile()
+	 * @generated
+	 */
+	public function isFile(string $extension = null): bool
+	{
+		return $this->proc->isFile($extension);
+	}
+
+
+	/**
+	 * @alias FluentValueProcessor::isExtension()
+	 * @generated
+	 */
+	public function isExtension(string $extension): bool
+	{
+		return $this->proc->isExtension($extension);
 	}
 }
