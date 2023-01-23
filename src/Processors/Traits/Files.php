@@ -100,9 +100,6 @@ trait Files
         if (!$this->ok()) {
             return false;
         }
-
-        debug($this->path($extension));
-
         return is_file($this->path($extension));
     }
 
