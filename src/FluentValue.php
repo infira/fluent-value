@@ -169,7 +169,7 @@ class FluentValue implements
 
     public function new(mixed $value = null): static
     {
-        return self::make(func_num_args() > 0 ? $this->pv($value) : $this->value())
+        return static::make(func_num_args() > 0 ? $this->pv($value) : $this->value())
             ->withAttributes($this->getAttributes())
             ->withEvents($this->getEvents());
     }
