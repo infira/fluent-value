@@ -132,6 +132,19 @@ trait FluentImmutableValue
 
 
 	/**
+	 * Append values works for array and strings
+	 *
+	 * @param  mixed  ...$values
+	 * @return static
+	 * @generated
+	 */
+	public function prepend(mixed ...$values): static
+	{
+		return $this->new($this->proc->prepend(...$values));
+	}
+
+
+	/**
 	 * @param  (callable(TKey,TValue): mixed)  $callback
 	 * @param  mixed  ...$parameter
 	 * @return static

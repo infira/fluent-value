@@ -3,6 +3,7 @@ namespace Infira\FluentValue\Chain;
 
 /**
  * @method FluentChain append(mixed ...$values)
+ * @method FluentChain prepend(mixed ...$values)
  * @method FluentChain transform(callable $callback, mixed ...$parameter)
  * @method FluentChain at(string|int $key)
  * @method FluentChain size()

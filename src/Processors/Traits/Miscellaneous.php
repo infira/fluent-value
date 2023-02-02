@@ -25,6 +25,24 @@ trait Miscellaneous
     }
 
     /**
+     * Append values works for array and strings
+     *
+     * @param  mixed  ...$values
+     * @return array|string
+     */
+    public function prepend(mixed ...$values): array|string
+    {
+        if ($this->isIterable()) {
+            $arr = $this->value;
+            array_unshift($arr, ...$values);
+
+            return $arr;
+        }
+
+        return implode('', $values).$this->value;
+    }
+
+    /**
      * @param  (callable(TKey,TValue): mixed)  $callback
      * @param  mixed  ...$parameter
      * @return $this
