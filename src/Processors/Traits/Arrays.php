@@ -168,7 +168,7 @@ trait Arrays
      */
     public function first(callable $callback = null, $default = null): mixed
     {
-        return Arr::first($this->value, Callables::makeInjectable($callback), $default);
+        return Arr::first($this->value, Callables::makeInjectableIfCan($callback), $default);
     }
 
     /**
@@ -182,7 +182,7 @@ trait Arrays
      */
     public function last(callable $callback = null, $default = null): mixed
     {
-        return Arr::last($this->value, Callables::makeInjectable($callback), $default);
+        return Arr::last($this->value, Callables::makeInjectableIfCan($callback), $default);
     }
 
     /**
