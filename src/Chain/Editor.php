@@ -20,7 +20,7 @@ class Editor implements UnderlyingValue
         if ($val instanceof Processor) {
             $val = $val->value();
         }
-        $this->flu->setValue($val);
+        $this->flu->edit($val);
 
         if (!$this->endMutationManually) {
             return $this->endMutation();

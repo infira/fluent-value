@@ -10,7 +10,6 @@ use Infira\FluentValue\Facade\Callables;
 use Infira\FluentValue\Processors\FluentValueProcessor;
 use Infira\FluentValue\Processors\LaravelStringableProcessor;
 use Infira\FluentValue\Traits\FluentImmutableValue;
-use Traversable;
 use Wolo\AttributesBag;
 use Wolo\Contracts\UnderlyingValue;
 use Wolo\Contracts\UnderlyingValueStatus;
@@ -119,7 +118,6 @@ class FluentValue implements
     public function setValue(mixed $value): static
     {
         $this->proc->setValue($value);
-        $this->trigger('change');
 
         return $this;
     }
@@ -132,15 +130,17 @@ class FluentValue implements
     }
 
     /**
-     * Edit value with callable
+     * Edit value,
+     * This method is mutable, it will change the original value
      * Closure callable is injectable ex ->edit(\MyClass $value) // will call $editor(MyClass(TValue))
      *
-     * @param  (callable(TValue): mixed)  $editor
+     * @param  (callable(TValue): mixed)|mixed  $editor
      * @return $this
      */
-    public function edit(callable $editor): static
+    public function edit($editor): static
     {
         $this->setValue($this->pv($editor));
+        $this->trigger('change');
 
         return $this;
     }
