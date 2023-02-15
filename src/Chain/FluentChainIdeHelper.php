@@ -23,6 +23,8 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain format(string $format, mixed ...$values)
  * @method FluentChain json(bool $pretty = false)
  * @property-read FluentChain $json - Returns the JSON representation of a value
+ * @method FluentChain jsonDecode(?bool $associative = null, int $depth = 512, int $flags = 0)
+ * @property-read FluentChain $jsonDecode - Returns the JSON representation of a value
  * @method FluentChain sprintf(mixed ...$values)
  * @method FluentChain vsprintf(mixed $values)
  * @method FluentChain wrapQuotes(string $quotes = '"')

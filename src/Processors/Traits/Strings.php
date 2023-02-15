@@ -142,6 +142,20 @@ trait Strings
     }
 
     /**
+     * Returns the JSON representation of a value
+     *
+     * @param  bool|null  $associative
+     * @param  int  $depth
+     * @param  int  $flags
+     * @return mixed
+     * @uses FluentImmutableValue::$jsonDecode
+     */
+    public function jsonDecode(?bool $associative = null, int $depth = 512, int $flags = 0): mixed
+    {
+        return json_decode($this->value, $associative, $depth, $flags);
+    }
+
+    /**
      * Return a formatted string
      *
      * @param  mixed  ...$values

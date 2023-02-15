@@ -14,6 +14,7 @@ use Infira\FluentValue\FluentValue;
  * @property-read $this $encodedURL - URL-encodes string
  * @property-read $this $lines - Split lines into array
  * @property-read $this $json - Returns the JSON representation of a value
+ * @property-read $this $jsonDecode - Returns the JSON representation of a value
  * @property-read $this $wrapQuotes - Wrap quotes
  * @property-read $this $slashedString - Quote string with slashes
  * @property-read $this $parsedStr - Parses the string into variables
@@ -313,6 +314,21 @@ trait FluentImmutableValue
 	public function json(bool $pretty = false): static
 	{
 		return $this->new($this->proc->json($pretty));
+	}
+
+
+	/**
+	 * Returns the JSON representation of a value
+	 *
+	 * @param  bool|null  $associative
+	 * @param  int  $depth
+	 * @param  int  $flags
+	 * @return static
+	 * @generated
+	 */
+	public function jsonDecode(?bool $associative = null, int $depth = 512, int $flags = 0): static
+	{
+		return $this->new($this->proc->jsonDecode($associative, $depth, $flags));
 	}
 
 

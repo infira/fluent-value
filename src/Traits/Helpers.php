@@ -83,6 +83,26 @@ trait Helpers
     }
 
     /**
+     * @param  callable  $callback  ($value,...$parameter)
+     * @param  mixed  ...$parameter
+     * @return mixed
+     */
+    public function pipe(callable $callback, mixed ...$parameter): mixed
+    {
+        return $this->to(...func_get_args());
+    }
+
+    /**
+     * @param  class-string  $class  ($value,...$parameter)
+     * @param  mixed  ...$parameter
+     * @return mixed
+     */
+    public function pipeInto(string $class, mixed ...$parameter): mixed
+    {
+        return new $class($this->value(), ...$parameter);
+    }
+
+    /**
      * @param  class-string|null  $class
      * @return object
      */

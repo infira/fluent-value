@@ -4,6 +4,7 @@ namespace Infira\FluentValue\Chain;
 
 use Infira\FluentValue\Contracts\Processor;
 use Infira\FluentValue\FluentValue;
+use Infira\FluentValue\Traits\FluentImmutableValue;
 use Wolo\Contracts\UnderlyingValue;
 
 /**
@@ -27,6 +28,14 @@ class Editor implements UnderlyingValue
         }
 
         return $this;
+    }
+
+    public function __get(string $name)
+    {
+        if (method_exists(FluentImmutableValue::class, $name)) {
+            return $this->__call($name, []);
+        }
+        throw new \InvalidArgumentException("property|method('$name') does not exist");
     }
 
     public function endMutation(): FluentValue
