@@ -125,7 +125,7 @@ trait Strings
             return $format;
         }
 
-        return vsprintf($this->value, $values);
+        return vsprintf($format, $values);
     }
 
     /**
