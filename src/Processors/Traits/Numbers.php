@@ -26,6 +26,7 @@ trait Numbers
      * @param  string  $thousand
      * @return string
      * @uses FluentImmutableValue::$formattedNumber
+     * @aliasof FluentImmutableValue::toFormattedNumber()
      */
     public function formatNumber(string $decimalSeparator = ',', string $thousand = ''): string
     {
@@ -92,13 +93,14 @@ trait Numbers
     }
 
     /**
-     * @param  int  $decimals
+     * @param  int  $precision
      * @return float|int
+     * @see https://www.php.net/manual/en/function.round.php
      * @uses FluentImmutableValue::$round
      */
-    public function round(int $decimals = 2): float|int
+    public function round(int $precision = 0): float|int
     {
-        return round($this->numeric(), $decimals);
+        return round($this->numeric(), $precision);
     }
 
     /**

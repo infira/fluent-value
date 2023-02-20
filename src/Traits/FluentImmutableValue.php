@@ -569,6 +569,16 @@ trait FluentImmutableValue
 
 
 	/**
+	 * @alias FluentValueProcessor::formatNumber()
+	 * @generated
+	 */
+	public function toFormattedNumber(string $decimalSeparator = ',', string $thousand = ''): string
+	{
+		return $this->proc->formatNumber($decimalSeparator, $thousand);
+	}
+
+
+	/**
 	 * @param  string  $decimalSeparator
 	 * @param  string  $thousand
 	 * @return static
@@ -576,7 +586,7 @@ trait FluentImmutableValue
 	 */
 	public function formatNumber(string $decimalSeparator = ',', string $thousand = ''): static
 	{
-		return $this->new($this->proc->formatNumber($decimalSeparator, $thousand));
+		return $this->new($this->toFormattedNumber($decimalSeparator, $thousand));
 	}
 
 
@@ -643,13 +653,14 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @param  int  $decimals
+	 * @param  int  $precision
 	 * @return static
+	 * @see https://www.php.net/manual/en/function.round.php
 	 * @generated
 	 */
-	public function round(int $decimals = 2): static
+	public function round(int $precision = 0): static
 	{
-		return $this->new($this->proc->round($decimals));
+		return $this->new($this->proc->round($precision));
 	}
 
 

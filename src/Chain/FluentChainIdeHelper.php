@@ -56,6 +56,7 @@ namespace Infira\FluentValue\Chain;
  * @method float|int toNumeric()
  * @method FluentChain numeric()
  * @property-read FluentChain $numeric
+ * @method string toFormattedNumber(string $decimalSeparator = ',', string $thousand = '')
  * @method FluentChain formatNumber(string $decimalSeparator = ',', string $thousand = '')
  * @property-read FluentChain $formattedNumber
  * @method FluentChain negative()
@@ -68,7 +69,7 @@ namespace Infira\FluentValue\Chain;
  * @property-read FluentChain $floor
  * @method FluentChain ceil()
  * @property-read FluentChain $ceil
- * @method FluentChain round(int $decimals = 2)
+ * @method FluentChain round(int $precision = 0)
  * @property-read FluentChain $round
  * @method FluentChain increment(int $by = 1)
  * @property-read FluentChain $increment
