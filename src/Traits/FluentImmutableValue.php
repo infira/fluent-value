@@ -160,13 +160,17 @@ trait FluentImmutableValue
 	/**
 	 * Get offset value
 	 *
+	 * @template TGetDefault
+	 * @template TValue
+	 *
 	 * @param  string|int  $key
+	 * @param  TGetDefault  $default
 	 * @return static
 	 * @generated
 	 */
-	public function at(string|int $key): static
+	public function at(string|int $key, mixed $default = null): static
 	{
-		return $this->new($this->proc->at($key));
+		return $this->new($this->proc->at($key, $default));
 	}
 
 

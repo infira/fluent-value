@@ -5,7 +5,7 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain append(mixed ...$values)
  * @method FluentChain prepend(mixed ...$values)
  * @method FluentChain transform(callable $callback, mixed ...$parameter)
- * @method FluentChain at(string|int $key)
+ * @method FluentChain at(string|int $key, mixed $default = null)
  * @method FluentChain size()
  * @property-read FluentChain $size - transform underlying value using count()/strlen()
  * @method FluentChain strlen()

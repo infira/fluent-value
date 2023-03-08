@@ -73,11 +73,19 @@ trait Miscellaneous
     /**
      * Get offset value
      *
+     * @template TGetDefault
+     * @template TValue
+     *
      * @param  string|int  $key
-     * @return mixed
+     * @param  TGetDefault  $default
+     * @return TValue|TGetDefault
      */
-    public function at(string|int $key): mixed
+    public function at(string|int $key, mixed $default = null): mixed
     {
+        if (!$this->has($key)) {
+            return $default;
+        }
+
         return $this->offsetGet($key);
     }
 
