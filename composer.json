@@ -19,7 +19,10 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=8.1",
-    "infira/wolo": "dev-main"
+    "infira/wolo": "~v1.1.1",
+
+    "nesbot/carbon": "^2.63",
+    "illuminate/support": "^9.41"
   },
   "suggest": {
     "nesbot/carbon": "When using FluentValue date formating",

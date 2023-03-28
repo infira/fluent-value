@@ -51,7 +51,7 @@ trait Comparing
 
     public function isBetweenRange(mixed $from, mixed $to): bool
     {
-        return Is::between(Flu::numeric($from), Flu::numeric($to), $this->value());
+        return Is::between($this->numeric(), $from, $to);
     }
 
     public function isBigger(mixed $to): bool
