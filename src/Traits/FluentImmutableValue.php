@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace Infira\FluentValue\Traits;
 
 use Infira\FluentValue\FluentValue;
@@ -119,1436 +120,1505 @@ use Infira\FluentValue\FluentValue;
  */
 trait FluentImmutableValue
 {
-	/**
-	 * Append values works for array and strings
-	 *
-	 * @param  mixed  ...$values
-	 * @return static
-	 * @generated
-	 */
-	public function append(mixed ...$values): static
-	{
-		return $this->new($this->proc->append(...$values));
-	}
-
-
-	/**
-	 * Append values works for array and strings
-	 *
-	 * @param  mixed  ...$values
-	 * @return static
-	 * @generated
-	 */
-	public function prepend(mixed ...$values): static
-	{
-		return $this->new($this->proc->prepend(...$values));
-	}
-
-
-	/**
-	 * @param  (callable(TKey,TValue): mixed)  $callback
-	 * @param  mixed  ...$parameter
-	 * @return static
-	 * @generated
-	 */
-	public function transform(callable $callback, mixed ...$parameter): static
-	{
-		return $this->new($this->proc->transform($callback, ...$parameter));
-	}
-
-
-	/**
-	 * Get offset value
-	 *
-	 * @template TGetDefault
-	 * @template TValue
-	 *
-	 * @param  string|int  $key
-	 * @param  TGetDefault  $default
-	 * @return static
-	 * @generated
-	 */
-	public function at(string|int $key, mixed $default = null): static
-	{
-		return $this->new($this->proc->at($key, $default));
-	}
-
-
-	/**
-	 * Get size, if underlying value is array then count else strlen
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function size(): static
-	{
-		return $this->new($this->proc->size());
-	}
-
-
-	/**
-	 * Get string length
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function strlen(): static
-	{
-		return $this->new($this->proc->strlen());
-	}
-
-
-	/**
-	 * Returns trailing name component of path/class-string
-	 *
-	 * @return static
-	 * @see  Flu::basename
-	 * @generated
-	 */
-	public function basename(): static
-	{
-		return $this->new($this->proc->basename());
-	}
-
-
-	/**
-	 * URL-encodes string
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function urlEncode(): static
-	{
-		return $this->new($this->proc->urlEncode());
-	}
-
-
-	/**
-	 * Join array elements with a string
-	 *
-	 * @param  string  $glue
-	 * @return static
-	 * @generated
-	 */
-	public function implode(string $glue): static
-	{
-		return $this->new($this->proc->implode($glue));
-	}
-
-
-	/**
-	 * Join array elements with a string
-	 *
-	 * @alias self::implode
-	 * @param  string  $glue
-	 * @return static
-	 * @generated
-	 */
-	public function join(string $glue): static
-	{
-		return $this->new($this->proc->join($glue));
-	}
-
-
-	/**
-	 * Split a string by a string
-	 *
-	 * @param  string  $separator
-	 * @return static
-	 * @generated
-	 */
-	public function explode(string $separator): static
-	{
-		return $this->new($this->proc->explode($separator));
-	}
-
-
-	/**
-	 * Split lines into array
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function lines(): static
-	{
-		return $this->new($this->proc->lines());
-	}
-
-
-	/**
-	 * Surround value with
-	 *
-	 * @example flu('value')->wrap('value','{','}') // "{value}"
-	 * @example flu('value')->wrap('value',['{','}']) //"{value}"
-	 * @example flu('value')->wrap('value',['{','['],['}',']']) // "[{value}]"
-	 * @param  string|array  $before
-	 * @param  string|array|null  $after
-	 * @return static
-	 * @generated
-	 */
-	public function wrap(string|array $before, string|array $after = null): static
-	{
-		return $this->new($this->proc->wrap($before, $after));
-	}
-
-
-	/**
-	 * Return a formatted string
-	 *
-	 * @example flu('gen')->getFormattedText('my name is {%value%}, and im %s age of old',39) //my name is gen, and im 39 age of old
-	 * @param  string  $format
-	 * @param  mixed  ...$values
-	 * @return static
-	 * @generated
-	 */
-	public function format(string $format, mixed ...$values): static
-	{
-		return $this->new($this->proc->format($format, ...$values));
-	}
-
-
-	/**
-	 * Returns the JSON representation of a value
-	 *
-	 * @param  bool  $pretty  JSON_PRETTY_PRINT - https://www.php.net/manual/en/json.constants.php
-	 * @return static
-	 * @throws \JsonException
-	 * @generated
-	 */
-	public function json(bool $pretty = false): static
-	{
-		return $this->new($this->proc->json($pretty));
-	}
-
-
-	/**
-	 * Returns the JSON representation of a value
-	 *
-	 * @param  bool|null  $associative
-	 * @param  int  $depth
-	 * @param  int  $flags
-	 * @return static
-	 * @generated
-	 */
-	public function jsonDecode(?bool $associative = null, int $depth = 512, int $flags = 0): static
-	{
-		return $this->new($this->proc->jsonDecode($associative, $depth, $flags));
-	}
-
-
-	/**
-	 * Return a formatted string
-	 *
-	 * @param  mixed  ...$values
-	 * @return static
-	 * @generated
-	 */
-	public function sprintf(mixed ...$values): static
-	{
-		return $this->new($this->proc->sprintf(...$values));
-	}
-
-
-	/**
-	 * Return a formatted string
-	 *
-	 * @param  mixed  $values
-	 * @return static
-	 * @generated
-	 */
-	public function vsprintf(mixed $values): static
-	{
-		return $this->new($this->proc->vsprintf($values));
-	}
-
-
-	/**
-	 * Wrap quotes
-	 *
-	 * @example flu('hello world')->wrapQuotes('"') // '"hello world"'
-	 * @param  string  $quotes
-	 * @return static
-	 * @generated
-	 */
-	public function wrapQuotes(string $quotes = '"'): static
-	{
-		return $this->new($this->proc->wrapQuotes($quotes));
-	}
-
-
-	/**
-	 * Quote string with slashes
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function addSlashes(): static
-	{
-		return $this->new($this->proc->addSlashes());
-	}
-
-
-	/**
-	 * Parses the string into variables
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function parseStr(): static
-	{
-		return $this->new($this->proc->parseStr());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::match()
-	 * @generated
-	 */
-	public function getMatch(string $pattern): string
-	{
-		return $this->proc->match($pattern);
-	}
-
-
-	/**
-	 * Get the string matching the given pattern.
-	 *
-	 * @param  string  $pattern
-	 * @return static
-	 * @see  Regex::match()
-	 * @generated
-	 */
-	public function match(string $pattern): static
-	{
-		return $this->new($this->getMatch($pattern));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::matchAll()
-	 * @generated
-	 */
-	public function getAllMatches(string $pattern): array
-	{
-		return $this->proc->matchAll($pattern);
-	}
-
-
-	/**
-	 * Get the string matching the given pattern.
-	 *
-	 * @param  string  $pattern
-	 * @return static
-	 * @see  Regex::matchAll
-	 * @generated
-	 */
-	public function matchAll(string $pattern): static
-	{
-		return $this->new($this->getAllMatches($pattern));
-	}
-
-
-	/**
-	 * String representation of object.
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function serialize(): static
-	{
-		return $this->new($this->proc->serialize());
-	}
-
-
-	/**
-	 * Constructs the object.
-	 *
-	 * @param  array  $options
-	 * @return static
-	 * @generated
-	 */
-	public function unserialize(array $options = []): static
-	{
-		return $this->new($this->proc->unserialize($options));
-	}
-
-
-	/**
-	 * Get array of its characters
-	 *
-	 * @param  int  $length
-	 * @return static
-	 * @generated
-	 */
-	public function characters(int $length = 1): static
-	{
-		return $this->new($this->proc->characters($length));
-	}
-
-
-	/**
-	 * Simple string templating
-	 *
-	 * @example flu('my name is {name}')->render(['name' => 'gen']) // 'my name is gen'
-	 * @param  array  $data
-	 * @return static
-	 * @generated
-	 */
-	public function render(array $data = [], callable $renderer = null): static
-	{
-		return $this->new($this->proc->render($data, $renderer));
-	}
-
-
-	/**
-	 * Get md5 hash
-	 *
-	 * @return static
-	 * @see  Hash::make()
-	 * @generated
-	 */
-	public function md5(): static
-	{
-		return $this->new($this->proc->md5());
-	}
-
-
-	/**
-	 * Get sha1 hash
-	 *
-	 * @return static
-	 * @see  Hash::make()
-	 * @generated
-	 */
-	public function sha1(): static
-	{
-		return $this->new($this->proc->sha1());
-	}
-
-
-	/**
-	 * Get crc32b hash
-	 *
-	 * @return static
-	 * @see  Hash::make()
-	 * @generated
-	 */
-	public function crc32b(): static
-	{
-		return $this->new($this->proc->crc32b());
-	}
-
-
-	/**
-	 * Get sha512 hash
-	 *
-	 * @return static
-	 * @see  Hash::make()
-	 * @generated
-	 */
-	public function sha512(): static
-	{
-		return $this->new($this->proc->sha512());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::numeric()
-	 * @generated
-	 */
-	public function toNumeric(): float|int
-	{
-		return $this->proc->numeric();
-	}
-
-
-	/**
-	 * @return static
-	 * @generated
-	 */
-	public function numeric(): static
-	{
-		return $this->new($this->toNumeric());
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::formatNumber()
-	 * @generated
-	 */
-	public function toFormattedNumber(string $decimalSeparator = ',', string $thousand = ''): string
-	{
-		return $this->proc->formatNumber($decimalSeparator, $thousand);
-	}
-
-
-	/**
-	 * @param  string  $decimalSeparator
-	 * @param  string  $thousand
-	 * @return static
-	 * @generated
-	 */
-	public function formatNumber(string $decimalSeparator = ',', string $thousand = ''): static
-	{
-		return $this->new($this->toFormattedNumber($decimalSeparator, $thousand));
-	}
-
-
-	/**
-	 * @return static
-	 * @generated
-	 */
-	public function negative(): static
-	{
-		return $this->new($this->proc->negative());
-	}
-
-
-	/**
-	 * @return static
-	 * @generated
-	 */
-	public function positive(): static
-	{
-		return $this->new($this->proc->positive());
-	}
-
-
-	/**
-	 * @param  mixed  ...$max
-	 * @return static
-	 * @generated
-	 */
-	public function max(mixed ...$max): static
-	{
-		return $this->new($this->proc->max(...$max));
-	}
-
-
-	/**
-	 * @param  mixed  ...$max
-	 * @return static
-	 * @generated
-	 */
-	public function min(mixed ...$max): static
-	{
-		return $this->new($this->proc->min(...$max));
-	}
-
-
-	/**
-	 * @return static
-	 * @generated
-	 */
-	public function floor(): static
-	{
-		return $this->new($this->proc->floor());
-	}
-
-
-	/**
-	 * @return static
-	 * @generated
-	 */
-	public function ceil(): static
-	{
-		return $this->new($this->proc->ceil());
-	}
-
-
-	/**
-	 * @param  int  $precision
-	 * @return static
-	 * @see https://www.php.net/manual/en/function.round.php
-	 * @generated
-	 */
-	public function round(int $precision = 0): static
-	{
-		return $this->new($this->proc->round($precision));
-	}
-
-
-	/**
-	 * @alias $this->increment()
-	 * @generated
-	 */
-	public function increment(int $by = 1): static
-	{
-		$this->set($this->proc->increment($by));
-		return $this;
-	}
-
-
-	/**
-	 * @alias $this->decrement()
-	 * @generated
-	 */
-	public function decrement(int $by = 1): static
-	{
-		$this->set($this->proc->decrement($by));
-		return $this;
-	}
-
-
-	/**
-	 * @param  float|int  $value
-	 * @return static
-	 * @generated
-	 */
-	public function add(float|int $value): static
-	{
-		return $this->new($this->proc->add($value));
-	}
-
-
-	/**
-	 * @param  float|int  $value
-	 * @return static
-	 * @generated
-	 */
-	public function subtract(float|int $value): static
-	{
-		return $this->new($this->proc->subtract($value));
-	}
-
-
-	/**
-	 * @param  float|int  $value
-	 * @return static
-	 * @generated
-	 */
-	public function multiply(float|int $value): static
-	{
-		return $this->new($this->proc->multiply($value));
-	}
-
-
-	/**
-	 * @param  float|int  $value
-	 * @return static
-	 * @generated
-	 */
-	public function divide(float|int $value): static
-	{
-		return $this->new($this->proc->divide($value));
-	}
-
-
-	/**
-	 * @param  float|int  $percent
-	 * @return static
-	 * @generated
-	 */
-	public function increaseByPercent(float|int $percent): static
-	{
-		return $this->new($this->proc->increaseByPercent($percent));
-	}
-
-
-	/**
-	 * @param  float|int  $percent
-	 * @return static
-	 * @generated
-	 */
-	public function decreaseByPercent(float|int $percent): static
-	{
-		return $this->new($this->proc->decreaseByPercent($percent));
-	}
-
-
-	/**
-	 * Get the underlying string value as a boolean.
-	 * Returns true when value is "1", "true", "on", and "yes". Otherwise, returns false.
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function bool(): static
-	{
-		return $this->new($this->proc->toBool());
-	}
-
-
-	/**
-	 * Cast to int
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function int(): static
-	{
-		return $this->new($this->proc->toInt());
-	}
-
-
-	/**
-	 * Cast to array
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function float(): static
-	{
-		return $this->new($this->proc->toFloat());
-	}
-
-
-	/**
-	 * @return static
-	 * @generated
-	 */
-	public function array(): static
-	{
-		return $this->new($this->proc->toArray());
-	}
-
-
-	/**
-	 * Get string
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function string(): static
-	{
-		return $this->new($this->proc->toString());
-	}
-
-
-	/**
-	 * Get the type of variable
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function type(): static
-	{
-		return $this->new($this->proc->toType());
-	}
-
-
-	/**
-	 * Format value as number and append € currency sign
-	 *
-	 * @example flu(10000.50)->eur() // "10000,50€"
-	 * @example flu(10000.50)->eur('.',' ') // "10 000.50€"
-	 * @param  string  $decimalSeparator
-	 * @param  string  $thousand
-	 * @return static
-	 * @generated
-	 */
-	public function eur(string $decimalSeparator = ',', string $thousand = ''): static
-	{
-		return $this->new($this->proc->eur($decimalSeparator, $thousand));
-	}
-
-
-	/**
-	 * Format value as number and append $ currency sign
-	 *
-	 * @example flu(10000.50)->dollar('.',' ') // "10 000.50$"
-	 * @example flu(10000.50)->dollar() // "10000,50$"
-	 * @param  string  $decimalSeparator
-	 * @param  string  $thousand
-	 * @return static
-	 * @generated
-	 */
-	public function dollar(string $decimalSeparator = ',', string $thousand = ''): static
-	{
-		return $this->new($this->proc->dollar($decimalSeparator, $thousand));
-	}
-
-
-	/**
-	 * Format money
-	 *
-	 * @example flu(10000.50)->money('$') // "10000,50$"
-	 * @example flu(10000.50)->money('$','.',' ') // "10 000.50$"
-	 * @param  string  $thousand
-	 * @param  string  $currency
-	 * @param  string  $decimalSeparator
-	 * @return static
-	 * @generated
-	 */
-	public function money(string $currency, string $decimalSeparator = ',', string $thousand = ''): static
-	{
-		return $this->new($this->proc->money($currency, $decimalSeparator, $thousand));
-	}
-
-
-	/**
-	 * @param  float|int  $percent
-	 * @return static
-	 * @generated
-	 */
-	public function discount(float|int $percent): static
-	{
-		return $this->new($this->proc->discount($percent));
-	}
-
-
-	/**
-	 * Add markup to value
-	 *
-	 * @param  float|int  $percent
-	 * @return static
-	 * @generated
-	 */
-	public function markup(float|int $percent): static
-	{
-		return $this->new($this->proc->markup($percent));
-	}
-
-
-	/**
-	 * Remove VAT(value added tax) from value
-	 *
-	 * @param  float|int|null  $vatPercent
-	 * @return static
-	 * @generated
-	 */
-	public function removeVat(float|int $vatPercent = null): static
-	{
-		return $this->new($this->proc->removeVat($vatPercent));
-	}
-
-
-	/**
-	 * Add VAT(value added tax) to value
-	 *
-	 * @param  float|int|null  $vatPercent
-	 * @return static
-	 * @generated
-	 */
-	public function addVat(float|int $vatPercent = null): static
-	{
-		return $this->new($this->proc->addVat($vatPercent));
-	}
-
-
-	/**
-	 * Get VAT(value added tax) of current value
-	 *
-	 * @param  bool  $priceContainsVat
-	 * @param  float|int|null  $vatPercent
-	 * @return static
-	 * @generated
-	 */
-	public function vat(bool $priceContainsVat, float|int $vatPercent = null): static
-	{
-		return $this->new($this->proc->vat($priceContainsVat, $vatPercent));
-	}
-
-
-	/**
-	 * Convert value to date formatted string using $format
-	 * If $format is not provided getDefaultDateFormat() is used
-	 *
-	 * @param  string|null  $format
-	 * @return static
-	 * @generated
-	 */
-	public function formatDate(string $format = null): static
-	{
-		return $this->new($this->proc->formatDate($format));
-	}
-
-
-	/**
-	 * Convert value to date formatted using getDefaultDateTimeFormat()
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function formatDateTime(): static
-	{
-		return $this->new($this->proc->formatDateTime());
-	}
-
-
-	/**
-	 * Converts value to date format Y-m-d
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function formatStandardDate(): static
-	{
-		return $this->new($this->proc->formatStandardDate());
-	}
-
-
-	/**
-	 * Converts value to date format Y-m-d H:i:s
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function formatStandardDateTime(): static
-	{
-		return $this->new($this->proc->formatStandardDateTime());
-	}
-
-
-	/**
-	 * @return static
-	 * @generated
-	 */
-	public function timestamp(): static
-	{
-		return $this->new($this->proc->timestamp());
-	}
-
-
-	/**
-	 * Wrap current value with html tag
-	 *
-	 * @example flu('Hello world!')->htmlTag('h1') //<h1>Hello world</h1>
-	 * @param  string  $tag
-	 * @return static
-	 * @generated
-	 */
-	public function htmlTag(string $tag): static
-	{
-		return $this->new($this->proc->htmlTag($tag));
-	}
-
-
-	/**
-	 * Parses the string into variables
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function htmlAttributes(): static
-	{
-		return $this->new($this->proc->htmlAttributes());
-	}
-
-
-	/**
-	 * Parses the string into variables
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function htmlToText(): static
-	{
-		return $this->new($this->proc->htmlToText());
-	}
-
-
-	/**
-	 * @param  bool  $doubleEncode
-	 * @return static
-	 * @generated
-	 */
-	public function escapeHTML(bool $doubleEncode = true): static
-	{
-		return $this->new($this->proc->escapeHTML($doubleEncode));
-	}
-
-
-	/**
-	 * Merge array
-	 *
-	 * @param  array  ...$array
-	 * @return static
-	 * @generated
-	 */
-	public function merge(array ...$array): static
-	{
-		return $this->new($this->proc->merge(...$array));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::keys()
-	 * @generated
-	 */
-	public function toArrayKeys(): array
-	{
-		return $this->proc->keys();
-	}
-
-
-	/**
-	 * Get array keys
-	 *
-	 * @return static
-	 * @generated
-	 */
-	public function keys(): static
-	{
-		return $this->new($this->toArrayKeys());
-	}
-
-
-	/**
-	 * Run a filter over each of the items.
-	 *
-	 * @param  (callable(TKey,TValue): mixed)|null  $callback  - "self::method" or "static::method" will be called Using FluentValue
-	 * @return static
-	 * @generated
-	 */
-	public function filter(callable $callback = null): static
-	{
-		return $this->new($this->proc->filter($callback));
-	}
-
-
-	/**
-	 * @alias $this->pushTo()
-	 * @generated
-	 */
-	public function pushTo(string|int $key, mixed ...$values): static
-	{
-		$this->set($this->proc->pushTo($key, ...$values));
-		return $this;
-	}
-
-
-	/**
-	 * @alias $this->push()
-	 * @generated
-	 */
-	public function push(mixed ...$values): static
-	{
-		$this->set($this->proc->push(...$values));
-		return $this;
-	}
-
-
-	/**
-	 * Rejects items using truth test
-	 *
-	 * @param  (callable(TKey,TValue): mixed)|null  $callback  - "self::method" or "static::method" will be called Using FluentValue
-	 * @return static
-	 * @generated
-	 */
-	public function reject(callable $callback = null): static
-	{
-		return $this->new($this->proc->reject($callback));
-	}
-
-
-	/**
-	 * Explodes, then value and then filters out empty values
-	 *
-	 * @param  string  $separator
-	 * @return static
-	 * @generated
-	 */
-	public function explodeRejectEmpty(string $separator): static
-	{
-		return $this->new($this->proc->explodeRejectEmpty($separator));
-	}
-
-
-	/**
-	 * Explodes, then trims each value
-	 *
-	 * @param  string  $separator
-	 * @return static
-	 * @generated
-	 */
-	public function explodeTrim(string $separator): static
-	{
-		return $this->new($this->proc->explodeTrim($separator));
-	}
-
-
-	/**
-	 * Return the first element in an array passing a given truth test.
-	 *
-	 * @param  (callable(TKey,TValue): mixed)|null  $callback
-	 * @param  null  $default
-	 * @return static
-	 * @see  Arr::first()
-	 * @generated
-	 */
-	public function first(callable $callback = null, $default = null): static
-	{
-		return $this->new($this->proc->first($callback, $default));
-	}
-
-
-	/**
-	 * Return the last element in an array passing a given truth test.
-	 *
-	 * @param  (callable(TKey,TValue): mixed)|null  $callback
-	 * @param  null  $default
-	 * @return static
-	 * @see  Arr::last()
-	 * @generated
-	 */
-	public function last(callable $callback = null, $default = null): static
-	{
-		return $this->new($this->proc->last($callback, $default));
-	}
-
-
-	/**
-	 * Applies the callback to the elements of the given arrays
-	 * Closure callable is injectable ex ->edit(\MyClass $value) // will call $editor(new \MyClass(TValue))
-	 * "flu::method" will be mapped with flu($arrayItem)->method(...$arg)
-	 *
-	 * @example flu([' 1',' 2',' hello'])->map('flu::trim->eur') //['1,00€','2,00€','0,00€]
-	 * @example flu([' 1',' 2',' hello'])->map('trim->intval') //[1,2,0]
-	 * @example flu([' 1',' 2',' hello'])->map(['trim','intval']) //[1,2,0]
-	 * @param  (callable(TKey,TValue): mixed)|(callable(TKey,TValue): mixed)[]|string  $callback
-	 * @param  mixed  ...$arg  extra arguments passed to callback
-	 * @return static
-	 * @generated
-	 */
-	public function map(callable|string|array $callback, mixed ...$arg): static
-	{
-		return $this->new($this->proc->map($callback, ...$arg));
-	}
-
-
-	/**
-	 * Applies the $fluentMethod to the elements of the given arrays
-	 *
-	 * @param  string  $fluentMethod
-	 * @param  mixed  ...$arg  extra arguments passed to callback
-	 * @return static
-	 * @TODO to get better autosuggestion use phpstorm meta
-	 * @generated
-	 */
-	public function mapMe(string $fluentMethod, mixed ...$arg): static
-	{
-		return $this->new($this->proc->mapMe($fluentMethod, ...$arg));
-	}
-
-
-	/**
-	 * Run an associative map over each of the items.
-	 * The callback should return an associative array with a single key/value pair.
-	 *
-	 * @param  (callable(TKey,TValue): mixed)  $callback
-	 * @return static
-	 * @generated
-	 */
-	public function mapWithKeys(callable $callback): static
-	{
-		return $this->new($this->proc->mapWithKeys($callback));
-	}
-
-
-	/**
-	 * @param  mixed  $success
-	 * @param  mixed|null  $default
-	 * @return static
-	 * @generated
-	 */
-	public function whenOk(mixed $success, mixed $default = null): static
-	{
-		return $this->new($this->proc->whenOk($success, $default));
-	}
-
-
-	/**
-	 * @param  mixed  $success
-	 * @param  mixed|null  $default
-	 * @return static
-	 * @generated
-	 */
-	public function whenNotOk(mixed $success, mixed $default = null): static
-	{
-		return $this->new($this->proc->whenNotOk($success, $default));
-	}
-
-
-	/**
-	 * @param  mixed  $value
-	 * @param  mixed  $success
-	 * @param  mixed|null  $default
-	 * @return static
-	 * @generated
-	 */
-	public function when(mixed $value, mixed $success, mixed $default = null): static
-	{
-		return $this->new($this->proc->when($value, $success, $default));
-	}
-
-
-	/**
-	 * @param  mixed  $value
-	 * @param  mixed  $success
-	 * @param  mixed|null  $default
-	 * @return static
-	 * @generated
-	 */
-	public function unless(mixed $value, mixed $success, mixed $default = null): static
-	{
-		return $this->new($this->proc->unless($value, $success, $default));
-	}
-
-
-	/**
-	 * @param  array|string  $needles
-	 * @param  mixed  $success
-	 * @param  mixed|null  $default
-	 * @return static
-	 * @see  Stringable::whenContains()
-	 * @generated
-	 */
-	public function whenContains(array|string $needles, mixed $success, mixed $default = null): static
-	{
-		return $this->new($this->proc->whenContains($needles, $success, $default));
-	}
-
-
-	/**
-	 * @param  array  $needles
-	 * @param  mixed  $success
-	 * @param  mixed|null  $default
-	 * @return static
-	 * @see  Stringable::whenContainsAll()
-	 * @generated
-	 */
-	public function whenContainsAll(array $needles, mixed $success, mixed $default = null): static
-	{
-		return $this->new($this->proc->whenContainsAll($needles, $success, $default));
-	}
-
-
-	/**
-	 * @param  mixed  $success
-	 * @param  mixed|null  $default
-	 * @return static
-	 * @see  Stringable::whenEmpty()
-	 * @generated
-	 */
-	public function whenEmpty(mixed $success, mixed $default = null): static
-	{
-		return $this->new($this->proc->whenEmpty($success, $default));
-	}
-
-
-	/**
-	 * @param  mixed  $success
-	 * @param  mixed|null  $default
-	 * @return static
-	 * @see  Stringable::whenNotEmpty()
-	 * @generated
-	 */
-	public function whenNotEmpty(mixed $success, mixed $default = null): static
-	{
-		return $this->new($this->proc->whenNotEmpty($success, $default));
-	}
-
-
-	/**
-	 * @param $needles
-	 * @param  mixed  $success
-	 * @param  mixed|null  $default
-	 * @return static
-	 * @see  Stringable::whenEndsWith()
-	 * @generated
-	 */
-	public function whenEndsWith($needles, mixed $success, mixed $default = null): static
-	{
-		return $this->new($this->proc->whenEndsWith($needles, $success, $default));
-	}
-
-
-	/**
-	 * @param $value
-	 * @param  mixed  $success
-	 * @param  mixed|null  $default
-	 * @return static
-	 * @see  Stringable::whenExactly()
-	 * @generated
-	 */
-	public function whenExactly($value, mixed $success, mixed $default = null): static
-	{
-		return $this->new($this->proc->whenExactly($value, $success, $default));
-	}
-
-
-	/**
-	 * @param $value
-	 * @param  mixed  $success
-	 * @param  mixed|null  $default
-	 * @return static
-	 * @see  Stringable::whenNotExactly()
-	 * @generated
-	 */
-	public function whenNotExactly($value, mixed $success, mixed $default = null): static
-	{
-		return $this->new($this->proc->whenNotExactly($value, $success, $default));
-	}
-
-
-	/**
-	 * @param $pattern
-	 * @param  mixed  $success
-	 * @param  mixed|null  $default
-	 * @return static
-	 * @see  Stringable::whenIs()
-	 * @generated
-	 */
-	public function whenIs($pattern, mixed $success, mixed $default = null): static
-	{
-		return $this->new($this->proc->whenIs($pattern, $success, $default));
-	}
-
-
-	/**
-	 * @param  mixed  $success
-	 * @param  mixed|null  $default
-	 * @return static
-	 * @see  Stringable::whenIsAscii()
-	 * @generated
-	 */
-	public function whenIsAscii(mixed $success, mixed $default = null): static
-	{
-		return $this->new($this->proc->whenIsAscii($success, $default));
-	}
-
-
-	/**
-	 * @param  mixed  $success
-	 * @param  mixed|null  $default
-	 * @return static
-	 * @see  Stringable::whenIsUuid()
-	 * @generated
-	 */
-	public function whenIsUuid(mixed $success, mixed $default = null): static
-	{
-		return $this->new($this->proc->whenIsUuid($success, $default));
-	}
-
-
-	/**
-	 * @param $needles
-	 * @param  mixed  $success
-	 * @param  mixed|null  $default
-	 * @return static
-	 * @see  Stringable::whenStartsWith()
-	 * @generated
-	 */
-	public function whenStartsWith($needles, mixed $success, mixed $default = null): static
-	{
-		return $this->new($this->proc->whenStartsWith($needles, $success, $default));
-	}
-
-
-	/**
-	 * @param $pattern
-	 * @param  mixed  $success
-	 * @param  mixed|null  $default
-	 * @return static
-	 * @see  Stringable::whenTest()
-	 * @generated
-	 */
-	public function whenTest($pattern, mixed $success, mixed $default = null): static
-	{
-		return $this->new($this->proc->whenTest($pattern, $success, $default));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::filename()
-	 * @generated
-	 */
-	public function toFileName(string $extension): string
-	{
-		return $this->proc->filename($extension);
-	}
-
-
-	/**
-	 * Add .$extension to current value
-	 *
-	 * @param  string  $extension
-	 * @return static
-	 * @generated
-	 */
-	public function filename(string $extension): static
-	{
-		return $this->new($this->toFileName($extension));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::path()
-	 * @generated
-	 */
-	public function toPath(string $extension = null, string $root = '/'): string
-	{
-		return $this->proc->path($extension, $root);
-	}
-
-
-	/**
-	 * Convert value to path
-	 *
-	 * @example flu('filename').toFilePath('.txt','/var/www/html') #=> /var/www/html/filename.txt
-	 * @example flu('filename').toFilePath('txt','/var/www/html') #=> /var/www/html/filename.txt
-	 * @param  string|null  $extension  if null then current value is added
-	 * @param  string  $root  directory path - If null then / is used
-	 * @return static
-	 * @generated
-	 */
-	public function path(string $extension = null, string $root = '/'): static
-	{
-		return $this->new($this->toPath($extension, $root));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::extension()
-	 * @generated
-	 */
-	public function toExtension(bool $lowercase = false): string
-	{
-		return $this->proc->extension($lowercase);
-	}
-
-
-	/**
-	 * Return file extension.
-	 * If current value is not file then try to get extension manually using string manipulations
-	 *
-	 * @param  bool  $lowercase
-	 * @return static
-	 * @generated
-	 */
-	public function extension(bool $lowercase = false): static
-	{
-		return $this->new($this->toExtension($lowercase));
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::fileExists()
-	 * @generated
-	 */
-	public function fileExists(string $extension = null): bool
-	{
-		return $this->proc->fileExists($extension);
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::isFile()
-	 * @generated
-	 */
-	public function isFile(string $extension = null): bool
-	{
-		return $this->proc->isFile($extension);
-	}
-
-
-	/**
-	 * @alias FluentValueProcessor::isExtension()
-	 * @generated
-	 */
-	public function isExtension(string $extension): bool
-	{
-		return $this->proc->isExtension($extension);
-	}
+    /**
+     * Append values works for array and strings
+     *
+     * @param mixed ...$values
+     * @return static
+     * @generated
+     */
+    public function append(mixed ...$values): static
+    {
+        return $this->new($this->proc->append(...$values));
+    }
+
+
+    /**
+     * Append values works for array and strings
+     *
+     * @param mixed ...$values
+     * @return static
+     * @generated
+     */
+    public function prepend(mixed ...$values): static
+    {
+        return $this->new($this->proc->prepend(...$values));
+    }
+
+
+    /**
+     * @param (callable(TKey,TValue): mixed) $callback
+     * @param mixed ...$parameter
+     * @return static
+     * @generated
+     */
+    public function transform(callable $callback, mixed ...$parameter): static
+    {
+        return $this->new($this->proc->transform($callback, ...$parameter));
+    }
+
+
+    /**
+     * Get offset value
+     *
+     * @template TGetDefault
+     * @template TValue
+     *
+     * @param string|int $key
+     * @param TGetDefault $default
+     * @return static
+     * @generated
+     */
+    public function at(string|int $key, mixed $default = null): static
+    {
+        return $this->new($this->proc->at($key, $default));
+    }
+
+
+    /**
+     * Get size, if underlying value is array then count else strlen
+     *
+     * @return static
+     * @generated
+     */
+    public function size(): static
+    {
+        return $this->new($this->proc->size());
+    }
+
+
+    /**
+     * Get string length
+     *
+     * @return static
+     * @generated
+     */
+    public function strlen(): static
+    {
+        return $this->new($this->proc->strlen());
+    }
+
+
+    /**
+     * Returns trailing name component of path/class-string
+     *
+     * @return static
+     * @see  Flu::basename
+     * @generated
+     */
+    public function basename(): static
+    {
+        return $this->new($this->proc->basename());
+    }
+
+
+    /**
+     * URL-encodes string
+     *
+     * @return static
+     * @generated
+     */
+    public function urlEncode(): static
+    {
+        return $this->new($this->proc->urlEncode());
+    }
+
+
+    /**
+     * Join array elements with a string
+     *
+     * @param string $glue
+     * @return static
+     * @generated
+     */
+    public function implode(string $glue): static
+    {
+        return $this->new($this->proc->implode($glue));
+    }
+
+
+    /**
+     * Join array elements with a string
+     *
+     * @alias self::implode
+     * @param string $glue
+     * @return static
+     * @generated
+     */
+    public function join(string $glue): static
+    {
+        return $this->new($this->proc->join($glue));
+    }
+
+
+    /**
+     * Split a string by a string
+     *
+     * @param string $separator
+     * @return static
+     * @generated
+     */
+    public function explode(string $separator): static
+    {
+        return $this->new($this->proc->explode($separator));
+    }
+
+
+    /**
+     * Split lines into array
+     *
+     * @return static
+     * @generated
+     */
+    public function lines(): static
+    {
+        return $this->new($this->proc->lines());
+    }
+
+
+    /**
+     * Surround value with
+     *
+     * @example flu('value')->wrap('value','{','}') // "{value}"
+     * @example flu('value')->wrap('value',['{','}']) //"{value}"
+     * @example flu('value')->wrap('value',['{','['],['}',']']) // "[{value}]"
+     * @param string|array $before
+     * @param string|array|null $after
+     * @return static
+     * @generated
+     */
+    public function wrap(string|array $before, string|array $after = null): static
+    {
+        return $this->new($this->proc->wrap($before, $after));
+    }
+
+
+    /**
+     * Return a formatted string
+     *
+     * @example flu('gen')->getFormattedText('my name is {%value%}, and im %s age of old',39) //my name is gen, and im 39 age of old
+     * @param string $format
+     * @param mixed ...$values
+     * @return static
+     * @generated
+     */
+    public function format(string $format, mixed ...$values): static
+    {
+        return $this->new($this->proc->format($format, ...$values));
+    }
+
+
+    /**
+     * Returns the JSON representation of a value
+     *
+     * @param bool $pretty JSON_PRETTY_PRINT - https://www.php.net/manual/en/json.constants.php
+     * @return static
+     * @throws \JsonException
+     * @generated
+     */
+    public function json(bool $pretty = false): static
+    {
+        return $this->new($this->proc->json($pretty));
+    }
+
+
+    /**
+     * Returns the JSON representation of a value
+     *
+     * @param bool|null $associative
+     * @param int $depth
+     * @param int $flags
+     * @return static
+     * @generated
+     */
+    public function jsonDecode(?bool $associative = null, int $depth = 512, int $flags = 0): static
+    {
+        return $this->new($this->proc->jsonDecode($associative, $depth, $flags));
+    }
+
+
+    /**
+     * Return a formatted string
+     *
+     * @param mixed ...$values
+     * @return static
+     * @generated
+     */
+    public function sprintf(mixed ...$values): static
+    {
+        return $this->new($this->proc->sprintf(...$values));
+    }
+
+
+    /**
+     * Return a formatted string
+     *
+     * @param mixed $values
+     * @return static
+     * @generated
+     */
+    public function vsprintf(mixed $values): static
+    {
+        return $this->new($this->proc->vsprintf($values));
+    }
+
+
+    /**
+     * Wrap quotes
+     *
+     * @example flu('hello world')->wrapQuotes('"') // '"hello world"'
+     * @param string $quotes
+     * @return static
+     * @generated
+     */
+    public function wrapQuotes(string $quotes = '"'): static
+    {
+        return $this->new($this->proc->wrapQuotes($quotes));
+    }
+
+
+    /**
+     * Quote string with slashes
+     *
+     * @return static
+     * @generated
+     */
+    public function addSlashes(): static
+    {
+        return $this->new($this->proc->addSlashes());
+    }
+
+
+    /**
+     * Parses the string into variables
+     *
+     * @return static
+     * @generated
+     */
+    public function parseStr(): static
+    {
+        return $this->new($this->proc->parseStr());
+    }
+
+
+    /**
+     * @alias FluentValueProcessor::match()
+     * @generated
+     */
+    public function getMatch(string $pattern): string
+    {
+        return $this->proc->match($pattern);
+    }
+
+
+    /**
+     * Get the string matching the given pattern.
+     *
+     * @param string $pattern
+     * @return static
+     * @see  Regex::match()
+     * @generated
+     */
+    public function match(string $pattern): static
+    {
+        return $this->new($this->getMatch($pattern));
+    }
+
+
+    /**
+     * @alias FluentValueProcessor::matchAll()
+     * @generated
+     */
+    public function getAllMatches(string $pattern): array
+    {
+        return $this->proc->matchAll($pattern);
+    }
+
+
+    /**
+     * Get the string matching the given pattern.
+     *
+     * @param string $pattern
+     * @return static
+     * @see  Regex::matchAll
+     * @generated
+     */
+    public function matchAll(string $pattern): static
+    {
+        return $this->new($this->getAllMatches($pattern));
+    }
+
+
+    /**
+     * String representation of object.
+     *
+     * @return static
+     * @generated
+     */
+    public function serialize(): static
+    {
+        return $this->new($this->proc->serialize());
+    }
+
+
+    /**
+     * Constructs the object.
+     *
+     * @param array $options
+     * @return static
+     * @generated
+     */
+    public function unserialize(array $options = []): static
+    {
+        return $this->new($this->proc->unserialize($options));
+    }
+
+
+    /**
+     * Get array of its characters
+     *
+     * @param int $length
+     * @return static
+     * @generated
+     */
+    public function characters(int $length = 1): static
+    {
+        return $this->new($this->proc->characters($length));
+    }
+
+
+    /**
+     * Simple string templating
+     *
+     * @example flu('my name is {name}')->render(['name' => 'gen']) // 'my name is gen'
+     * @param array $data
+     * @return static
+     * @generated
+     */
+    public function render(array $data = [], callable $renderer = null): static
+    {
+        return $this->new($this->proc->render($data, $renderer));
+    }
+
+
+    /**
+     * @alias FluentValueProcessor::md5()
+     * @generated
+     */
+    public function toMd5(mixed ...$data): string
+    {
+        return $this->proc->md5(...$data);
+    }
+
+
+    /**
+     * Get md5 hash
+     *
+     * @param mixed ...$data - in addition to self value pass extra to make hash
+     * @return static
+     * @see  Hash::make()
+     * @generated
+     */
+    public function md5(mixed ...$data): static
+    {
+        return $this->new($this->toMd5(...$data));
+    }
+
+
+    /**
+     * @alias FluentValueProcessor::sha1()
+     * @generated
+     */
+    public function toSha1(mixed ...$data): string
+    {
+        return $this->proc->sha1(...$data);
+    }
+
+
+    /**
+     * Get sha1 hash
+     *
+     * @param mixed ...$data - in addition to self value pass extra to make hash
+     * @return static
+     * @see  Hash::make()
+     * @generated
+     */
+    public function sha1(mixed ...$data): static
+    {
+        return $this->new($this->toSha1(...$data));
+    }
+
+
+    /**
+     * @alias FluentValueProcessor::crc32b()
+     * @generated
+     */
+    public function toCrc32b(mixed ...$data): string
+    {
+        return $this->proc->crc32b(...$data);
+    }
+
+
+    /**
+     * Get crc32b hash
+     *
+     * @param mixed ...$data - in addition to self value pass extra to make hash
+     * @return static
+     * @see  Hash::make()
+     * @generated
+     */
+    public function crc32b(mixed ...$data): static
+    {
+        return $this->new($this->toCrc32b(...$data));
+    }
+
+
+    /**
+     * @alias FluentValueProcessor::sha512()
+     * @generated
+     */
+    public function toSha512(mixed ...$data): string
+    {
+        return $this->proc->sha512(...$data);
+    }
+
+
+    /**
+     * Get sha512 hash
+     *
+     * @param mixed ...$data - in addition to self value pass extra to make hash
+     * @return static
+     * @see  Hash::make()
+     * @generated
+     */
+    public function sha512(mixed ...$data): static
+    {
+        return $this->new($this->toSha512(...$data));
+    }
+
+
+    /**
+     * @alias FluentValueProcessor::hash()
+     * @generated
+     */
+    public function toHash(string $algo, mixed ...$data): string
+    {
+        return $this->proc->hash($algo, ...$data);
+    }
+
+
+    /**
+     * Make hash from current value
+     * @param string $algo
+     * @param mixed ...$data - in addition to self value pass extra to make hash
+     * @return static
+     * @link https://www.php.net/manual/en/function.hash-algos.php
+     * @link https://www.php.net/manual/en/function.hash.php
+     * @generated
+     */
+    public function hash(string $algo, mixed ...$data): static
+    {
+        return $this->new($this->toHash($algo, ...$data));
+    }
+
+
+    /**
+     * @alias FluentValueProcessor::numeric()
+     * @generated
+     */
+    public function toNumeric(): float|int
+    {
+        return $this->proc->numeric();
+    }
+
+
+    /**
+     * @return static
+     * @generated
+     */
+    public function numeric(): static
+    {
+        return $this->new($this->toNumeric());
+    }
+
+
+    /**
+     * @alias FluentValueProcessor::formatNumber()
+     * @generated
+     */
+    public function toFormattedNumber(string $decimalSeparator = ',', string $thousand = ''): string
+    {
+        return $this->proc->formatNumber($decimalSeparator, $thousand);
+    }
+
+
+    /**
+     * @param string $decimalSeparator
+     * @param string $thousand
+     * @return static
+     * @generated
+     */
+    public function formatNumber(string $decimalSeparator = ',', string $thousand = ''): static
+    {
+        return $this->new($this->toFormattedNumber($decimalSeparator, $thousand));
+    }
+
+
+    /**
+     * @return static
+     * @generated
+     */
+    public function negative(): static
+    {
+        return $this->new($this->proc->negative());
+    }
+
+
+    /**
+     * @return static
+     * @generated
+     */
+    public function positive(): static
+    {
+        return $this->new($this->proc->positive());
+    }
+
+
+    /**
+     * @param mixed ...$max
+     * @return static
+     * @generated
+     */
+    public function max(mixed ...$max): static
+    {
+        return $this->new($this->proc->max(...$max));
+    }
+
+
+    /**
+     * @param mixed ...$max
+     * @return static
+     * @generated
+     */
+    public function min(mixed ...$max): static
+    {
+        return $this->new($this->proc->min(...$max));
+    }
+
+
+    /**
+     * @return static
+     * @generated
+     */
+    public function floor(): static
+    {
+        return $this->new($this->proc->floor());
+    }
+
+
+    /**
+     * @return static
+     * @generated
+     */
+    public function ceil(): static
+    {
+        return $this->new($this->proc->ceil());
+    }
+
+
+    /**
+     * @param int $precision
+     * @return static
+     * @see https://www.php.net/manual/en/function.round.php
+     * @generated
+     */
+    public function round(int $precision = 0): static
+    {
+        return $this->new($this->proc->round($precision));
+    }
+
+
+    /**
+     * @alias $this->increment()
+     * @generated
+     */
+    public function increment(int $by = 1): static
+    {
+        $this->set($this->proc->increment($by));
+        return $this;
+    }
+
+
+    /**
+     * @alias $this->decrement()
+     * @generated
+     */
+    public function decrement(int $by = 1): static
+    {
+        $this->set($this->proc->decrement($by));
+        return $this;
+    }
+
+
+    /**
+     * @param float|int $value
+     * @return static
+     * @generated
+     */
+    public function add(float|int $value): static
+    {
+        return $this->new($this->proc->add($value));
+    }
+
+
+    /**
+     * @param float|int $value
+     * @return static
+     * @generated
+     */
+    public function subtract(float|int $value): static
+    {
+        return $this->new($this->proc->subtract($value));
+    }
+
+
+    /**
+     * @param float|int $value
+     * @return static
+     * @generated
+     */
+    public function multiply(float|int $value): static
+    {
+        return $this->new($this->proc->multiply($value));
+    }
+
+
+    /**
+     * @param float|int $value
+     * @return static
+     * @generated
+     */
+    public function divide(float|int $value): static
+    {
+        return $this->new($this->proc->divide($value));
+    }
+
+
+    /**
+     * @param float|int $percent
+     * @return static
+     * @generated
+     */
+    public function increaseByPercent(float|int $percent): static
+    {
+        return $this->new($this->proc->increaseByPercent($percent));
+    }
+
+
+    /**
+     * @param float|int $percent
+     * @return static
+     * @generated
+     */
+    public function decreaseByPercent(float|int $percent): static
+    {
+        return $this->new($this->proc->decreaseByPercent($percent));
+    }
+
+
+    /**
+     * Get the underlying string value as a boolean.
+     * Returns true when value is "1", "true", "on", and "yes". Otherwise, returns false.
+     *
+     * @return static
+     * @generated
+     */
+    public function bool(): static
+    {
+        return $this->new($this->proc->toBool());
+    }
+
+
+    /**
+     * Cast to int
+     *
+     * @return static
+     * @generated
+     */
+    public function int(): static
+    {
+        return $this->new($this->proc->toInt());
+    }
+
+
+    /**
+     * Cast to array
+     *
+     * @return static
+     * @generated
+     */
+    public function float(): static
+    {
+        return $this->new($this->proc->toFloat());
+    }
+
+
+    /**
+     * @return static
+     * @generated
+     */
+    public function array(): static
+    {
+        return $this->new($this->proc->toArray());
+    }
+
+
+    /**
+     * Get string
+     *
+     * @return static
+     * @generated
+     */
+    public function string(): static
+    {
+        return $this->new($this->proc->toString());
+    }
+
+
+    /**
+     * Get the type of variable
+     *
+     * @return static
+     * @generated
+     */
+    public function type(): static
+    {
+        return $this->new($this->proc->toType());
+    }
+
+
+    /**
+     * Format value as number and append € currency sign
+     *
+     * @example flu(10000.50)->eur() // "10000,50€"
+     * @example flu(10000.50)->eur('.',' ') // "10 000.50€"
+     * @param string $decimalSeparator
+     * @param string $thousand
+     * @return static
+     * @generated
+     */
+    public function eur(string $decimalSeparator = ',', string $thousand = ''): static
+    {
+        return $this->new($this->proc->eur($decimalSeparator, $thousand));
+    }
+
+
+    /**
+     * Format value as number and append $ currency sign
+     *
+     * @example flu(10000.50)->dollar('.',' ') // "10 000.50$"
+     * @example flu(10000.50)->dollar() // "10000,50$"
+     * @param string $decimalSeparator
+     * @param string $thousand
+     * @return static
+     * @generated
+     */
+    public function dollar(string $decimalSeparator = ',', string $thousand = ''): static
+    {
+        return $this->new($this->proc->dollar($decimalSeparator, $thousand));
+    }
+
+
+    /**
+     * Format money
+     *
+     * @example flu(10000.50)->money('$') // "10000,50$"
+     * @example flu(10000.50)->money('$','.',' ') // "10 000.50$"
+     * @param string $thousand
+     * @param string $currency
+     * @param string $decimalSeparator
+     * @return static
+     * @generated
+     */
+    public function money(string $currency, string $decimalSeparator = ',', string $thousand = ''): static
+    {
+        return $this->new($this->proc->money($currency, $decimalSeparator, $thousand));
+    }
+
+
+    /**
+     * @param float|int $percent
+     * @return static
+     * @generated
+     */
+    public function discount(float|int $percent): static
+    {
+        return $this->new($this->proc->discount($percent));
+    }
+
+
+    /**
+     * Add markup to value
+     *
+     * @param float|int $percent
+     * @return static
+     * @generated
+     */
+    public function markup(float|int $percent): static
+    {
+        return $this->new($this->proc->markup($percent));
+    }
+
+
+    /**
+     * Remove VAT(value added tax) from value
+     *
+     * @param float|int|null $vatPercent
+     * @return static
+     * @generated
+     */
+    public function removeVat(float|int $vatPercent = null): static
+    {
+        return $this->new($this->proc->removeVat($vatPercent));
+    }
+
+
+    /**
+     * Add VAT(value added tax) to value
+     *
+     * @param float|int|null $vatPercent
+     * @return static
+     * @generated
+     */
+    public function addVat(float|int $vatPercent = null): static
+    {
+        return $this->new($this->proc->addVat($vatPercent));
+    }
+
+
+    /**
+     * Get VAT(value added tax) of current value
+     *
+     * @param bool $priceContainsVat
+     * @param float|int|null $vatPercent
+     * @return static
+     * @generated
+     */
+    public function vat(bool $priceContainsVat, float|int $vatPercent = null): static
+    {
+        return $this->new($this->proc->vat($priceContainsVat, $vatPercent));
+    }
+
+
+    /**
+     * Convert value to date formatted string using $format
+     * If $format is not provided getDefaultDateFormat() is used
+     *
+     * @param string|null $format
+     * @return static
+     * @generated
+     */
+    public function formatDate(string $format = null): static
+    {
+        return $this->new($this->proc->formatDate($format));
+    }
+
+
+    /**
+     * Convert value to date formatted using getDefaultDateTimeFormat()
+     *
+     * @return static
+     * @generated
+     */
+    public function formatDateTime(): static
+    {
+        return $this->new($this->proc->formatDateTime());
+    }
+
+
+    /**
+     * Converts value to date format Y-m-d
+     *
+     * @return static
+     * @generated
+     */
+    public function formatStandardDate(): static
+    {
+        return $this->new($this->proc->formatStandardDate());
+    }
+
+
+    /**
+     * Converts value to date format Y-m-d H:i:s
+     *
+     * @return static
+     * @generated
+     */
+    public function formatStandardDateTime(): static
+    {
+        return $this->new($this->proc->formatStandardDateTime());
+    }
+
+
+    /**
+     * @return static
+     * @generated
+     */
+    public function timestamp(): static
+    {
+        return $this->new($this->proc->timestamp());
+    }
+
+
+    /**
+     * Wrap current value with html tag
+     *
+     * @example flu('Hello world!')->htmlTag('h1') //<h1>Hello world</h1>
+     * @param string $tag
+     * @return static
+     * @generated
+     */
+    public function htmlTag(string $tag): static
+    {
+        return $this->new($this->proc->htmlTag($tag));
+    }
+
+
+    /**
+     * Parses the string into variables
+     *
+     * @return static
+     * @generated
+     */
+    public function htmlAttributes(): static
+    {
+        return $this->new($this->proc->htmlAttributes());
+    }
+
+
+    /**
+     * Parses the string into variables
+     *
+     * @return static
+     * @generated
+     */
+    public function htmlToText(): static
+    {
+        return $this->new($this->proc->htmlToText());
+    }
+
+
+    /**
+     * @param bool $doubleEncode
+     * @return static
+     * @generated
+     */
+    public function escapeHTML(bool $doubleEncode = true): static
+    {
+        return $this->new($this->proc->escapeHTML($doubleEncode));
+    }
+
+
+    /**
+     * Merge array
+     *
+     * @param array ...$array
+     * @return static
+     * @generated
+     */
+    public function merge(array ...$array): static
+    {
+        return $this->new($this->proc->merge(...$array));
+    }
+
+
+    /**
+     * @alias FluentValueProcessor::keys()
+     * @generated
+     */
+    public function toArrayKeys(): array
+    {
+        return $this->proc->keys();
+    }
+
+
+    /**
+     * Get array keys
+     *
+     * @return static
+     * @generated
+     */
+    public function keys(): static
+    {
+        return $this->new($this->toArrayKeys());
+    }
+
+
+    /**
+     * Run a filter over each of the items.
+     *
+     * @param (callable(TKey,TValue): mixed)|null $callback - "self::method" or "static::method" will be called Using FluentValue
+     * @return static
+     * @generated
+     */
+    public function filter(callable $callback = null): static
+    {
+        return $this->new($this->proc->filter($callback));
+    }
+
+
+    /**
+     * @alias $this->pushTo()
+     * @generated
+     */
+    public function pushTo(string|int $key, mixed ...$values): static
+    {
+        $this->set($this->proc->pushTo($key, ...$values));
+        return $this;
+    }
+
+
+    /**
+     * @alias $this->push()
+     * @generated
+     */
+    public function push(mixed ...$values): static
+    {
+        $this->set($this->proc->push(...$values));
+        return $this;
+    }
+
+
+    /**
+     * Rejects items using truth test
+     *
+     * @param (callable(TKey,TValue): mixed)|null $callback - "self::method" or "static::method" will be called Using FluentValue
+     * @return static
+     * @generated
+     */
+    public function reject(callable $callback = null): static
+    {
+        return $this->new($this->proc->reject($callback));
+    }
+
+
+    /**
+     * Explodes, then value and then filters out empty values
+     *
+     * @param string $separator
+     * @return static
+     * @generated
+     */
+    public function explodeRejectEmpty(string $separator): static
+    {
+        return $this->new($this->proc->explodeRejectEmpty($separator));
+    }
+
+
+    /**
+     * Explodes, then trims each value
+     *
+     * @param string $separator
+     * @return static
+     * @generated
+     */
+    public function explodeTrim(string $separator): static
+    {
+        return $this->new($this->proc->explodeTrim($separator));
+    }
+
+
+    /**
+     * Return the first element in an array passing a given truth test.
+     *
+     * @param (callable(TKey,TValue): mixed)|null $callback
+     * @param null $default
+     * @return static
+     * @see  Arr::first()
+     * @generated
+     */
+    public function first(callable $callback = null, $default = null): static
+    {
+        return $this->new($this->proc->first($callback, $default));
+    }
+
+
+    /**
+     * Return the last element in an array passing a given truth test.
+     *
+     * @param (callable(TKey,TValue): mixed)|null $callback
+     * @param null $default
+     * @return static
+     * @see  Arr::last()
+     * @generated
+     */
+    public function last(callable $callback = null, $default = null): static
+    {
+        return $this->new($this->proc->last($callback, $default));
+    }
+
+
+    /**
+     * Applies the callback to the elements of the given arrays
+     * Closure callable is injectable ex ->edit(\MyClass $value) // will call $editor(new \MyClass(TValue))
+     * "flu::method" will be mapped with flu($arrayItem)->method(...$arg)
+     *
+     * @example flu([' 1',' 2',' hello'])->map('flu::trim->eur') //['1,00€','2,00€','0,00€]
+     * @example flu([' 1',' 2',' hello'])->map('trim->intval') //[1,2,0]
+     * @example flu([' 1',' 2',' hello'])->map(['trim','intval']) //[1,2,0]
+     * @param (callable(TKey,TValue): mixed)|(callable(TKey,TValue): mixed)[]|string $callback
+     * @param mixed ...$arg extra arguments passed to callback
+     * @return static
+     * @generated
+     */
+    public function map(callable|string|array $callback, mixed ...$arg): static
+    {
+        return $this->new($this->proc->map($callback, ...$arg));
+    }
+
+
+    /**
+     * Applies the $fluentMethod to the elements of the given arrays
+     *
+     * @param string $fluentMethod
+     * @param mixed ...$arg extra arguments passed to callback
+     * @return static
+     * @TODO to get better autosuggestion use phpstorm meta
+     * @generated
+     */
+    public function mapMe(string $fluentMethod, mixed ...$arg): static
+    {
+        return $this->new($this->proc->mapMe($fluentMethod, ...$arg));
+    }
+
+
+    /**
+     * Run an associative map over each of the items.
+     * The callback should return an associative array with a single key/value pair.
+     *
+     * @param (callable(TKey,TValue): mixed) $callback
+     * @return static
+     * @generated
+     */
+    public function mapWithKeys(callable $callback): static
+    {
+        return $this->new($this->proc->mapWithKeys($callback));
+    }
+
+
+    /**
+     * @param mixed $success
+     * @param mixed|null $default
+     * @return static
+     * @generated
+     */
+    public function whenOk(mixed $success, mixed $default = null): static
+    {
+        return $this->new($this->proc->whenOk($success, $default));
+    }
+
+
+    /**
+     * @param mixed $success
+     * @param mixed|null $default
+     * @return static
+     * @generated
+     */
+    public function whenNotOk(mixed $success, mixed $default = null): static
+    {
+        return $this->new($this->proc->whenNotOk($success, $default));
+    }
+
+
+    /**
+     * @param mixed $value
+     * @param mixed $success
+     * @param mixed|null $default
+     * @return static
+     * @generated
+     */
+    public function when(mixed $value, mixed $success, mixed $default = null): static
+    {
+        return $this->new($this->proc->when($value, $success, $default));
+    }
+
+
+    /**
+     * @param mixed $value
+     * @param mixed $success
+     * @param mixed|null $default
+     * @return static
+     * @generated
+     */
+    public function unless(mixed $value, mixed $success, mixed $default = null): static
+    {
+        return $this->new($this->proc->unless($value, $success, $default));
+    }
+
+
+    /**
+     * @param array|string $needles
+     * @param mixed $success
+     * @param mixed|null $default
+     * @return static
+     * @see  Stringable::whenContains()
+     * @generated
+     */
+    public function whenContains(array|string $needles, mixed $success, mixed $default = null): static
+    {
+        return $this->new($this->proc->whenContains($needles, $success, $default));
+    }
+
+
+    /**
+     * @param array $needles
+     * @param mixed $success
+     * @param mixed|null $default
+     * @return static
+     * @see  Stringable::whenContainsAll()
+     * @generated
+     */
+    public function whenContainsAll(array $needles, mixed $success, mixed $default = null): static
+    {
+        return $this->new($this->proc->whenContainsAll($needles, $success, $default));
+    }
+
+
+    /**
+     * @param mixed $success
+     * @param mixed|null $default
+     * @return static
+     * @see  Stringable::whenEmpty()
+     * @generated
+     */
+    public function whenEmpty(mixed $success, mixed $default = null): static
+    {
+        return $this->new($this->proc->whenEmpty($success, $default));
+    }
+
+
+    /**
+     * @param mixed $success
+     * @param mixed|null $default
+     * @return static
+     * @see  Stringable::whenNotEmpty()
+     * @generated
+     */
+    public function whenNotEmpty(mixed $success, mixed $default = null): static
+    {
+        return $this->new($this->proc->whenNotEmpty($success, $default));
+    }
+
+
+    /**
+     * @param $needles
+     * @param mixed $success
+     * @param mixed|null $default
+     * @return static
+     * @see  Stringable::whenEndsWith()
+     * @generated
+     */
+    public function whenEndsWith($needles, mixed $success, mixed $default = null): static
+    {
+        return $this->new($this->proc->whenEndsWith($needles, $success, $default));
+    }
+
+
+    /**
+     * @param $value
+     * @param mixed $success
+     * @param mixed|null $default
+     * @return static
+     * @see  Stringable::whenExactly()
+     * @generated
+     */
+    public function whenExactly($value, mixed $success, mixed $default = null): static
+    {
+        return $this->new($this->proc->whenExactly($value, $success, $default));
+    }
+
+
+    /**
+     * @param $value
+     * @param mixed $success
+     * @param mixed|null $default
+     * @return static
+     * @see  Stringable::whenNotExactly()
+     * @generated
+     */
+    public function whenNotExactly($value, mixed $success, mixed $default = null): static
+    {
+        return $this->new($this->proc->whenNotExactly($value, $success, $default));
+    }
+
+
+    /**
+     * @param $pattern
+     * @param mixed $success
+     * @param mixed|null $default
+     * @return static
+     * @see  Stringable::whenIs()
+     * @generated
+     */
+    public function whenIs($pattern, mixed $success, mixed $default = null): static
+    {
+        return $this->new($this->proc->whenIs($pattern, $success, $default));
+    }
+
+
+    /**
+     * @param mixed $success
+     * @param mixed|null $default
+     * @return static
+     * @see  Stringable::whenIsAscii()
+     * @generated
+     */
+    public function whenIsAscii(mixed $success, mixed $default = null): static
+    {
+        return $this->new($this->proc->whenIsAscii($success, $default));
+    }
+
+
+    /**
+     * @param mixed $success
+     * @param mixed|null $default
+     * @return static
+     * @see  Stringable::whenIsUuid()
+     * @generated
+     */
+    public function whenIsUuid(mixed $success, mixed $default = null): static
+    {
+        return $this->new($this->proc->whenIsUuid($success, $default));
+    }
+
+
+    /**
+     * @param $needles
+     * @param mixed $success
+     * @param mixed|null $default
+     * @return static
+     * @see  Stringable::whenStartsWith()
+     * @generated
+     */
+    public function whenStartsWith($needles, mixed $success, mixed $default = null): static
+    {
+        return $this->new($this->proc->whenStartsWith($needles, $success, $default));
+    }
+
+
+    /**
+     * @param $pattern
+     * @param mixed $success
+     * @param mixed|null $default
+     * @return static
+     * @see  Stringable::whenTest()
+     * @generated
+     */
+    public function whenTest($pattern, mixed $success, mixed $default = null): static
+    {
+        return $this->new($this->proc->whenTest($pattern, $success, $default));
+    }
+
+
+    /**
+     * @alias FluentValueProcessor::filename()
+     * @generated
+     */
+    public function toFileName(string $extension): string
+    {
+        return $this->proc->filename($extension);
+    }
+
+
+    /**
+     * Add .$extension to current value
+     *
+     * @param string $extension
+     * @return static
+     * @generated
+     */
+    public function filename(string $extension): static
+    {
+        return $this->new($this->toFileName($extension));
+    }
+
+
+    /**
+     * @alias FluentValueProcessor::path()
+     * @generated
+     */
+    public function toPath(string $extension = null, string $root = '/'): string
+    {
+        return $this->proc->path($extension, $root);
+    }
+
+
+    /**
+     * Convert value to path
+     *
+     * @example flu('filename').toFilePath('.txt','/var/www/html') #=> /var/www/html/filename.txt
+     * @example flu('filename').toFilePath('txt','/var/www/html') #=> /var/www/html/filename.txt
+     * @param string|null $extension if null then current value is added
+     * @param string $root directory path - If null then / is used
+     * @return static
+     * @generated
+     */
+    public function path(string $extension = null, string $root = '/'): static
+    {
+        return $this->new($this->toPath($extension, $root));
+    }
+
+
+    /**
+     * @alias FluentValueProcessor::extension()
+     * @generated
+     */
+    public function toExtension(bool $lowercase = false): string
+    {
+        return $this->proc->extension($lowercase);
+    }
+
+
+    /**
+     * Return file extension.
+     * If current value is not file then try to get extension manually using string manipulations
+     *
+     * @param bool $lowercase
+     * @return static
+     * @generated
+     */
+    public function extension(bool $lowercase = false): static
+    {
+        return $this->new($this->toExtension($lowercase));
+    }
+
+
+    /**
+     * @alias FluentValueProcessor::fileExists()
+     * @generated
+     */
+    public function fileExists(string $extension = null): bool
+    {
+        return $this->proc->fileExists($extension);
+    }
+
+
+    /**
+     * @alias FluentValueProcessor::isFile()
+     * @generated
+     */
+    public function isFile(string $extension = null): bool
+    {
+        return $this->proc->isFile($extension);
+    }
+
+
+    /**
+     * @alias FluentValueProcessor::isExtension()
+     * @generated
+     */
+    public function isExtension(string $extension): bool
+    {
+        return $this->proc->isExtension($extension);
+    }
 }

@@ -45,14 +45,20 @@ namespace Infira\FluentValue\Chain;
  * @property-read FluentChain $characters - transform underlying value characters array
  * @method FluentChain render(array $data = [], callable $renderer = null)
  * @property-read FluentChain $rendered - Simple string templating
- * @method FluentChain md5()
+ * @method string toMd5(mixed ...$data)
+ * @method FluentChain md5(mixed ...$data)
  * @property-read FluentChain $md5 - Get md5 hash
- * @method FluentChain sha1()
+ * @method string toSha1(mixed ...$data)
+ * @method FluentChain sha1(mixed ...$data)
  * @property-read FluentChain $sha1 - Get sha1 hash
- * @method FluentChain crc32b()
+ * @method string toCrc32b(mixed ...$data)
+ * @method FluentChain crc32b(mixed ...$data)
  * @property-read FluentChain $crc32b - Get crc32b hash
- * @method FluentChain sha512()
+ * @method string toSha512(mixed ...$data)
+ * @method FluentChain sha512(mixed ...$data)
  * @property-read FluentChain $sha512 - Get sha512 hash
+ * @method string toHash(string $algo, mixed ...$data)
+ * @method FluentChain hash(string $algo, mixed ...$data)
  * @method float|int toNumeric()
  * @method FluentChain numeric()
  * @property-read FluentChain $numeric
