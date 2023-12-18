@@ -50,6 +50,7 @@ class FluentValue implements
     private array $events = [
         'change' => []
     ];
+    private static float|int $vatPercent = 20;
 
     public function __construct(mixed $value)
     {
@@ -77,7 +78,7 @@ class FluentValue implements
     /**
      * Convert to real value
      *
-     * @param  mixed  $value
+     * @param mixed $value
      * @return mixed
      */
     protected function pv(mixed $value): mixed
@@ -85,7 +86,7 @@ class FluentValue implements
         if ($value instanceof self) {
             $value = $value->get();
         }
-        elseif ($value instanceof Closure) {
+        else if ($value instanceof Closure) {
             $value = Callables::makeInjectable($value)($this->value());
         }
 
@@ -99,7 +100,7 @@ class FluentValue implements
     /**
      * Set value for this instance, $value will be processed
      *
-     * @param  mixed  $value
+     * @param mixed $value
      * @return $this
      */
     public function set(mixed $value): static
@@ -112,7 +113,7 @@ class FluentValue implements
     /**
      * Set real underlying value
      *
-     * @param  mixed  $value
+     * @param mixed $value
      * @return $this
      */
     public function setValue(mixed $value): static
@@ -134,7 +135,7 @@ class FluentValue implements
      * This method is mutable, it will change the original value
      * Closure callable is injectable ex ->edit(\MyClass $value) // will call $editor(MyClass(TValue))
      *
-     * @param  (callable(TValue): mixed)|mixed  $editor
+     * @param (callable(TValue): mixed)|mixed $editor
      * @return $this
      */
     public function edit($editor): static
@@ -191,7 +192,7 @@ class FluentValue implements
     /**
      * enables editor, every chain call will alter original value, editor will turn off after first chain call
      *
-     * @param  bool  $endManually  - mutatoion chain will be ended after ->end() call
+     * @param bool $endManually - mutatoion chain will be ended after ->end() call
      * @return Editor
      */
     public function editor(bool $endManually = false): Editor
@@ -380,7 +381,17 @@ class FluentValue implements
      */
     public static function getDefaultVATPercent(): float|int
     {
-        return 20;
+        return self::$vatPercent;
+    }
+
+    /**
+     * Set default value added tax
+     *
+     * @param float|int $percent
+     */
+    public static function setDefaultVATPercent(float|int $percent): void
+    {
+        self::$vatPercent = $percent;
     }
 
     /**
