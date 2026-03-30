@@ -80,7 +80,6 @@ class FluentChain implements \Stringable, UnderlyingValue
         return $this->flu->new($carry);
     }
 
-
     public function dontRunWhen(callable $condition, mixed $output = null): static
     {
         $this->dontStartRunning = $this->_isBreake($condition);

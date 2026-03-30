@@ -39,7 +39,6 @@ class FluentValueProcessor implements
         Traits\Files,
         Traits\Conditions;
 
-
     private bool $mutatorEnabled = false;
     private bool $endMutationManually = false;
     protected mixed $value;
@@ -119,7 +118,7 @@ class FluentValueProcessor implements
     /**
      * Set underlying value
      *
-     * @param  mixed  $value
+     * @param mixed $value
      * @return $this
      */
     public function setValue(mixed $value): static
@@ -129,7 +128,7 @@ class FluentValueProcessor implements
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toString();
     }

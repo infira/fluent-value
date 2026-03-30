@@ -14,7 +14,6 @@ class Editor implements UnderlyingValue
 {
     public function __construct(private FluentValue $flu, private bool $endMutationManually = false) {}
 
-
     public function __call(string $name, array $arguments)
     {
         [, $val] = $this->flu->callProcessors($name, $arguments);

@@ -22,8 +22,8 @@ trait Numbers
     }
 
     /**
-     * @param  string  $decimalSeparator
-     * @param  string  $thousand
+     * @param string $decimalSeparator
+     * @param string $thousand
      * @return string
      * @uses FluentImmutableValue::$formattedNumber
      * @aliasof FluentImmutableValue::toFormattedNumber()
@@ -57,7 +57,7 @@ trait Numbers
     }
 
     /**
-     * @param  mixed  ...$max
+     * @param mixed ...$max
      * @return mixed
      */
     public function max(mixed ...$max): mixed
@@ -66,7 +66,7 @@ trait Numbers
     }
 
     /**
-     * @param  mixed  ...$max
+     * @param mixed ...$max
      * @return mixed
      */
     public function min(mixed ...$max): mixed
@@ -93,7 +93,7 @@ trait Numbers
     }
 
     /**
-     * @param  int  $precision
+     * @param int $precision
      * @return float|int
      * @see https://www.php.net/manual/en/function.round.php
      * @uses FluentImmutableValue::$round
@@ -104,7 +104,7 @@ trait Numbers
     }
 
     /**
-     * @param  int  $by
+     * @param int $by
      * @return float|int
      * @uses FluentImmutableValue::$increment
      * @template Immutable
@@ -115,7 +115,7 @@ trait Numbers
     }
 
     /**
-     * @param  int  $by
+     * @param int $by
      * @return float|int
      * @uses FluentImmutableValue::$decrement
      * @template Immutable
@@ -126,7 +126,7 @@ trait Numbers
     }
 
     /**
-     * @param  float|int  $value
+     * @param float|int $value
      * @return float|int
      */
     public function add(float|int $value): float|int
@@ -135,7 +135,7 @@ trait Numbers
     }
 
     /**
-     * @param  float|int  $value
+     * @param float|int $value
      * @return float|int
      */
     public function subtract(float|int $value): float|int
@@ -144,7 +144,7 @@ trait Numbers
     }
 
     /**
-     * @param  float|int  $value
+     * @param float|int $value
      * @return float|int
      */
     public function multiply(float|int $value): float|int
@@ -153,7 +153,7 @@ trait Numbers
     }
 
     /**
-     * @param  float|int  $value
+     * @param float|int $value
      * @return float|int
      */
     public function divide(float|int $value): float|int
@@ -162,7 +162,7 @@ trait Numbers
     }
 
     /**
-     * @param  float|int  $percent
+     * @param float|int $percent
      * @return float|int
      */
     public function increaseByPercent(float|int $percent): float|int
@@ -171,7 +171,7 @@ trait Numbers
     }
 
     /**
-     * @param  float|int  $percent
+     * @param float|int $percent
      * @return float|int
      */
     public function decreaseByPercent(float|int $percent): float|int

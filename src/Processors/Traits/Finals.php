@@ -2,7 +2,6 @@
 
 namespace Infira\FluentValue\Processors\Traits;
 
-use Infira\FluentValue\Flu;
 use Traversable;
 use Wolo\Is;
 

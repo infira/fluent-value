@@ -163,7 +163,6 @@ trait Types
         return gettype($this->value());
     }
 
-
     /**
      * Check variable type
      *

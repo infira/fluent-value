@@ -19,7 +19,7 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain explode(string $separator)
  * @method FluentChain lines()
  * @property-read FluentChain $lines - Split lines into array
- * @method FluentChain wrap(string|array $before, string|array $after = null)
+ * @method FluentChain wrap(string|array $before, string|array|null $after = null)
  * @method FluentChain format(string $format, mixed ...$values)
  * @method FluentChain json(bool $pretty = false)
  * @property-read FluentChain $json - Returns the JSON representation of a value
@@ -33,9 +33,7 @@ namespace Infira\FluentValue\Chain;
  * @property-read FluentChain $slashedString - Quote string with slashes
  * @method FluentChain parseStr()
  * @property-read FluentChain $parsedStr - Parses the string into variables
- * @method string getMatch(string $pattern)
  * @method FluentChain match(string $pattern)
- * @method array getAllMatches(string $pattern)
  * @method FluentChain matchAll(string $pattern)
  * @method FluentChain serialize()
  * @property-read FluentChain $serialized - String representation of object.
@@ -43,26 +41,19 @@ namespace Infira\FluentValue\Chain;
  * @property-read FluentChain $unserialized - Constructs the object.
  * @method FluentChain characters(int $length = 1)
  * @property-read FluentChain $characters - transform underlying value characters array
- * @method FluentChain render(array $data = [], callable $renderer = null)
+ * @method FluentChain render(array $data = [], ?callable $renderer = null)
  * @property-read FluentChain $rendered - Simple string templating
- * @method string toMd5(mixed ...$data)
  * @method FluentChain md5(mixed ...$data)
  * @property-read FluentChain $md5 - Get md5 hash
- * @method string toSha1(mixed ...$data)
  * @method FluentChain sha1(mixed ...$data)
  * @property-read FluentChain $sha1 - Get sha1 hash
- * @method string toCrc32b(mixed ...$data)
  * @method FluentChain crc32b(mixed ...$data)
  * @property-read FluentChain $crc32b - Get crc32b hash
- * @method string toSha512(mixed ...$data)
  * @method FluentChain sha512(mixed ...$data)
  * @property-read FluentChain $sha512 - Get sha512 hash
- * @method string toHash(string $algo, mixed ...$data)
  * @method FluentChain hash(string $algo, mixed ...$data)
- * @method float|int toNumeric()
  * @method FluentChain numeric()
  * @property-read FluentChain $numeric
- * @method string toFormattedNumber(string $decimalSeparator = ',', string $thousand = '')
  * @method FluentChain formatNumber(string $decimalSeparator = ',', string $thousand = '')
  * @property-read FluentChain $formattedNumber
  * @method FluentChain negative()
@@ -106,12 +97,12 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain money(string $currency, string $decimalSeparator = ',', string $thousand = '')
  * @method FluentChain discount(float|int $percent)
  * @method FluentChain markup(float|int $percent)
- * @method FluentChain removeVat(float|int $vatPercent = null)
+ * @method FluentChain removeVat(float|int|null $vatPercent = null)
  * @property-read FluentChain $vatExcluded - FluentValue where VAT(value added tax) is excluded
- * @method FluentChain addVat(float|int $vatPercent = null)
+ * @method FluentChain addVat(float|int|null $vatPercent = null)
  * @property-read FluentChain $vatIncluded - FluentValue where VAT(value added tax) is included
- * @method FluentChain vat(bool $priceContainsVat, float|int $vatPercent = null)
- * @method FluentChain formatDate(string $format = null)
+ * @method FluentChain vat(bool $priceContainsVat, float|int|null $vatPercent = null)
+ * @method FluentChain formatDate(?string $format = null)
  * @property-read FluentChain $formatDate - Convert value to date formatted string using $format If $format is not provided getDefaultDateFormat() is used
  * @method FluentChain formatDateTime()
  * @property-read FluentChain $formatDateTime - Convert value to date formatted using getDefaultDateTimeFormat()
@@ -129,20 +120,19 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain escapeHTML(bool $doubleEncode = true)
  * @property-read FluentChain $escapedHTML
  * @method FluentChain merge(array ...$array)
- * @method array toArrayKeys()
  * @method FluentChain keys()
  * @property-read FluentChain $keys - Get array keys
- * @method FluentChain filter(callable $callback = null)
+ * @method FluentChain filter(?callable $callback = null)
  * @property-read FluentChain $filter - reject empty
  * @method FluentChain pushTo(string|int $key, mixed ...$values)
  * @method FluentChain push(mixed ...$values)
- * @method FluentChain reject(callable $callback = null)
+ * @method FluentChain reject(?callable $callback = null)
  * @property-read FluentChain $reject - reject not empty
  * @method FluentChain explodeRejectEmpty(string $separator)
  * @method FluentChain explodeTrim(string $separator)
- * @method FluentChain first(callable $callback = null, $default = null)
+ * @method FluentChain first(?callable $callback = null, mixed $default = null)
  * @property-read FluentChain $first - Return the first element in an array passing a given truth test.
- * @method FluentChain last(callable $callback = null, $default = null)
+ * @method FluentChain last(?callable $callback = null, mixed $default = null)
  * @property-read FluentChain $last - Return the last element in an array passing a given truth test.
  * @method FluentChain map(callable|string|array $callback, mixed ...$arg)
  * @method FluentChain mapMe(string $fluentMethod, mixed ...$arg)
@@ -163,16 +153,13 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain whenIsUuid(mixed $success, mixed $default = null)
  * @method FluentChain whenStartsWith($needles, mixed $success, mixed $default = null)
  * @method FluentChain whenTest($pattern, mixed $success, mixed $default = null)
- * @method string toFileName(string $extension)
  * @method FluentChain filename(string $extension)
- * @method string toPath(string $extension = null, string $root = '/')
- * @method FluentChain path(string $extension = null, string $root = '/')
+ * @method FluentChain path(?string $extension = null, string $root = '/')
  * @property-read FluentChain $path - Convert value to path
- * @method string toExtension(bool $lowercase = false)
  * @method FluentChain extension(bool $lowercase = false)
  * @property-read FluentChain $extension - Return file extension. If current value is not file then try to get extension manually using string manipulations
- * @method bool fileExists(string $extension = null)
- * @method bool isFile(string $extension = null)
+ * @method bool fileExists(?string $extension = null)
+ * @method bool isFile(?string $extension = null)
  * @method bool isExtension(string $extension)
  * @property-read FluentChain newLine - Append a new line to the string.
  * @method FluentChain newLine($count = 1) - Append a new line to the string.
@@ -180,22 +167,30 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain ascii($language = 'en') - Transliterate a UTF-8 value to ASCII.
  * @property-read FluentChain camel - Convert a value to camel case.
  * @method FluentChain camel() - Convert a value to camel case.
+ * @property-read FluentChain convertCase - Convert the case of a string.
+ * @method FluentChain convertCase(int $mode = MB_CASE_FOLD, ?string $encoding = 'UTF-8') - Convert the case of a string.
+ * @property-read FluentChain deduplicate - Replace consecutive instances of a given character with a single character.
+ * @method FluentChain deduplicate(array|string $characters = ' ') - Replace consecutive instances of a given character with a single character.
  * @property-read FluentChain dirname - Get the parent directory's path.
  * @method FluentChain dirname($levels = 1) - Get the parent directory's path.
  * @property-read FluentChain kebab - Convert a string to kebab case.
  * @method FluentChain kebab() - Convert a string to kebab case.
  * @property-read FluentChain limit - Limit the number of characters in a string.
- * @method FluentChain limit($limit = 100, $end = '...') - Limit the number of characters in a string.
+ * @method FluentChain limit($limit = 100, $end = '...', $preserveWords = false) - Limit the number of characters in a string.
  * @property-read FluentChain lower - Convert the given string to lower-case.
  * @method FluentChain lower() - Convert the given string to lower-case.
  * @property-read FluentChain markdown - Convert GitHub flavored Markdown into HTML.
- * @method FluentChain markdown(array $options = []) - Convert GitHub flavored Markdown into HTML.
+ * @method FluentChain markdown(array $options = [], array $extensions = []) - Convert GitHub flavored Markdown into HTML.
  * @property-read FluentChain inlineMarkdown - Convert inline Markdown into HTML.
- * @method FluentChain inlineMarkdown(array $options = []) - Convert inline Markdown into HTML.
+ * @method FluentChain inlineMarkdown(array $options = [], array $extensions = []) - Convert inline Markdown into HTML.
+ * @property-read FluentChain numbers - Remove all non-numeric characters from a string.
+ * @method FluentChain numbers() - Remove all non-numeric characters from a string.
  * @property-read FluentChain plural - Get the plural form of an English word.
- * @method FluentChain plural($count = 2) - Get the plural form of an English word.
+ * @method FluentChain plural($count = 2, $prependCount = false) - Get the plural form of an English word.
  * @property-read FluentChain pluralStudly - Pluralize the last word of an English, studly caps case string.
  * @method FluentChain pluralStudly($count = 2) - Pluralize the last word of an English, studly caps case string.
+ * @property-read FluentChain pluralPascal - Pluralize the last word of an English, Pascal caps case string.
+ * @method FluentChain pluralPascal($count = 2) - Pluralize the last word of an English, Pascal caps case string.
  * @property-read FluentChain reverse - Reverse the string.
  * @method FluentChain reverse() - Reverse the string.
  * @property-read FluentChain squish - Remove all "extra" blank space from the given string.
@@ -204,18 +199,26 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain stripTags($allowedTags = null) - Strip HTML and PHP tags from the given string.
  * @property-read FluentChain upper - Convert the given string to upper-case.
  * @method FluentChain upper() - Convert the given string to upper-case.
- * @property-read FluentChain title - Convert the given string to title case.
- * @method FluentChain title() - Convert the given string to title case.
- * @property-read FluentChain headline - Convert the given string to title case for each word.
- * @method FluentChain headline() - Convert the given string to title case for each word.
+ * @property-read FluentChain title - Convert the given string to proper case.
+ * @method FluentChain title() - Convert the given string to proper case.
+ * @property-read FluentChain headline - Convert the given string to proper case for each word.
+ * @method FluentChain headline() - Convert the given string to proper case for each word.
+ * @property-read FluentChain initials - Convert the given string to only its initials.
+ * @method FluentChain initials() - Convert the given string to only its initials.
+ * @property-read FluentChain apa - Convert the given string to APA-style title case.
+ * @method FluentChain apa() - Convert the given string to APA-style title case.
+ * @property-read FluentChain transliterate - Transliterate a string to its closest ASCII representation.
+ * @method FluentChain transliterate($unknown = '?', $strict = false) - Transliterate a string to its closest ASCII representation.
  * @property-read FluentChain singular - Get the singular form of an English word.
  * @method FluentChain singular() - Get the singular form of an English word.
  * @property-read FluentChain slug - Generate a URL friendly "slug" from a given string.
- * @method FluentChain slug($separator = '-', $language = 'en') - Generate a URL friendly "slug" from a given string.
+ * @method FluentChain slug($separator = '-', $language = 'en', $dictionary = ['@' => 'at']) - Generate a URL friendly "slug" from a given string.
  * @property-read FluentChain snake - Convert a string to snake case.
  * @method FluentChain snake($delimiter = '_') - Convert a string to snake case.
  * @property-read FluentChain studly - Convert a value to studly caps case.
  * @method FluentChain studly() - Convert a value to studly caps case.
+ * @property-read FluentChain pascal - Convert the string to Pascal case.
+ * @method FluentChain pascal() - Convert the string to Pascal case.
  * @property-read FluentChain trim - Trim the string of the given characters.
  * @method FluentChain trim($characters = null) - Trim the string of the given characters.
  * @property-read FluentChain ltrim - Left trim the string of the given characters.
@@ -226,8 +229,20 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain lcfirst() - Make a string's first character lowercase.
  * @property-read FluentChain ucfirst - Make a string's first character uppercase.
  * @method FluentChain ucfirst() - Make a string's first character uppercase.
+ * @property-read FluentChain ucwords - Capitalize the first character of each word in a string.
+ * @method FluentChain ucwords($separators = " \t\r\n\f\v") - Capitalize the first character of each word in a string.
  * @property-read FluentChain words - Limit the number of words in a string.
  * @method FluentChain words($words = 100, $end = '...') - Limit the number of words in a string.
+ * @property-read FluentChain wordWrap - Wrap a string to a given number of characters.
+ * @method FluentChain wordWrap($characters = 75, $break = "\n", $cutLongWords = false) - Wrap a string to a given number of characters.
+ * @property-read FluentChain toBase64 - Convert the string to Base64 encoding.
+ * @method FluentChain toBase64() - Convert the string to Base64 encoding.
+ * @property-read FluentChain fromBase64 - Decode the Base64 encoded string.
+ * @method FluentChain fromBase64($strict = false) - Decode the Base64 encoded string.
+ * @property-read FluentChain encrypt - Encrypt the string.
+ * @method FluentChain encrypt(bool $serialize = false) - Encrypt the string.
+ * @property-read FluentChain decrypt - Decrypt the string.
+ * @method FluentChain decrypt(bool $serialize = false) - Decrypt the string.
  */
 trait FluentChainIdeHelper
 {

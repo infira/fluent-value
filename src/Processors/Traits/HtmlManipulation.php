@@ -14,7 +14,7 @@ trait HtmlManipulation
      * Wrap current value with html tag
      *
      * @example flu('Hello world!')->htmlTag('h1') //<h1>Hello world</h1>
-     * @param  string  $tag
+     * @param string $tag
      * @return string
      */
     public function htmlTag(string $tag): string
@@ -50,7 +50,7 @@ trait HtmlManipulation
     }
 
     /**
-     * @param  bool  $doubleEncode
+     * @param bool $doubleEncode
      * @return string
      * @uses FluentImmutableValue::$escapedHTML
      */

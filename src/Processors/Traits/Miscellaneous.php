@@ -12,7 +12,7 @@ trait Miscellaneous
     /**
      * Append values works for array and strings
      *
-     * @param  mixed  ...$values
+     * @param mixed ...$values
      * @return array|mixed|string
      */
     public function append(mixed ...$values): mixed
@@ -27,7 +27,7 @@ trait Miscellaneous
     /**
      * Append values works for array and strings
      *
-     * @param  mixed  ...$values
+     * @param mixed ...$values
      * @return array|string
      */
     public function prepend(mixed ...$values): array|string
@@ -43,8 +43,8 @@ trait Miscellaneous
     }
 
     /**
-     * @param  (callable(TKey,TValue): mixed)  $callback
-     * @param  mixed  ...$parameter
+     * @param (callable(TKey,TValue): mixed) $callback
+     * @param mixed ...$parameter
      * @return $this
      */
     public function transform(callable $callback, mixed ...$parameter): static
@@ -62,7 +62,7 @@ trait Miscellaneous
     /**
      * Does offset value exists
      *
-     * @param  string|int  $key
+     * @param string|int $key
      * @return bool
      */
     public function has(string|int $key): bool
@@ -76,8 +76,8 @@ trait Miscellaneous
      * @template TGetDefault
      * @template TValue
      *
-     * @param  string|int  $key
-     * @param  TGetDefault  $default
+     * @param string|int $key
+     * @param TGetDefault $default
      * @return TValue|TGetDefault
      */
     public function at(string|int $key, mixed $default = null): mixed
@@ -92,7 +92,7 @@ trait Miscellaneous
     /**
      * Remove offset value
      *
-     * @param  string|int  $key
+     * @param string|int $key
      * @return $this
      */
     public function forget(string|int $key): static
@@ -116,6 +116,5 @@ trait Miscellaneous
 
         return $this->strlen();
     }
-
 
 }

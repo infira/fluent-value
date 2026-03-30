@@ -20,7 +20,7 @@ trait Files
     /**
      * Add .$extension to current value
      *
-     * @param  string  $extension
+     * @param string $extension
      * @return string
      * @aliasof FluentImmutableValue::toFileName()
      */
@@ -37,13 +37,13 @@ trait Files
      *
      * @example flu('filename').toFilePath('.txt','/var/www/html') #=> /var/www/html/filename.txt
      * @example flu('filename').toFilePath('txt','/var/www/html') #=> /var/www/html/filename.txt
-     * @param  string|null  $extension  if null then current value is added
-     * @param  string  $root  directory path - If null then / is used
+     * @param string|null $extension if null then current value is added
+     * @param string $root directory path - If null then / is used
      * @uses FluentImmutableValue::$path
      * @aliasof FluentImmutableValue::toPath()
      * @return string
      */
-    public function path(string $extension = null, string $root = '/'): string
+    public function path(?string $extension = null, string $root = '/'): string
     {
         if (is_null($extension)) {
             return $this->normalizePath($this->value, $root);
@@ -56,7 +56,7 @@ trait Files
      * Return file extension.
      * If current value is not file then try to get extension manually using string manipulations
      *
-     * @param  bool  $lowercase
+     * @param bool $lowercase
      * @return string
      * @uses FluentImmutableValue::$extension
      * @aliasof FluentImmutableValue::toExtension()
@@ -75,12 +75,12 @@ trait Files
     }
 
     /**
-     * @param  string|null  $extension
+     * @param string|null $extension
      * @return bool
      * @aliasof FluentImmutableValue::fileExists()
      * @final
      */
-    public function fileExists(string $extension = null): bool
+    public function fileExists(?string $extension = null): bool
     {
         if (!$this->ok()) {
             return false;
@@ -90,16 +90,17 @@ trait Files
     }
 
     /**
-     * @param  string|null  $extension
+     * @param string|null $extension
      * @return bool
      * @aliasof FluentImmutableValue::isFile()
      * @final
      */
-    public function isFile(string $extension = null): bool
+    public function isFile(?string $extension = null): bool
     {
         if (!$this->ok()) {
             return false;
         }
+
         return is_file($this->path($extension));
     }
 

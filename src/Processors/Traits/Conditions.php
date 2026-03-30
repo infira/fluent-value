@@ -11,8 +11,8 @@ use Infira\FluentValue\Processors\FluentValueProcessor;
 trait Conditions
 {
     /**
-     * @param  mixed  $success
-     * @param  mixed|null  $default
+     * @param mixed $success
+     * @param mixed|null $default
      * @return mixed
      */
     public function whenOk(mixed $success, mixed $default = null): mixed
@@ -21,8 +21,8 @@ trait Conditions
     }
 
     /**
-     * @param  mixed  $success
-     * @param  mixed|null  $default
+     * @param mixed $success
+     * @param mixed|null $default
      * @return mixed
      */
     public function whenNotOk(mixed $success, mixed $default = null): mixed
@@ -31,9 +31,9 @@ trait Conditions
     }
 
     /**
-     * @param  mixed  $value
-     * @param  mixed  $success
-     * @param  mixed|null  $default
+     * @param mixed $value
+     * @param mixed $success
+     * @param mixed|null $default
      * @return mixed
      */
     public function when(mixed $value, mixed $success, mixed $default = null): mixed
@@ -50,7 +50,7 @@ trait Conditions
         if ($value) {
             $output = $success($this, $value) ?? $this;
         }
-        elseif ($default) {
+        else if ($default) {
             $output = $default($this, $value) ?? $this;
         }
         else {
@@ -61,9 +61,9 @@ trait Conditions
     }
 
     /**
-     * @param  mixed  $value
-     * @param  mixed  $success
-     * @param  mixed|null  $default
+     * @param mixed $value
+     * @param mixed $success
+     * @param mixed|null $default
      * @return mixed
      */
     public function unless(mixed $value, mixed $success, mixed $default = null): mixed
@@ -80,7 +80,7 @@ trait Conditions
         if (!$value) {
             $output = $success($this, $value) ?? $this;
         }
-        elseif ($default) {
+        else if ($default) {
             $output = $default($this, $value) ?? $this;
         }
         else {
@@ -91,9 +91,9 @@ trait Conditions
     }
 
     /**
-     * @param  array|string  $needles
-     * @param  mixed  $success
-     * @param  mixed|null  $default
+     * @param array|string $needles
+     * @param mixed $success
+     * @param mixed|null $default
      * @return mixed
      * @see  Stringable::whenContains()
      */
@@ -103,9 +103,9 @@ trait Conditions
     }
 
     /**
-     * @param  array  $needles
-     * @param  mixed  $success
-     * @param  mixed|null  $default
+     * @param array $needles
+     * @param mixed $success
+     * @param mixed|null $default
      * @return mixed
      * @see  Stringable::whenContainsAll()
      */
@@ -115,8 +115,8 @@ trait Conditions
     }
 
     /**
-     * @param  mixed  $success
-     * @param  mixed|null  $default
+     * @param mixed $success
+     * @param mixed|null $default
      * @return mixed
      * @see  Stringable::whenEmpty()
      */
@@ -126,8 +126,8 @@ trait Conditions
     }
 
     /**
-     * @param  mixed  $success
-     * @param  mixed|null  $default
+     * @param mixed $success
+     * @param mixed|null $default
      * @return mixed
      * @see  Stringable::whenNotEmpty()
      */
@@ -138,8 +138,8 @@ trait Conditions
 
     /**
      * @param $needles
-     * @param  mixed  $success
-     * @param  mixed|null  $default
+     * @param mixed $success
+     * @param mixed|null $default
      * @return mixed
      * @see  Stringable::whenEndsWith()
      */
@@ -150,8 +150,8 @@ trait Conditions
 
     /**
      * @param $value
-     * @param  mixed  $success
-     * @param  mixed|null  $default
+     * @param mixed $success
+     * @param mixed|null $default
      * @return mixed
      * @see  Stringable::whenExactly()
      */
@@ -162,8 +162,8 @@ trait Conditions
 
     /**
      * @param $value
-     * @param  mixed  $success
-     * @param  mixed|null  $default
+     * @param mixed $success
+     * @param mixed|null $default
      * @return mixed
      * @see  Stringable::whenNotExactly()
      */
@@ -174,8 +174,8 @@ trait Conditions
 
     /**
      * @param $pattern
-     * @param  mixed  $success
-     * @param  mixed|null  $default
+     * @param mixed $success
+     * @param mixed|null $default
      * @return mixed
      * @see  Stringable::whenIs()
      */
@@ -185,8 +185,8 @@ trait Conditions
     }
 
     /**
-     * @param  mixed  $success
-     * @param  mixed|null  $default
+     * @param mixed $success
+     * @param mixed|null $default
      * @return mixed
      * @see  Stringable::whenIsAscii()
      */
@@ -196,8 +196,8 @@ trait Conditions
     }
 
     /**
-     * @param  mixed  $success
-     * @param  mixed|null  $default
+     * @param mixed $success
+     * @param mixed|null $default
      * @return mixed
      * @see  Stringable::whenIsUuid()
      */
@@ -208,8 +208,8 @@ trait Conditions
 
     /**
      * @param $needles
-     * @param  mixed  $success
-     * @param  mixed|null  $default
+     * @param mixed $success
+     * @param mixed|null $default
      * @return mixed
      * @see  Stringable::whenStartsWith()
      */
@@ -220,8 +220,8 @@ trait Conditions
 
     /**
      * @param $pattern
-     * @param  mixed  $success
-     * @param  mixed|null  $default
+     * @param mixed $success
+     * @param mixed|null $default
      * @return mixed
      * @see  Stringable::whenTest()
      */

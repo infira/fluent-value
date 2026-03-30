@@ -14,11 +14,11 @@ trait Dates
      * Convert value to date formatted string using $format
      * If $format is not provided getDefaultDateFormat() is used
      *
-     * @param  string|null  $format
+     * @param string|null $format
      * @return string
      * @uses FluentImmutableValue::$formatDate
      */
-    public function formatDate(string $format = null): string
+    public function formatDate(?string $format = null): string
     {
         return $this->toDate()->format(
             is_null($format) ? FluentValue::getDefaultDateFormat() : $format

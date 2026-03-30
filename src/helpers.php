@@ -1,6 +1,5 @@
 <?php
 
-
 use Infira\FluentValue\FluentValue;
 
 if (!function_exists('flu')) {

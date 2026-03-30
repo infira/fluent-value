@@ -27,8 +27,8 @@ class Flu
     /**
      * Returns the JSON representation of a value
      *
-     * @param  mixed  $input
-     * @param  bool  $pretty  JSON_PRETTY_PRINT - https://www.php.net/manual/en/json.constants.php
+     * @param mixed $input
+     * @param bool $pretty JSON_PRETTY_PRINT - https://www.php.net/manual/en/json.constants.php
      * @return string
      * @throws JsonException
      * @link https://php.net/manual/en/function.json-encode.php
@@ -62,7 +62,7 @@ class Flu
      * Turns \My\CoolNamespace\MyClass into myClass
      * works as well with /my/path
      *
-     * @param  string|object  $value
+     * @param string|object $value
      * @return string
      */
     public static function basename(string|object $value): string
@@ -92,7 +92,7 @@ class Flu
     /**
      * Converts html to text
      *
-     * @param  string  $str
+     * @param string $str
      * @return string
      */
     public static function htmlToText(string $str): string
@@ -104,9 +104,9 @@ class Flu
      * Simple string templating
      *
      * @example render('my name is {name}',['name' => 'gen']) // 'my name is gen'
-     * @param  array  $vars
-     * @param  string|array  $syntax
-     * @param  mixed  $template
+     * @param array $vars
+     * @param string|array $syntax
+     * @param mixed $template
      * @return string
      */
     public static function render(mixed $template, array $vars, string|array $syntax = '{}'): string
@@ -137,9 +137,9 @@ class Flu
     /**
      * Get offset value
      *
-     * @param  mixed  $key
-     * @param  mixed  $value
-     * @param  mixed  $default
+     * @param mixed $key
+     * @param mixed $value
+     * @param mixed $default
      * @return mixed
      */
     public static function at(mixed $key, mixed $value, mixed $default = null): mixed
@@ -151,13 +151,12 @@ class Flu
         return isset($value[$key]) ? $key[$value] : $default;
     }
 
-
     /**
      * Set value to offset
      *
-     * @param  mixed  $key
-     * @param  mixed  $value
-     * @param  mixed  $setValue
+     * @param mixed $key
+     * @param mixed $value
+     * @param mixed $setValue
      * @return mixed
      */
     public static function setAt(mixed $key, mixed $value, mixed $setValue): mixed
@@ -177,8 +176,8 @@ class Flu
     /**
      * Remove offset value
      *
-     * @param  mixed  $key
-     * @param  mixed  $value
+     * @param mixed $key
+     * @param mixed $value
      * @return mixed
      */
     public static function removeAt(mixed $key, mixed $value): mixed

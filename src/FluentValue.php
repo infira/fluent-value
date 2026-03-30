@@ -45,7 +45,6 @@ class FluentValue implements
     use Traits\Helpers,
         Traits\FluentImmutableValue;
 
-
     private FluentValueProcessor $proc;
     private array $events = [
         'change' => []
@@ -235,9 +234,8 @@ class FluentValue implements
     }
     //endregion
 
-
     //region magic
-    public function __invoke(callable $parser = null)
+    public function __invoke(?callable $parser = null)
     {
         if ($parser === null) {
             return $this->value();
@@ -246,7 +244,7 @@ class FluentValue implements
         return $this->new($parser)->get();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toString();
     }
@@ -265,7 +263,6 @@ class FluentValue implements
         if ($namedOutput !== self::UNDEFINED) {
             return $namedOutput;
         }
-
 
         if (method_exists(FluentImmutableValue::class, $name)) {
             return $this->{$name}();

@@ -21,7 +21,7 @@ trait Helpers
     /**
      * Pass the $this to the given callback
      *
-     * @param  callable($this): mixed  $callback
+     * @param callable($this): mixed $callback
      * @return $this
      */
     public function tap(callable $callback): static
@@ -73,8 +73,8 @@ trait Helpers
     }
 
     /**
-     * @param  callable  $callback  ($value,...$parameter)
-     * @param  mixed  ...$parameter
+     * @param callable $callback ($value,...$parameter)
+     * @param mixed ...$parameter
      * @return mixed
      */
     public function to(callable $callback, mixed ...$parameter): mixed
@@ -83,8 +83,8 @@ trait Helpers
     }
 
     /**
-     * @param  callable  $callback  ($value,...$parameter)
-     * @param  mixed  ...$parameter
+     * @param callable $callback ($value,...$parameter)
+     * @param mixed ...$parameter
      * @return mixed
      */
     public function pipe(callable $callback, mixed ...$parameter): mixed
@@ -93,8 +93,8 @@ trait Helpers
     }
 
     /**
-     * @param  class-string  $class  ($value,...$parameter)
-     * @param  mixed  ...$parameter
+     * @param class-string $class ($value,...$parameter)
+     * @param mixed ...$parameter
      * @return mixed
      */
     public function pipeInto(string $class, mixed ...$parameter): mixed
@@ -103,10 +103,10 @@ trait Helpers
     }
 
     /**
-     * @param  class-string|null  $class
+     * @param class-string|null $class
      * @return object
      */
-    public function toObject(string $class = null): object
+    public function toObject(?string $class = null): object
     {
         if ($class === null) {
             return new $class($this);
@@ -125,7 +125,7 @@ trait Helpers
     }
 
     //region chaining
-    public function chain(self $carry = null): FluentChain
+    public function chain(self|null $carry = null): FluentChain
     {
         return new FluentChain($carry ?: $this);
     }

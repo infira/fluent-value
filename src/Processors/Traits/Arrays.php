@@ -25,7 +25,7 @@ trait Arrays
     /**
      * Merge array
      *
-     * @param  array  ...$array
+     * @param array ...$array
      * @return array
      */
     public function merge(array ...$array): array
@@ -48,11 +48,11 @@ trait Arrays
     /**
      * Run a filter over each of the items.
      *
-     * @param  (callable(TKey,TValue): mixed)|null  $callback  - "self::method" or "static::method" will be called Using FluentValue
+     * @param (callable(TKey,TValue): mixed)|null $callback - "self::method" or "static::method" will be called Using FluentValue
      * @return array
      * @uses FluentImmutableValue::$filter - reject empty
      */
-    public function filter(callable $callback = null): array
+    public function filter(?callable $callback = null): array
     {
         if (!$callback) {
             return array_filter($this->value);
@@ -73,8 +73,8 @@ trait Arrays
      * Add items to, if not exists new array will be created
      * It is same as flu([])['key'] = $value
      *
-     * @param  string|int  $key
-     * @param  mixed  ...$values
+     * @param string|int $key
+     * @param mixed ...$values
      * @return array
      * @template Immutable
      */
@@ -94,7 +94,7 @@ trait Arrays
     /**
      * Push values to array
      *
-     * @param  mixed  ...$values
+     * @param mixed ...$values
      * @return array
      * @template Immutable
      */
@@ -111,11 +111,11 @@ trait Arrays
     /**
      * Rejects items using truth test
      *
-     * @param  (callable(TKey,TValue): mixed)|null  $callback  - "self::method" or "static::method" will be called Using FluentValue
+     * @param (callable(TKey,TValue): mixed)|null $callback - "self::method" or "static::method" will be called Using FluentValue
      * @return array
      * @uses FluentImmutableValue::$reject - reject not empty
      */
-    public function reject(callable $callback = null): array
+    public function reject(?callable $callback = null): array
     {
         if (!$callback) {
             return array_filter($this->value, static fn($item) => !empty($item));
@@ -135,7 +135,7 @@ trait Arrays
     /**
      * Explodes, then value and then filters out empty values
      *
-     * @param  string  $separator
+     * @param string $separator
      * @return array
      */
     public function explodeRejectEmpty(string $separator): array
@@ -149,7 +149,7 @@ trait Arrays
     /**
      * Explodes, then trims each value
      *
-     * @param  string  $separator
+     * @param string $separator
      * @return array
      */
     public function explodeTrim(string $separator): array
@@ -160,13 +160,13 @@ trait Arrays
     /**
      * Return the first element in an array passing a given truth test.
      *
-     * @param  (callable(TKey,TValue): mixed)|null  $callback
-     * @param  null  $default
+     * @param (callable(TKey,TValue): mixed)|null $callback
+     * @param mixed $default
      * @return mixed
      * @see  Arr::first()
      * @uses FluentImmutableValue::$first
      */
-    public function first(callable $callback = null, $default = null): mixed
+    public function first(?callable $callback = null, mixed $default = null): mixed
     {
         return Arr::first($this->value, Callables::makeInjectableIfCan($callback), $default);
     }
@@ -174,13 +174,13 @@ trait Arrays
     /**
      * Return the last element in an array passing a given truth test.
      *
-     * @param  (callable(TKey,TValue): mixed)|null  $callback
-     * @param  null  $default
+     * @param (callable(TKey,TValue): mixed)|null $callback
+     * @param mixed $default
      * @return mixed
      * @see  Arr::last()
      * @uses FluentImmutableValue::$last
      */
-    public function last(callable $callback = null, $default = null): mixed
+    public function last(?callable $callback = null, mixed $default = null): mixed
     {
         return Arr::last($this->value, Callables::makeInjectableIfCan($callback), $default);
     }
@@ -193,8 +193,8 @@ trait Arrays
      * @example flu([' 1',' 2',' hello'])->map('flu::trim->eur') //['1,00€','2,00€','0,00€]
      * @example flu([' 1',' 2',' hello'])->map('trim->intval') //[1,2,0]
      * @example flu([' 1',' 2',' hello'])->map(['trim','intval']) //[1,2,0]
-     * @param  (callable(TKey,TValue): mixed)|(callable(TKey,TValue): mixed)[]|string  $callback
-     * @param  mixed  ...$arg  extra arguments passed to callback
+     * @param (callable(TKey,TValue): mixed)|(callable(TKey,TValue): mixed)[]|string $callback
+     * @param mixed ...$arg extra arguments passed to callback
      * @return array
      */
     public function map(callable|string|array $callback, mixed...$arg): array
@@ -232,8 +232,8 @@ trait Arrays
     /**
      * Applies the $fluentMethod to the elements of the given arrays
      *
-     * @param  string  $fluentMethod
-     * @param  mixed  ...$arg  extra arguments passed to callback
+     * @param string $fluentMethod
+     * @param mixed ...$arg extra arguments passed to callback
      * @return array
      * @TODO to get better autosuggestion use phpstorm meta
      */
@@ -242,12 +242,11 @@ trait Arrays
         return $this->map("flu::$fluentMethod", ...$arg);
     }
 
-
     /**
      * Run an associative map over each of the items.
      * The callback should return an associative array with a single key/value pair.
      *
-     * @param  (callable(TKey,TValue): mixed)  $callback
+     * @param (callable(TKey,TValue): mixed) $callback
      * @return array
      */
     public function mapWithKeys(callable $callback): array

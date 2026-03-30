@@ -53,7 +53,7 @@ trait Strings
     /**
      * Join array elements with a string
      *
-     * @param  string  $glue
+     * @param string $glue
      * @return string
      */
     public function implode(string $glue): string
@@ -65,7 +65,7 @@ trait Strings
      * Join array elements with a string
      *
      * @alias self::implode
-     * @param  string  $glue
+     * @param string $glue
      * @return string
      */
     public function join(string $glue): string
@@ -76,7 +76,7 @@ trait Strings
     /**
      * Split a string by a string
      *
-     * @param  string  $separator
+     * @param string $separator
      * @return array
      */
     public function explode(string $separator): array
@@ -101,11 +101,11 @@ trait Strings
      * @example flu('value')->wrap('value','{','}') // "{value}"
      * @example flu('value')->wrap('value',['{','}']) //"{value}"
      * @example flu('value')->wrap('value',['{','['],['}',']']) // "[{value}]"
-     * @param  string|array  $before
-     * @param  string|array|null  $after
+     * @param string|array $before
+     * @param string|array|null $after
      * @return string
      */
-    public function wrap(string|array $before, string|array $after = null): string
+    public function wrap(string|array $before, string|array|null $after = null): string
     {
         return Flu::wrap($this->value, $before, $after);
     }
@@ -114,8 +114,8 @@ trait Strings
      * Return a formatted string
      *
      * @example flu('gen')->getFormattedText('my name is {%value%}, and im %s age of old',39) //my name is gen, and im 39 age of old
-     * @param  string  $format
-     * @param  mixed  ...$values
+     * @param string $format
+     * @param mixed ...$values
      * @return string
      */
     public function format(string $format, mixed ...$values): string
@@ -131,7 +131,7 @@ trait Strings
     /**
      * Returns the JSON representation of a value
      *
-     * @param  bool  $pretty  JSON_PRETTY_PRINT - https://www.php.net/manual/en/json.constants.php
+     * @param bool $pretty JSON_PRETTY_PRINT - https://www.php.net/manual/en/json.constants.php
      * @return string
      * @throws \JsonException
      * @uses FluentImmutableValue::$json
@@ -144,9 +144,9 @@ trait Strings
     /**
      * Returns the JSON representation of a value
      *
-     * @param  bool|null  $associative
-     * @param  int  $depth
-     * @param  int  $flags
+     * @param bool|null $associative
+     * @param int $depth
+     * @param int $flags
      * @return mixed
      * @uses FluentImmutableValue::$jsonDecode
      */
@@ -158,7 +158,7 @@ trait Strings
     /**
      * Return a formatted string
      *
-     * @param  mixed  ...$values
+     * @param mixed ...$values
      * @return string
      */
     public function sprintf(mixed ...$values): string
@@ -169,7 +169,7 @@ trait Strings
     /**
      * Return a formatted string
      *
-     * @param  mixed  $values
+     * @param mixed $values
      * @return string
      */
     public function vsprintf(mixed $values): string
@@ -185,7 +185,7 @@ trait Strings
      * Wrap quotes
      *
      * @example flu('hello world')->wrapQuotes('"') // '"hello world"'
-     * @param  string  $quotes
+     * @param string $quotes
      * @return string
      * @uses FluentImmutableValue::$wrapQuotes
      */
@@ -223,7 +223,7 @@ trait Strings
     /**
      * Get the string matching the given pattern.
      *
-     * @param  string  $pattern
+     * @param string $pattern
      * @return string
      * @see  Regex::match()
      * @aliasof FluentImmutableValue::getMatch()
@@ -236,7 +236,7 @@ trait Strings
     /**
      * Get the string matching the given pattern.
      *
-     * @param  string  $pattern
+     * @param string $pattern
      * @return array
      * @see  Regex::matchAll
      * @aliasof FluentImmutableValue::getAllMatches()
@@ -260,7 +260,7 @@ trait Strings
     /**
      * Constructs the object.
      *
-     * @param  array  $options
+     * @param array $options
      * @return mixed
      * @uses FluentImmutableValue::$unserialized
      */
@@ -272,7 +272,7 @@ trait Strings
     /**
      * Get array of its characters
      *
-     * @param  int  $length
+     * @param int $length
      * @return array
      * @uses FluentImmutableValue::$characters - transform underlying value characters array
      */
@@ -293,10 +293,11 @@ trait Strings
      *
      * @example flu('my name is {name}')->render(['name' => 'gen']) // 'my name is gen'
      * @uses FluentImmutableValue::$rendered
-     * @param  array  $data
+     * @param array $data
+     * @param callable|null $renderer
      * @return string
      */
-    public function render(array $data = [], callable $renderer = null): string
+    public function render(array $data = [], ?callable $renderer = null): string
     {
         if ($renderer) {
             return $renderer($this->value, $data);

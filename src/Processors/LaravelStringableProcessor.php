@@ -31,7 +31,7 @@ class LaravelStringableProcessor extends Stringable implements Processor
     public function canConvertToFluent(mixed $value): bool
     {
         return $value instanceof self
-            || $value instanceof Collection;
+               || $value instanceof Collection;
     }
 
     public function getFluentValue(mixed $value): mixed
