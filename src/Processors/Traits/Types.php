@@ -2,6 +2,7 @@
 
 namespace Infira\FluentValue\Processors\Traits;
 
+use Infira\FluentValue\Flu;
 use Wolo\Contracts\UnderlyingValue;
 
 /**
@@ -33,6 +34,12 @@ trait Types
     public function toBoolean(): bool
     {
         return $this->toBool();
+    }
+
+    /** @final */
+    public function toNumeric(): float|int
+    {
+        return Flu::numeric($this->value);
     }
 
     /**

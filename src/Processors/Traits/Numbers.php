@@ -30,7 +30,7 @@ trait Numbers
      */
     public function formatNumber(string $decimalSeparator = ',', string $thousand = ''): string
     {
-        return Flu::formatNumber($this->numeric(), $decimalSeparator, $thousand);
+        return Flu::formatNumber($this->toNumeric(), $decimalSeparator, $thousand);
     }
 
     /**
@@ -39,7 +39,7 @@ trait Numbers
      */
     public function negative(): float|int
     {
-        $nr = $this->numeric();
+        $nr = $this->toNumeric();
         if ($nr < 0) {
             return $nr;
         }
@@ -53,7 +53,7 @@ trait Numbers
      */
     public function positive(): float|int
     {
-        return abs($this->numeric());
+        return abs($this->toNumeric());
     }
 
     /**
@@ -62,7 +62,7 @@ trait Numbers
      */
     public function max(mixed ...$max): mixed
     {
-        return max($this->numeric(), ...$max);
+        return max($this->toNumeric(), ...$max);
     }
 
     /**
@@ -71,7 +71,7 @@ trait Numbers
      */
     public function min(mixed ...$max): mixed
     {
-        return min($this->numeric(), ...$max);
+        return min($this->toNumeric(), ...$max);
     }
 
     /**
@@ -80,7 +80,7 @@ trait Numbers
      */
     public function floor(): float
     {
-        return floor($this->numeric());
+        return floor($this->toNumeric());
     }
 
     /**
@@ -89,7 +89,7 @@ trait Numbers
      */
     public function ceil(): float
     {
-        return ceil($this->numeric());
+        return ceil($this->toNumeric());
     }
 
     /**
@@ -100,7 +100,7 @@ trait Numbers
      */
     public function round(int $precision = 0): float|int
     {
-        return round($this->numeric(), $precision);
+        return round($this->toNumeric(), $precision);
     }
 
     /**
@@ -131,7 +131,7 @@ trait Numbers
      */
     public function add(float|int $value): float|int
     {
-        return $this->numeric() + Flu::numeric($value);
+        return $this->toNumeric() + Flu::numeric($value);
     }
 
     /**
@@ -140,7 +140,7 @@ trait Numbers
      */
     public function subtract(float|int $value): float|int
     {
-        return $this->numeric() - Flu::numeric($value);
+        return $this->toNumeric() - Flu::numeric($value);
     }
 
     /**
@@ -149,7 +149,7 @@ trait Numbers
      */
     public function multiply(float|int $value): float|int
     {
-        return $this->numeric() * Flu::numeric($value);
+        return $this->toNumeric() * Flu::numeric($value);
     }
 
     /**
@@ -158,7 +158,7 @@ trait Numbers
      */
     public function divide(float|int $value): float|int
     {
-        return $this->numeric() / Flu::numeric($value);
+        return $this->toNumeric() / Flu::numeric($value);
     }
 
     /**
@@ -167,7 +167,7 @@ trait Numbers
      */
     public function increaseByPercent(float|int $percent): float|int
     {
-        return Calc::decreaseByPercent($this->numeric(), Flu::numeric($percent));
+        return Calc::decreaseByPercent($this->toNumeric(), Flu::numeric($percent));
     }
 
     /**
@@ -176,6 +176,6 @@ trait Numbers
      */
     public function decreaseByPercent(float|int $percent): float|int
     {
-        return Calc::decreaseByPercent($this->numeric(), Flu::numeric($percent));
+        return Calc::decreaseByPercent($this->toNumeric(), Flu::numeric($percent));
     }
 }

@@ -63,7 +63,7 @@ trait MoneyAndTaxes
      */
     public function discount(float|int $percent): float|int
     {
-        return Pricing::discount($this->numeric(), $percent);
+        return Pricing::discount($this->toNumeric(), $percent);
     }
 
     /**
@@ -74,7 +74,7 @@ trait MoneyAndTaxes
      */
     public function markup(float|int $percent): float|int
     {
-        return Pricing::markup($this->numeric(), $percent);
+        return Pricing::markup($this->toNumeric(), $percent);
     }
 
     /**
@@ -87,7 +87,7 @@ trait MoneyAndTaxes
     public function removeVat(float|int|null $vatPercent = null): float|int
     {
         return Vat::remove(
-            $this->numeric(),
+            $this->toNumeric(),
             is_null($vatPercent) ? FluentValue::getDefaultVATPercent() : $vatPercent
         );
     }
@@ -102,7 +102,7 @@ trait MoneyAndTaxes
     public function addVat(float|int|null $vatPercent = null): float|int
     {
         return Vat::add(
-            $this->numeric(),
+            $this->toNumeric(),
             is_null($vatPercent) ? FluentValue::getDefaultVATPercent() : $vatPercent
         );
     }
@@ -117,7 +117,7 @@ trait MoneyAndTaxes
     public function vat(bool $priceContainsVat, float|int|null $vatPercent = null): float|int
     {
         return Vat::get(
-            $this->numeric(),
+            $this->toNumeric(),
             $priceContainsVat,
             is_null($vatPercent) ? FluentValue::getDefaultVATPercent() : $vatPercent
         );
