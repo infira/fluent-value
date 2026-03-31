@@ -1603,14 +1603,13 @@ trait FluentImmutableValue
 	 *
 	 * @example flu('filename').toFilePath('.txt','/var/www/html') #=> /var/www/html/filename.txt
 	 * @example flu('filename').toFilePath('txt','/var/www/html') #=> /var/www/html/filename.txt
-	 * @param string|null $extension if null then current value is added
 	 * @param string $root directory path - If null then / is used
 	 * @return static
 	 * @generated
 	 */
-	public function path(?string $extension = null, string $root = '/'): static
+	public function path(string $root = '/'): static
 	{
-		return $this->new($this->toPath($extension, $root));
+		return $this->new($this->toPath($root));
 	}
 
 
@@ -1619,14 +1618,13 @@ trait FluentImmutableValue
 	 *
 	 * @example flu('filename').toFilePath('.txt','/var/www/html') #=> /var/www/html/filename.txt
 	 * @example flu('filename').toFilePath('txt','/var/www/html') #=> /var/www/html/filename.txt
-	 * @param string|null $extension if null then current value is added
 	 * @param string $root directory path - If null then / is used
 	 * @return string
 	 * @generated
 	 */
-	public function toPath(?string $extension = null, string $root = '/'): string
+	public function toPath(string $root = '/'): string
 	{
-		return $this->proc->path($extension, $root);
+		return $this->proc->path($root);
 	}
 
 
@@ -1659,24 +1657,22 @@ trait FluentImmutableValue
 
 
 	/**
-	 * @param string|null $extension
 	 * @return bool
 	 * @generated
 	 */
-	public function fileExists(?string $extension = null): bool
+	public function fileExists(): bool
 	{
-		return $this->proc->fileExists($extension);
+		return $this->proc->fileExists();
 	}
 
 
 	/**
-	 * @param string|null $extension
 	 * @return bool
 	 * @generated
 	 */
-	public function isFile(?string $extension = null): bool
+	public function isFile(): bool
 	{
-		return $this->proc->isFile($extension);
+		return $this->proc->isFile();
 	}
 
 

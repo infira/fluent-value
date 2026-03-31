@@ -37,19 +37,14 @@ trait Files
      *
      * @example flu('filename').toFilePath('.txt','/var/www/html') #=> /var/www/html/filename.txt
      * @example flu('filename').toFilePath('txt','/var/www/html') #=> /var/www/html/filename.txt
-     * @param string|null $extension if null then current value is added
      * @param string $root directory path - If null then / is used
      * @uses FluentImmutableValue::$path
      * @uses FluentImmutableValue::toPath()
      * @return string
      */
-    public function path(?string $extension = null, string $root = '/'): string
+    public function path(string $root = '/'): string
     {
-        if (is_null($extension)) {
-            return $this->normalizePath($root, $this->value);
-        }
-
-        return $this->normalizePath($root, $this->filename($extension));
+        return $this->normalizePath($root, $this->value);
     }
 
     /**
@@ -74,30 +69,22 @@ trait Files
         return $extension->toString();
     }
 
-    /**
-     * @param string|null $extension
-     * @return bool
-     */
-    public function fileExists(?string $extension = null): bool
+    public function fileExists(): bool
     {
         if (!$this->ok()) {
             return false;
         }
 
-        return file_exists($this->path($extension));
+        return file_exists($this->path());
     }
 
-    /**
-     * @param string|null $extension
-     * @return bool
-     */
-    public function isFile(?string $extension = null): bool
+    public function isFile(): bool
     {
         if (!$this->ok()) {
             return false;
         }
 
-        return is_file($this->path($extension));
+        return is_file($this->path());
     }
 
     public function isExtension(string $extension): bool

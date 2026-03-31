@@ -163,14 +163,14 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain whenTest($pattern, mixed $success, mixed $default = null)
  * @method FluentChain filename(string $extension)
  * @method string toFileName(string $extension)
- * @method FluentChain path(?string $extension = null, string $root = '/')
- * @method string toPath(?string $extension = null, string $root = '/')
+ * @method FluentChain path(string $root = '/')
+ * @method string toPath(string $root = '/')
  * @property-read FluentChain $path - Convert value to path
  * @method FluentChain extension(bool $lowercase = false)
  * @method string toExtension(bool $lowercase = false)
  * @property-read FluentChain $extension - Return file extension. If current value is not file then try to get extension manually using string manipulations
- * @method bool fileExists(?string $extension = null)
- * @method bool isFile(?string $extension = null)
+ * @method bool fileExists()
+ * @method bool isFile()
  * @method bool isExtension(string $extension)
  * @property-read FluentChain newLine - Append a new line to the string.
  * @method FluentChain newLine($count = 1) - Append a new line to the string.
