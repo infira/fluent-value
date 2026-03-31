@@ -534,7 +534,7 @@ trait FluentImmutableValue
 	 */
 	public function md5(mixed ...$data): static
 	{
-		return $this->new($this->proc->md5(...$data));
+		return $this->new($this->toMd5(...$data));
 	}
 
 
@@ -562,7 +562,7 @@ trait FluentImmutableValue
 	 */
 	public function sha1(mixed ...$data): static
 	{
-		return $this->new($this->proc->sha1(...$data));
+		return $this->new($this->toSha1(...$data));
 	}
 
 
@@ -590,7 +590,7 @@ trait FluentImmutableValue
 	 */
 	public function crc32b(mixed ...$data): static
 	{
-		return $this->new($this->proc->crc32b(...$data));
+		return $this->new($this->toCrc32b(...$data));
 	}
 
 
@@ -618,7 +618,7 @@ trait FluentImmutableValue
 	 */
 	public function sha512(mixed ...$data): static
 	{
-		return $this->new($this->proc->sha512(...$data));
+		return $this->new($this->toSha512(...$data));
 	}
 
 
@@ -647,7 +647,7 @@ trait FluentImmutableValue
 	 */
 	public function hash(string $algo, mixed ...$data): static
 	{
-		return $this->new($this->proc->hash($algo, ...$data));
+		return $this->new($this->toHash($algo, ...$data));
 	}
 
 
@@ -776,7 +776,7 @@ trait FluentImmutableValue
 
 	/**
 	 * @param int $by
-	 * @return $this
+	 * @return static
 	 * @template Immutable
 	 * @generated
 	 */
@@ -789,7 +789,7 @@ trait FluentImmutableValue
 
 	/**
 	 * @param int $by
-	 * @return $this
+	 * @return static
 	 * @template Immutable
 	 * @generated
 	 */
@@ -1215,7 +1215,7 @@ trait FluentImmutableValue
 	 *
 	 * @param string|int $key
 	 * @param mixed ...$values
-	 * @return $this
+	 * @return static
 	 * @template Immutable
 	 * @generated
 	 */
@@ -1230,7 +1230,7 @@ trait FluentImmutableValue
 	 * Push values to array
 	 *
 	 * @param mixed ...$values
-	 * @return $this
+	 * @return static
 	 * @template Immutable
 	 * @generated
 	 */
@@ -1610,7 +1610,7 @@ trait FluentImmutableValue
 	 */
 	public function path(?string $extension = null, string $root = '/'): static
 	{
-		return $this->new($this->proc->path($extension, $root));
+		return $this->new($this->toPath($extension, $root));
 	}
 
 
@@ -1640,7 +1640,7 @@ trait FluentImmutableValue
 	 */
 	public function extension(bool $lowercase = false): static
 	{
-		return $this->new($this->proc->extension($lowercase));
+		return $this->new($this->toExtension($lowercase));
 	}
 
 
