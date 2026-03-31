@@ -226,7 +226,7 @@ trait Strings
      * @param string $pattern
      * @return string
      * @see  Regex::match()
-     * @aliasof FluentImmutableValue::getMatch()
+     * @uses FluentImmutableValue::getMatch()
      */
     public function match(string $pattern): string
     {
@@ -239,7 +239,7 @@ trait Strings
      * @param string $pattern
      * @return array
      * @see  Regex::matchAll
-     * @aliasof FluentImmutableValue::getAllMatches()
+     * @see FluentImmutableValue::getAllMatches()
      */
     public function matchAll(string $pattern): array
     {

@@ -17,7 +17,7 @@ trait Hashing
      * @return string
      * @see  Hash::make()
      * @uses FluentImmutableValue::$md5
-     * @aliasof FluentImmutableValue::toMd5()
+     * @uses FluentImmutableValue::toMd5()
      */
     public function md5(mixed ...$data): string
     {
@@ -31,7 +31,7 @@ trait Hashing
      * @return string
      * @see  Hash::make()
      * @uses FluentImmutableValue::$sha1
-     * @aliasof FluentImmutableValue::toSha1()
+     * @uses FluentImmutableValue::toSha1()
      */
     public function sha1(mixed ...$data): string
     {
@@ -45,7 +45,7 @@ trait Hashing
      * @return string
      * @see  Hash::make()
      * @uses FluentImmutableValue::$crc32b
-     * @aliasof FluentImmutableValue::toCrc32b()
+     * @uses FluentImmutableValue::toCrc32b()
      */
     public function crc32b(mixed ...$data): string
     {
@@ -59,7 +59,7 @@ trait Hashing
      * @return string
      * @see  Hash::make()
      * @uses FluentImmutableValue::$sha512
-     * @aliasof FluentImmutableValue::toSha512()
+     * @uses FluentImmutableValue::toSha512()
      */
     public function sha512(mixed ...$data): string
     {
@@ -73,7 +73,7 @@ trait Hashing
      * @return string
      * @link https://www.php.net/manual/en/function.hash-algos.php
      * @link https://www.php.net/manual/en/function.hash.php
-     * @aliasof FluentImmutableValue::toHash()
+     * @uses FluentImmutableValue::toHash()
      */
     public function hash(string $algo, mixed ...$data): string
     {

@@ -434,7 +434,6 @@ trait FluentImmutableValue
 	 * @param string $pattern
 	 * @return static
 	 * @see  Regex::match()
-	 * @aliasof FluentImmutableValue::getMatch()
 	 * @generated
 	 */
 	public function match(string $pattern): static
@@ -447,9 +446,23 @@ trait FluentImmutableValue
 	 * Get the string matching the given pattern.
 	 *
 	 * @param string $pattern
+	 * @return string
+	 * @see  Regex::match()
+	 * @generated
+	 */
+	public function getMatch(string $pattern): string
+	{
+		return $this->proc->match($pattern);
+	}
+
+
+	/**
+	 * Get the string matching the given pattern.
+	 *
+	 * @param string $pattern
 	 * @return static
 	 * @see  Regex::matchAll
-	 * @aliasof FluentImmutableValue::getAllMatches()
+	 * @see FluentImmutableValue::getAllMatches()
 	 * @generated
 	 */
 	public function matchAll(string $pattern): static
@@ -517,7 +530,6 @@ trait FluentImmutableValue
 	 * @param mixed ...$data - in addition to self value pass extra to make hash
 	 * @return static
 	 * @see  Hash::make()
-	 * @aliasof FluentImmutableValue::toMd5()
 	 * @generated
 	 */
 	public function md5(mixed ...$data): static
@@ -527,12 +539,25 @@ trait FluentImmutableValue
 
 
 	/**
+	 * Get md5 hash
+	 *
+	 * @param mixed ...$data - in addition to self value pass extra to make hash
+	 * @return string
+	 * @see  Hash::make()
+	 * @generated
+	 */
+	public function toMd5(mixed ...$data): string
+	{
+		return $this->proc->md5(...$data);
+	}
+
+
+	/**
 	 * Get sha1 hash
 	 *
 	 * @param mixed ...$data - in addition to self value pass extra to make hash
 	 * @return static
 	 * @see  Hash::make()
-	 * @aliasof FluentImmutableValue::toSha1()
 	 * @generated
 	 */
 	public function sha1(mixed ...$data): static
@@ -542,12 +567,25 @@ trait FluentImmutableValue
 
 
 	/**
+	 * Get sha1 hash
+	 *
+	 * @param mixed ...$data - in addition to self value pass extra to make hash
+	 * @return string
+	 * @see  Hash::make()
+	 * @generated
+	 */
+	public function toSha1(mixed ...$data): string
+	{
+		return $this->proc->sha1(...$data);
+	}
+
+
+	/**
 	 * Get crc32b hash
 	 *
 	 * @param mixed ...$data - in addition to self value pass extra to make hash
 	 * @return static
 	 * @see  Hash::make()
-	 * @aliasof FluentImmutableValue::toCrc32b()
 	 * @generated
 	 */
 	public function crc32b(mixed ...$data): static
@@ -557,17 +595,44 @@ trait FluentImmutableValue
 
 
 	/**
+	 * Get crc32b hash
+	 *
+	 * @param mixed ...$data - in addition to self value pass extra to make hash
+	 * @return string
+	 * @see  Hash::make()
+	 * @generated
+	 */
+	public function toCrc32b(mixed ...$data): string
+	{
+		return $this->proc->crc32b(...$data);
+	}
+
+
+	/**
 	 * Get sha512 hash
 	 *
 	 * @param mixed ...$data - in addition to self value pass extra to make hash
 	 * @return static
 	 * @see  Hash::make()
-	 * @aliasof FluentImmutableValue::toSha512()
 	 * @generated
 	 */
 	public function sha512(mixed ...$data): static
 	{
 		return $this->new($this->proc->sha512(...$data));
+	}
+
+
+	/**
+	 * Get sha512 hash
+	 *
+	 * @param mixed ...$data - in addition to self value pass extra to make hash
+	 * @return string
+	 * @see  Hash::make()
+	 * @generated
+	 */
+	public function toSha512(mixed ...$data): string
+	{
+		return $this->proc->sha512(...$data);
 	}
 
 
@@ -578,7 +643,6 @@ trait FluentImmutableValue
 	 * @return static
 	 * @link https://www.php.net/manual/en/function.hash-algos.php
 	 * @link https://www.php.net/manual/en/function.hash.php
-	 * @aliasof FluentImmutableValue::toHash()
 	 * @generated
 	 */
 	public function hash(string $algo, mixed ...$data): static
@@ -588,8 +652,22 @@ trait FluentImmutableValue
 
 
 	/**
+	 * Make hash from current value
+	 * @param string $algo
+	 * @param mixed ...$data - in addition to self value pass extra to make hash
+	 * @return string
+	 * @link https://www.php.net/manual/en/function.hash-algos.php
+	 * @link https://www.php.net/manual/en/function.hash.php
+	 * @generated
+	 */
+	public function toHash(string $algo, mixed ...$data): string
+	{
+		return $this->proc->hash($algo, ...$data);
+	}
+
+
+	/**
 	 * @return static
-	 * @aliasof FluentImmutableValue::toNumeric()
 	 * @generated
 	 */
 	public function numeric(): static
@@ -602,12 +680,23 @@ trait FluentImmutableValue
 	 * @param string $decimalSeparator
 	 * @param string $thousand
 	 * @return static
-	 * @aliasof FluentImmutableValue::toFormattedNumber()
 	 * @generated
 	 */
 	public function formatNumber(string $decimalSeparator = ',', string $thousand = ''): static
 	{
 		return $this->new($this->proc->formatNumber($decimalSeparator, $thousand));
+	}
+
+
+	/**
+	 * @param string $decimalSeparator
+	 * @param string $thousand
+	 * @return string
+	 * @generated
+	 */
+	public function toFormattedNumber(string $decimalSeparator = ',', string $thousand = ''): string
+	{
+		return $this->proc->formatNumber($decimalSeparator, $thousand);
 	}
 
 
@@ -1093,12 +1182,23 @@ trait FluentImmutableValue
 	 * Get array keys
 	 *
 	 * @return static
-	 * @aliasof FluentImmutableValue::toArrayKeys()
 	 * @generated
 	 */
 	public function keys(): static
 	{
 		return $this->new($this->proc->keys());
+	}
+
+
+	/**
+	 * Get array keys
+	 *
+	 * @return array
+	 * @generated
+	 */
+	public function toArrayKeys(): array
+	{
+		return $this->proc->keys();
 	}
 
 
@@ -1483,12 +1583,24 @@ trait FluentImmutableValue
 	 *
 	 * @param string $extension
 	 * @return static
-	 * @aliasof FluentImmutableValue::toFileName()
 	 * @generated
 	 */
 	public function filename(string $extension): static
 	{
 		return $this->new($this->proc->filename($extension));
+	}
+
+
+	/**
+	 * Add .$extension to current value
+	 *
+	 * @param string $extension
+	 * @return string
+	 * @generated
+	 */
+	public function toFileName(string $extension): string
+	{
+		return $this->proc->filename($extension);
 	}
 
 
@@ -1499,7 +1611,6 @@ trait FluentImmutableValue
 	 * @example flu('filename').toFilePath('txt','/var/www/html') #=> /var/www/html/filename.txt
 	 * @param string|null $extension if null then current value is added
 	 * @param string $root directory path - If null then / is used
-	 * @aliasof FluentImmutableValue::toPath()
 	 * @return static
 	 * @generated
 	 */
@@ -1510,12 +1621,27 @@ trait FluentImmutableValue
 
 
 	/**
+	 * Convert value to path
+	 *
+	 * @example flu('filename').toFilePath('.txt','/var/www/html') #=> /var/www/html/filename.txt
+	 * @example flu('filename').toFilePath('txt','/var/www/html') #=> /var/www/html/filename.txt
+	 * @param string|null $extension if null then current value is added
+	 * @param string $root directory path - If null then / is used
+	 * @return string
+	 * @generated
+	 */
+	public function toPath(?string $extension = null, string $root = '/'): string
+	{
+		return $this->proc->path($extension, $root);
+	}
+
+
+	/**
 	 * Return file extension.
 	 * If current value is not file then try to get extension manually using string manipulations
 	 *
 	 * @param bool $lowercase
 	 * @return static
-	 * @aliasof FluentImmutableValue::toExtension()
 	 * @generated
 	 */
 	public function extension(bool $lowercase = false): static
@@ -1525,9 +1651,22 @@ trait FluentImmutableValue
 
 
 	/**
+	 * Return file extension.
+	 * If current value is not file then try to get extension manually using string manipulations
+	 *
+	 * @param bool $lowercase
+	 * @return string
+	 * @generated
+	 */
+	public function toExtension(bool $lowercase = false): string
+	{
+		return $this->proc->extension($lowercase);
+	}
+
+
+	/**
 	 * @param string|null $extension
 	 * @return bool
-	 * @aliasof FluentImmutableValue::fileExists()
 	 * @final
 	 * @generated
 	 */
@@ -1540,7 +1679,6 @@ trait FluentImmutableValue
 	/**
 	 * @param string|null $extension
 	 * @return bool
-	 * @aliasof FluentImmutableValue::isFile()
 	 * @final
 	 * @generated
 	 */
@@ -1553,7 +1691,6 @@ trait FluentImmutableValue
 	/**
 	 * Is current value file extension
 	 *
-	 * @aliasof FluentImmutableValue::isExtension()
 	 * @final
 	 * @return bool
 	 * @generated

@@ -22,7 +22,7 @@ trait Files
      *
      * @param string $extension
      * @return string
-     * @aliasof FluentImmutableValue::toFileName()
+     * @uses FluentImmutableValue::toFileName()
      */
     public function filename(string $extension): string
     {
@@ -40,7 +40,7 @@ trait Files
      * @param string|null $extension if null then current value is added
      * @param string $root directory path - If null then / is used
      * @uses FluentImmutableValue::$path
-     * @aliasof FluentImmutableValue::toPath()
+     * @uses FluentImmutableValue::toPath()
      * @return string
      */
     public function path(?string $extension = null, string $root = '/'): string
@@ -59,7 +59,7 @@ trait Files
      * @param bool $lowercase
      * @return string
      * @uses FluentImmutableValue::$extension
-     * @aliasof FluentImmutableValue::toExtension()
+     * @uses FluentImmutableValue::toExtension()
      */
     public function extension(bool $lowercase = false): string
     {
@@ -77,7 +77,6 @@ trait Files
     /**
      * @param string|null $extension
      * @return bool
-     * @aliasof FluentImmutableValue::fileExists()
      * @final
      */
     public function fileExists(?string $extension = null): bool
@@ -92,7 +91,6 @@ trait Files
     /**
      * @param string|null $extension
      * @return bool
-     * @aliasof FluentImmutableValue::isFile()
      * @final
      */
     public function isFile(?string $extension = null): bool
@@ -107,7 +105,6 @@ trait Files
     /**
      * Is current value file extension
      *
-     * @aliasof FluentImmutableValue::isExtension()
      * @final
      */
     public function isExtension(string $extension): bool

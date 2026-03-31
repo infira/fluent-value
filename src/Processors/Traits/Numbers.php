@@ -14,11 +14,10 @@ trait Numbers
     /**
      * @return float|int
      * @uses FluentImmutableValue::$numeric
-     * @aliasof FluentImmutableValue::toNumeric()
      */
     public function numeric(): float|int
     {
-        return Flu::numeric($this->value);
+        return $this->toNumeric();
     }
 
     /**
@@ -26,7 +25,7 @@ trait Numbers
      * @param string $thousand
      * @return string
      * @uses FluentImmutableValue::$formattedNumber
-     * @aliasof FluentImmutableValue::toFormattedNumber()
+     * @uses FluentImmutableValue::toFormattedNumber()
      */
     public function formatNumber(string $decimalSeparator = ',', string $thousand = ''): string
     {
