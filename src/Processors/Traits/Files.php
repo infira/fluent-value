@@ -12,9 +12,9 @@ use Wolo\File\Path;
  */
 trait Files
 {
-    protected function normalizePath(string ...$paths): string
+    protected function normalizePath(string $root = '/', string ...$paths): string
     {
-        return Path::join(...$paths);
+        return Path::join($root, ...$paths);
     }
 
     /**
