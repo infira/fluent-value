@@ -34,7 +34,6 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain parseStr()
  * @property-read FluentChain $parsedStr - Parses the string into variables
  * @method FluentChain match(string $pattern)
- * @method string getMatch(string $pattern)
  * @method FluentChain matchAll(string $pattern)
  * @method FluentChain serialize()
  * @property-read FluentChain $serialized - String representation of object.
@@ -45,23 +44,17 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain render(array $data = [], ?callable $renderer = null)
  * @property-read FluentChain $rendered - Simple string templating
  * @method FluentChain md5(mixed ...$data)
- * @method string toMd5(mixed ...$data)
  * @property-read FluentChain $md5 - Get md5 hash
  * @method FluentChain sha1(mixed ...$data)
- * @method string toSha1(mixed ...$data)
  * @property-read FluentChain $sha1 - Get sha1 hash
  * @method FluentChain crc32b(mixed ...$data)
- * @method string toCrc32b(mixed ...$data)
  * @property-read FluentChain $crc32b - Get crc32b hash
  * @method FluentChain sha512(mixed ...$data)
- * @method string toSha512(mixed ...$data)
  * @property-read FluentChain $sha512 - Get sha512 hash
  * @method FluentChain hash(string $algo, mixed ...$data)
- * @method string toHash(string $algo, mixed ...$data)
  * @method FluentChain numeric()
  * @property-read FluentChain $numeric
  * @method FluentChain formatNumber(string $decimalSeparator = ',', string $thousand = '')
- * @method string toFormattedNumber(string $decimalSeparator = ',', string $thousand = '')
  * @property-read FluentChain $formattedNumber
  * @method FluentChain negative()
  * @property-read FluentChain $negative
@@ -128,7 +121,6 @@ namespace Infira\FluentValue\Chain;
  * @property-read FluentChain $escapedHTML
  * @method FluentChain merge(array ...$array)
  * @method FluentChain keys()
- * @method array toArrayKeys()
  * @property-read FluentChain $keys - Get array keys
  * @method FluentChain filter(?callable $callback = null)
  * @property-read FluentChain $filter - reject empty
@@ -162,12 +154,9 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain whenStartsWith($needles, mixed $success, mixed $default = null)
  * @method FluentChain whenTest($pattern, mixed $success, mixed $default = null)
  * @method FluentChain filename(string $extension)
- * @method string toFileName(string $extension)
  * @method FluentChain path(?string $extension = null, string $root = '/')
- * @method string toPath(?string $extension = null, string $root = '/')
  * @property-read FluentChain $path - Convert value to path
  * @method FluentChain extension(bool $lowercase = false)
- * @method string toExtension(bool $lowercase = false)
  * @property-read FluentChain $extension - Return file extension. If current value is not file then try to get extension manually using string manipulations
  * @method bool fileExists(?string $extension = null)
  * @method bool isFile(?string $extension = null)
