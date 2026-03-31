@@ -77,7 +77,6 @@ trait Files
     /**
      * @param string|null $extension
      * @return bool
-     * @final
      */
     public function fileExists(?string $extension = null): bool
     {
@@ -91,7 +90,6 @@ trait Files
     /**
      * @param string|null $extension
      * @return bool
-     * @final
      */
     public function isFile(?string $extension = null): bool
     {
@@ -102,11 +100,6 @@ trait Files
         return is_file($this->path($extension));
     }
 
-    /**
-     * Is current value file extension
-     *
-     * @final
-     */
     public function isExtension(string $extension): bool
     {
         return $this->flu->extension->lower->exactly(flu($extension)->lower->trim->toString());

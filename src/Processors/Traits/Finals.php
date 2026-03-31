@@ -10,10 +10,6 @@ trait Finals
     use Comparing;
     use Types;
 
-    /**
-     * @final
-     * @return Traversable
-     */
     public function getIterator(): Traversable
     {
         return new \ArrayIterator($this->toArray());

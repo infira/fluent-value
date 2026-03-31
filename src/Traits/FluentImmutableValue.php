@@ -871,7 +871,6 @@ trait FluentImmutableValue
 	 * Returns true when value is "1", "true", "on", and "yes". Otherwise, returns false.
 	 *
 	 * @return static
-	 * @final
 	 * @generated
 	 */
 	public function bool(): static
@@ -884,7 +883,6 @@ trait FluentImmutableValue
 	 * Cast to int
 	 *
 	 * @return static
-	 * @final
 	 * @generated
 	 */
 	public function int(): static
@@ -897,7 +895,6 @@ trait FluentImmutableValue
 	 * Cast to array
 	 *
 	 * @return static
-	 * @final
 	 * @generated
 	 */
 	public function float(): static
@@ -908,7 +905,6 @@ trait FluentImmutableValue
 
 	/**
 	 * @return static
-	 * @final
 	 * @generated
 	 */
 	public function array(): static
@@ -921,7 +917,6 @@ trait FluentImmutableValue
 	 * Get string
 	 *
 	 * @return static
-	 * @final
 	 * @generated
 	 */
 	public function string(): static
@@ -934,7 +929,6 @@ trait FluentImmutableValue
 	 * Get the type of variable
 	 *
 	 * @return static
-	 * @final
 	 * @generated
 	 */
 	public function type(): static
@@ -1667,7 +1661,6 @@ trait FluentImmutableValue
 	/**
 	 * @param string|null $extension
 	 * @return bool
-	 * @final
 	 * @generated
 	 */
 	public function fileExists(?string $extension = null): bool
@@ -1679,7 +1672,6 @@ trait FluentImmutableValue
 	/**
 	 * @param string|null $extension
 	 * @return bool
-	 * @final
 	 * @generated
 	 */
 	public function isFile(?string $extension = null): bool
@@ -1689,9 +1681,6 @@ trait FluentImmutableValue
 
 
 	/**
-	 * Is current value file extension
-	 *
-	 * @final
 	 * @return bool
 	 * @generated
 	 */
