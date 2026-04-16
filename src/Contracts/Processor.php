@@ -2,9 +2,10 @@
 
 namespace Infira\FluentValue\Contracts;
 
+use Wolo\AttributesBag\HasAttributes;
 use Wolo\Contracts\UnderlyingValue;
 
-interface Processor extends UnderlyingValue
+interface Processor extends UnderlyingValue, HasAttributes
 {
     public function canExecute(string $method);
 

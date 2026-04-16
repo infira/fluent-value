@@ -10,6 +10,8 @@ use Infira\FluentValue\Facade\Callables;
 use Infira\FluentValue\Processors\FluentValueProcessor;
 use Infira\FluentValue\Processors\LaravelStringableProcessor;
 use Infira\FluentValue\Traits\FluentImmutableValue;
+use InvalidArgumentException;
+use RuntimeException;
 use Wolo\AttributesBag;
 use Wolo\Contracts\UnderlyingValue;
 use Wolo\Contracts\UnderlyingValueStatus;
@@ -40,7 +42,6 @@ class FluentValue implements
      */
     public static $valueProcessor = FluentValueProcessor::class;
 
-    use AttributesBag\AttributesBagManager;
     use Processors\Traits\Finals;
     use Traits\Helpers,
         Traits\FluentImmutableValue;
@@ -64,9 +65,7 @@ class FluentValue implements
      */
     public function init(): void {}
 
-    /**
-     * @return Processor[]
-     */
+    /**@return (class-string<Processor>)[] */
     public function getProcessors(): array
     {
         return [
@@ -162,7 +161,7 @@ class FluentValue implements
      * @return mixed
      * @alias
      */
-    public function value()
+    public function value(): mixed
     {
         return $this->proc->value();
     }
@@ -170,15 +169,8 @@ class FluentValue implements
     public function new(mixed $value = null): static
     {
         return static::make(func_num_args() > 0 ? $this->pv($value) : $this->value())
-            ->withAttributes($this->getAttributes())
+            ->mergeAttributes($this->getAttributes())
             ->withEvents($this->getEvents());
-    }
-
-    public function withAttributes(array $attributes): static
-    {
-        $this->setAttributes($attributes);
-
-        return $this;
     }
 
     public static function make(mixed $value): static
@@ -253,7 +245,7 @@ class FluentValue implements
     {
         $namedOutput = match ($name) {
             'value' => $this->value(),
-            'to' => $this->createProcessor($this->value()),
+            'to' => $this->createProcessor($this->value(), $this->getAttributes()),
             'edit' => $this->editor(false), //TODO kas seda on tegelt vaja?
             'chain' => $this->chain($this),
             'whenOk' => $this->whenOkChain(),
@@ -275,15 +267,15 @@ class FluentValue implements
         }
 
         //FluentValueProcessor doesn't have necessary properties, lets fund out that other processors has
-        foreach ($this->getProcessors() as $processor) {
-            $processor = new $processor($this->value());
+        foreach ($this->getProcessors() as $processorClass) {
+            $processor = new $processorClass($this->value())->setAttributes($this->getAttributes());
             if ($processor->propertyExists($name)) {
                 $value = $processor->getPropertyValue($name);
 
                 return $this->getProcessorOutput($processor, $value);
             }
         }
-        throw new \InvalidArgumentException("property|method('$name') does not exist");
+        throw new InvalidArgumentException("property|method('$name') does not exist");
     }
 
     public function __set(string $name, $value): void
@@ -293,7 +285,7 @@ class FluentValue implements
 
             return;
         }
-        throw new \RuntimeException('Undefined usage for __set');
+        throw new RuntimeException('Undefined usage for __set');
     }
 
     public function __isset(string $name): bool
@@ -301,7 +293,7 @@ class FluentValue implements
         if ($name === 'value') {
             return !$this->isEmpty();
         }
-        throw new \RuntimeException('Undefined usage for __isset');
+        throw new RuntimeException('Undefined usage for __isset');
     }
 
     public function __call(string $method, array $arguments = []): static|bool|null
@@ -311,31 +303,20 @@ class FluentValue implements
 
     public function callProcessors(string $method, array $arguments = []): array
     {
-        if ($arguments) {
-            $arguments = array_map(
-                static function ($v) {
-                    if ($v instanceof self) {
-                        return $v->get();
-                    }
-
-                    return $v;
-                },
-                $arguments
-            );
-        }
+        $arguments = array_map(static fn($v) => $v instanceof self ? $v->get() : $v, $arguments);
 
         if ($this->proc->canExecute($method)) {
             return [$this->proc, $this->proc->execute($method, ...$arguments)];
         }
 
         //FluentValueProcessor doesn't have necessary methods, lets fund out that other processors has
-        foreach ($this->getProcessors() as $processor) {
-            $processor = $processor instanceof Processor ? $processor : new $processor($this->value());
+        foreach ($this->getProcessors() as $processorClass) {
+            $processor = new $processorClass($this->value())->setAttributes($this->getAttributes());
             if ($processor->canExecute($method)) {
                 return [$processor, $processor->execute($method, ...$arguments)];
             }
         }
-        throw new \InvalidArgumentException("method('$method') does not exist");
+        throw new InvalidArgumentException("method('$method') does not exist");
     }
 
     public function execute(string|array $method, mixed ...$param): mixed
@@ -350,16 +331,15 @@ class FluentValue implements
 
     //endregion
 
-    private function createProcessor(mixed $value): FluentValueProcessor
+    private function createProcessor(mixed $value, array $attributes = []): FluentValueProcessor
     {
         $value = $value instanceof self ? $value->value() : $value;
         $value = $value instanceof \Stringable ? (string)$value : $value;
-        $proc = new static::$valueProcessor($value);
-        if (!($proc instanceof FluentValueProcessor)) {
-            throw new \RuntimeException('Processor must be instance of \Infira\FluentValue\Processors\FluentValueProcessor');
+        if (!is_subclass_of(static::$valueProcessor, FluentValueProcessor::class)) {
+            throw new RuntimeException('Processor must be instance of '.FluentValueProcessor::class.', '.static::$valueProcessor.' provided');
         }
 
-        return $proc;
+        return new static::$valueProcessor($value)->setAttributes($attributes);
     }
 
     private function getProcessorOutput(Processor $processor, $value): mixed
@@ -431,6 +411,56 @@ class FluentValue implements
     public function count(): int
     {
         return $this->proc->size();
+    }
+    //endregion
+
+    //region attributes
+    public function setAttribute(string $key, mixed $value): static
+    {
+        $this->proc->setAttribute($key, $value);
+
+        return $this;
+    }
+
+    public function getAttribute(string $key, mixed $default = null): mixed
+    {
+        return $this->proc->getAttribute($key, $default);
+    }
+
+    public function hasAttribute(string $key): bool
+    {
+        return $this->proc->hasAttribute($key);
+    }
+
+    public function getAttributes(): array
+    {
+        return $this->proc->getAttributes();
+    }
+
+    public function setAttributes(array $attributes): static
+    {
+        $this->proc->setAttributes($attributes);
+
+        return $this;
+    }
+
+    public function mergeAttributes(array $attributes): static
+    {
+        $this->proc->mergeAttributes($attributes);
+
+        return $this;
+    }
+
+    /**
+     * @param array $attributes
+     * @return $this
+     * @deprecated use mergeAttributes instead
+     */
+    public function withAttributes(array $attributes): static
+    {
+        $this->mergeAttributes($attributes);
+
+        return $this;
     }
     //endregion
 }

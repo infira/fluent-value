@@ -5,9 +5,12 @@ namespace Infira\FluentValue\Processors;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Stringable;
 use Infira\FluentValue\Contracts\Processor;
+use Wolo\AttributesBag\AttributesBagManager;
 
 class LaravelStringableProcessor extends Stringable implements Processor
 {
+    use AttributesBagManager;
+
     public function canExecute(string $method): bool
     {
         return method_exists($this, $method);

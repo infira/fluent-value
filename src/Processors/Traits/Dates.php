@@ -61,6 +61,7 @@ trait Dates
     /**
      * @return int
      * @uses FluentImmutableValue::$timestamp
+     * @uses FluentImmutableValue::toTimestamp()
      */
     public function timestamp(): int
     {

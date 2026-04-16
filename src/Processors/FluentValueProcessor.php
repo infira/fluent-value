@@ -7,6 +7,7 @@ use Infira\FluentValue\Chain\FluentChain;
 use Infira\FluentValue\Contracts\Processor;
 use Infira\FluentValue\Flu;
 use Infira\FluentValue\FluentValue;
+use Wolo\AttributesBag\AttributesBagManager;
 
 /**
  * @template TValue
@@ -25,7 +26,8 @@ class FluentValueProcessor implements
     public const UNDEFINED = '_UNDEFINED_';
     use \Infira\FluentValue\Traits\Helpers;
     use Traits\CallableProperties,
-        Traits\Finals;
+        Traits\Finals,
+        AttributesBagManager;
 
     //processors
     use Traits\Miscellaneous,

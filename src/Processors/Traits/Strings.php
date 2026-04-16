@@ -135,6 +135,7 @@ trait Strings
      * @return string
      * @throws \JsonException
      * @uses FluentImmutableValue::$json
+     * @uses FluentImmutableValue::toJson()
      */
     public function json(bool $pretty = false): string
     {

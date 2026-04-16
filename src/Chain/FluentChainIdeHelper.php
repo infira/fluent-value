@@ -22,6 +22,7 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain wrap(string|array $before, string|array|null $after = null)
  * @method FluentChain format(string $format, mixed ...$values)
  * @method FluentChain json(bool $pretty = false)
+ * @method string toJson(bool $pretty = false)
  * @property-read FluentChain $json - Returns the JSON representation of a value
  * @method FluentChain jsonDecode(?bool $associative = null, int $depth = 512, int $flags = 0)
  * @property-read FluentChain $jsonDecode - Returns the JSON representation of a value
@@ -118,6 +119,7 @@ namespace Infira\FluentValue\Chain;
  * @method FluentChain formatStandardDateTime()
  * @property-read FluentChain $formatStandardDateTime - Converts value to date format Y-m-d H:i:s
  * @method FluentChain timestamp()
+ * @method int toTimestamp()
  * @property-read FluentChain $timestamp
  * @method FluentChain htmlTag(string $tag)
  * @method FluentChain htmlAttributes()

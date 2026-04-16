@@ -345,7 +345,21 @@ trait FluentImmutableValue
 	 */
 	public function json(bool $pretty = false): static
 	{
-		return $this->new($this->proc->json($pretty));
+		return $this->new($this->toJson($pretty));
+	}
+
+
+	/**
+	 * Returns the JSON representation of a value
+	 *
+	 * @param bool $pretty JSON_PRETTY_PRINT - https://www.php.net/manual/en/json.constants.php
+	 * @return string
+	 * @throws \JsonException
+	 * @generated
+	 */
+	public function toJson(bool $pretty = false): string
+	{
+		return $this->proc->json($pretty);
 	}
 
 
@@ -1106,7 +1120,17 @@ trait FluentImmutableValue
 	 */
 	public function timestamp(): static
 	{
-		return $this->new($this->proc->timestamp());
+		return $this->new($this->toTimestamp());
+	}
+
+
+	/**
+	 * @return int
+	 * @generated
+	 */
+	public function toTimestamp(): int
+	{
+		return $this->proc->timestamp();
 	}
 
 
