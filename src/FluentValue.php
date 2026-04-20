@@ -335,7 +335,7 @@ class FluentValue implements
     {
         $value = $value instanceof self ? $value->value() : $value;
         $value = $value instanceof \Stringable ? (string)$value : $value;
-        if (!is_subclass_of(static::$valueProcessor, FluentValueProcessor::class)) {
+        if (!is_subclass_of(static::$valueProcessor, FluentValueProcessor::class) && static::$valueProcessor !== FluentValueProcessor::class) {
             throw new RuntimeException('Processor must be instance of '.FluentValueProcessor::class.', '.static::$valueProcessor.' provided');
         }
 
